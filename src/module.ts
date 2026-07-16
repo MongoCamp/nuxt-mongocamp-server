@@ -3,17 +3,15 @@ import { defu } from 'defu'
 import { consola } from 'consola'
 import { name, version } from '../package.json'
 
-export * from './runtime/api/models'
+export * from './runtime/api'
 
 export interface ModuleOptions {
   url: string
   apiKey?: string
   paginationSize?: number
   refreshToken: boolean
-  tokenRefreshIntervall: number
+  tokenRefreshInterval: number
 }
-
-export * from './runtime/api/models'
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
@@ -33,8 +31,8 @@ export default defineNuxtModule<ModuleOptions>({
     if (!options.paginationSize || options.paginationSize < 10) {
       options.paginationSize = 500
     }
-    if (!options.tokenRefreshIntervall || options.tokenRefreshIntervall < 5000) {
-      options.tokenRefreshIntervall = 5000
+    if (!options.tokenRefreshInterval || options.tokenRefreshInterval < 5000) {
+      options.tokenRefreshInterval = 5000
     }
 
     nuxt.options.runtimeConfig.public.mongocamp = defu(nuxt.options.runtimeConfig.public.mongocamp,
@@ -42,11 +40,11 @@ export default defineNuxtModule<ModuleOptions>({
         url: options.url,
         paginationSize: options.paginationSize,
         refreshToken: options.refreshToken,
-        tokenRefreshIntervall: options.tokenRefreshIntervall,
+        tokenRefreshInterval: options.tokenRefreshInterval,
       },
     )
 
-    nuxt.options.runtimeConfig.mongocampApiKey = defu(nuxt.options.runtimeConfig.mongocampApiKey, options.apiKey ?? '')
+    nuxt.options.runtimeConfig.mongocampApiKey = nuxt.options.runtimeConfig.mongocampApiKey ?? options.apiKey ?? ''
 
     const { resolve } = createResolver(import.meta.url)
     const runtimeDir = resolve('./runtime')

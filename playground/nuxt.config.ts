@@ -22,7 +22,7 @@ export default defineNuxtConfig({
     url: process.env.MONGOCAMP_URL,
     apiKey: process.env.NITRO_MONGOCAMP_API_KEY,
     refreshToken: false,
-    tokenRefreshIntervall: 10000,
+    tokenRefreshInterval: 10000,
   },
 
   unocss: {

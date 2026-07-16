@@ -2,21 +2,36 @@ import { computed } from 'vue'
 import { consola } from 'consola'
 
 import type { Login, LoginResult, UserProfile } from '../api'
+import { ResponseError } from '../api'
 
 import { useMongocampApi } from './mongocampApi'
 import { useMongocampStorage } from './mongocampStorage'
 import { useMongocampUser } from './mongocampUser'
-import { useRuntimeConfig } from '#app'
+import { useRuntimeConfig, useState } from '#app'
 
 export function useMongocampAuth() {
   const config = useRuntimeConfig()
   const refreshToken: boolean = config.public.mongocamp?.refreshToken
-  const tokenRefreshIntervall: number = config.public.mongocamp?.tokenRefreshIntervall
+  const tokenRefreshInterval: number = config.public.mongocamp?.tokenRefreshInterval
 
   const state = useMongocampStorage()
   const { authApi } = useMongocampApi()
   const user = useMongocampUser()
-  let updateTokenInterval: number | undefined
+
+  // shared across every useMongocampAuth() caller so only one interval ever runs per session
+  const updateTokenInterval = useState<number | undefined>('mongocamp.tokenRefreshInterval', () => undefined)
+
+  function startTokenRefresh() {
+    if (import.meta.client && refreshToken && !updateTokenInterval.value)
+      updateTokenInterval.value = window.setInterval(updateToken, tokenRefreshInterval)
+  }
+
+  function stopTokenRefresh() {
+    if (import.meta.client && updateTokenInterval.value) {
+      window.clearInterval(updateTokenInterval.value)
+      updateTokenInterval.value = undefined
+    }
+  }
 
   async function isAuthenticated() {
     return await authApi.isAuthenticated()
@@ -28,7 +43,9 @@ export function useMongocampAuth() {
       updateUserState(result)
     }
     catch (e) {
-      consola.log(e)
+      consola.error(e)
+      if (e instanceof ResponseError && (e.response.status === 401 || e.response.status === 403))
+        logout()
     }
   }
 
@@ -43,9 +60,7 @@ export function useMongocampAuth() {
     const login: Login = { userId: loginId, password: loginPassword }
     const result: LoginResult = await authApi.login({ login })
     updateUserState(result)
-    if (refreshToken && import.meta.client) {
-      updateTokenInterval = window.setInterval(updateToken, tokenRefreshIntervall)
-    }
+    startTokenRefresh()
 
     return result.userProfile
   }
@@ -55,21 +70,15 @@ export function useMongocampAuth() {
     const profile: UserProfile = { user: '', isAdmin: false }
     state.value.profile = profile
     user.value = profile
-    if (refreshToken && import.meta.client) {
-      window.clearInterval(updateTokenInterval)
-    }
+    stopTokenRefresh()
   }
 
   const isLoggedIn = computed(() => {
     const result: boolean = state.value?.token?.length > 0
-    if (import.meta.client) {
-      if (result && refreshToken && !updateTokenInterval) {
-        updateTokenInterval = window.setInterval(updateToken, tokenRefreshIntervall)
-      }
-      else if (!result && updateTokenInterval) {
-        window.clearInterval(updateTokenInterval)
-      }
-    }
+    if (result)
+      startTokenRefresh()
+    else
+      stopTokenRefresh()
     return result
   })
 

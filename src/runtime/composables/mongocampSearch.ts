@@ -24,7 +24,8 @@ export function useMongocampSearch() {
     return find(collectionName, undefined, page, sort, projection, rowsPerPage)
   }
   function findByField(collectionName: string, field: string, value: string, page = 1, sort: string[] | undefined = undefined, projection: string[] | undefined = undefined, rowsPerPage: number = config.public.mongocamp?.paginationSize) {
-    const expression = `${field}: ${value}`
+    const escapedValue = value.replace(/"/g, '\\"')
+    const expression = `${field}: "${escapedValue}"`
     return find(collectionName, expression, page, sort, projection, rowsPerPage)
   }
 
