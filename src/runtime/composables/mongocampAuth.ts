@@ -1,8 +1,8 @@
-import { computed } from 'vue'
+import { computed, watch } from 'vue'
 import { consola } from 'consola'
 
 import type { Login, LoginResult, UserProfile } from '../api'
-import { ResponseError } from '../api'
+import { toMongocampError } from '../utils/toMongocampError'
 
 import { useMongocampApi } from './mongocampApi'
 import { useMongocampStorage } from './mongocampStorage'
@@ -43,8 +43,9 @@ export function useMongocampAuth() {
       updateUserState(result)
     }
     catch (e) {
-      consola.error(e)
-      if (e instanceof ResponseError && (e.response.status === 401 || e.response.status === 403))
+      const error = await toMongocampError(e)
+      consola.error(error.message, error.cause)
+      if (error.status === 401 || error.status === 403)
         logout()
     }
   }
@@ -60,27 +61,31 @@ export function useMongocampAuth() {
     const login: Login = { userId: loginId, password: loginPassword }
     const result: LoginResult = await authApi.login({ login })
     updateUserState(result)
-    startTokenRefresh()
 
     return result.userProfile
   }
 
   const logout = (): void => {
+    if (state.value.token)
+      authApi.logout().catch(e => consola.error(e))
+
     state.value.token = ''
     const profile: UserProfile = { user: '', isAdmin: false }
     state.value.profile = profile
     user.value = profile
-    stopTokenRefresh()
   }
 
-  const isLoggedIn = computed(() => {
-    const result: boolean = state.value?.token?.length > 0
-    if (result)
-      startTokenRefresh()
-    else
-      stopTokenRefresh()
-    return result
-  })
+  const isLoggedIn = computed(() => (state.value.token?.length ?? 0) > 0)
+
+  // side effect lives in a watcher, not the computed getter above
+  if (import.meta.client) {
+    watch(isLoggedIn, (loggedIn) => {
+      if (loggedIn)
+        startTokenRefresh()
+      else
+        stopTokenRefresh()
+    }, { immediate: true })
+  }
 
   const userRoles = computed(() => state.value.profile.roles ?? [])
 

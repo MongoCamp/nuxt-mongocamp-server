@@ -1,7 +1,13 @@
-import { useSessionStorage } from '@vueuse/core'
 import type { UserProfile } from '../api'
+import { useCookie } from '#app'
+
+export interface MongocampSession {
+  token: string
+  profile: UserProfile
+}
 
 export function useMongocampStorage() {
-  const profile: UserProfile = { user: '', isAdmin: false }
-  return useSessionStorage('mongocamp', { token: '', profile })
+  return useCookie<MongocampSession>('mongocamp', {
+    default: () => ({ token: '', profile: { user: '', isAdmin: false } }),
+  })
 }

@@ -7,6 +7,10 @@
     ".": {
       "types": "./dist/types.d.mts",
       "import": "./dist/module.mjs"
+    },
+    "./api": {
+      "types": "./dist/runtime/api/index.d.ts",
+      "import": "./dist/runtime/api/index.js"
     }
   },
   "main": "./dist/module.mjs",
@@ -40,7 +44,9 @@
   },
   "dependencies": {
     "@nuxt/kit": "^4.4.8",
-    "@vueuse/nuxt": "^14.3.0"
+    "@vueuse/nuxt": "^14.3.0",
+    "consola": "^3.4.2",
+    "defu": "^6.1.7"
   },
   "devDependencies": {
     "@nuxt/devtools": "4.0.0-alpha.7",
