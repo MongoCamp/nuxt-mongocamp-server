@@ -9,9 +9,6 @@ export default defineNuxtConfig({
   ssr: true,
 
   runtimeConfig: {
-    // Private config that is only available on the server
-    mongocampApiKey: 'dev_key', // `dev_key` is the default value
-
     // Config within public will be also exposed to the client
     public: {
       MONGOCAMP_ADMIN_USER: process.env.MONGOCAMP_ADMIN_USER,
@@ -23,6 +20,7 @@ export default defineNuxtConfig({
 
   mongocamp: {
     url: process.env.MONGOCAMP_URL,
+    apiKey: process.env.NITRO_MONGOCAMP_API_KEY,
     refreshToken: false,
     tokenRefreshIntervall: 10000,
   },

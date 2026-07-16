@@ -1,6 +1,4 @@
-import { mongocampApi } from '#server/utils/mongocamp'
-
 export default defineEventHandler((event) => {
-  const { adminApi } = mongocampApi(event)
+  const { adminApi } = useMongocampApi(event)
   return adminApi.listRoles()
 })

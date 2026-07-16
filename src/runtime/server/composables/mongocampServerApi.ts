@@ -1,3 +1,5 @@
+import type { H3Event } from 'h3'
+import { useRuntimeConfig } from '#imports'
 import {
   AdminApi,
   ApplicationApi,
@@ -46,4 +48,12 @@ export function useMongocampServerApi(url: string, key?: string, token?: string)
     informationApi,
     jobApi,
   }
+}
+
+export function useMongocampApi(event: H3Event) {
+  const config = useRuntimeConfig(event)
+  const url = config.public.mongocamp?.url
+  const apiKey = config.mongocampApiKey
+
+  return useMongocampServerApi(url, apiKey)
 }

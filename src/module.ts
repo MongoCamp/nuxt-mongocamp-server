@@ -7,6 +7,7 @@ export * from './runtime/api/models'
 
 export interface ModuleOptions {
   url: string
+  apiKey?: string
   paginationSize?: number
   refreshToken: boolean
   tokenRefreshIntervall: number
@@ -44,6 +45,8 @@ export default defineNuxtModule<ModuleOptions>({
         tokenRefreshIntervall: options.tokenRefreshIntervall,
       },
     )
+
+    nuxt.options.runtimeConfig.mongocampApiKey = defu(nuxt.options.runtimeConfig.mongocampApiKey, options.apiKey ?? '')
 
     const { resolve } = createResolver(import.meta.url)
     const runtimeDir = resolve('./runtime')
