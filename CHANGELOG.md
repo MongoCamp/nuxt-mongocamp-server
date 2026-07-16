@@ -1,6 +1,27 @@
 # Changelog
 
 
+## v1.5.0
+
+[compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.4.4...v1.5.0)
+
+### 🚀 Enhancements
+
+- Support apiKey module option for server API authentication ([a5fe714](https://github.com/MongoCamp/mongocamp-nuxt/commit/a5fe714))
+- Add domain composables, SSR-safe auth, and further hardening ([5b2ca91](https://github.com/MongoCamp/mongocamp-nuxt/commit/5b2ca91))
+
+### 🩹 Fixes
+
+- Correctness issues in client/server REST auth handling ([4a553ab](https://github.com/MongoCamp/mongocamp-nuxt/commit/4a553ab))
+
+### 🏡 Chore
+
+- Update release script to use minor version bumps ([bf63f88](https://github.com/MongoCamp/mongocamp-nuxt/commit/bf63f88))
+
+### ❤️ Contributors
+
+- Sfxcode ([@sfxcode](https://github.com/sfxcode))
+
 ## v1.4.4
 
 [compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.4.3...v1.4.4)
