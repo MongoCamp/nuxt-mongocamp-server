@@ -30,6 +30,7 @@ export default defineNuxtConfig({
 | `paginationSize`        | `number`  | `500`   | Default rows per page for search/list composables. Values below 10 fall back to the default.   |
 | `refreshToken`          | `boolean` | —       | Whether the client auto-refreshes the session token on an interval after login.                |
 | `tokenRefreshInterval`  | `number`  | `5000`  | Refresh interval in ms. Values below 5000 fall back to the default.                             |
+| `sessionMaxAge`         | `number`  | `2592000` (30 days) | Max age in seconds of the `mongocamp-session` cookie. Values <= 0 fall back to the default.  |
 
 A missing `url` throws during `nuxi dev`/`nuxi build`/`nuxi generate` (not during `nuxi prepare`, so IDE/type-stub generation still works without a configured backend).
 

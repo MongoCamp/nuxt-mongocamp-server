@@ -11,6 +11,7 @@ export interface ModuleOptions {
   paginationSize?: number
   refreshToken: boolean
   tokenRefreshInterval: number
+  sessionMaxAge?: number
 }
 
 declare module '@nuxt/schema' {
@@ -20,6 +21,7 @@ declare module '@nuxt/schema' {
       paginationSize: number
       refreshToken: boolean
       tokenRefreshInterval: number
+      sessionMaxAge: number
     }
   }
   interface RuntimeConfig {
@@ -57,12 +59,16 @@ export default defineNuxtModule<ModuleOptions>({
     if (!options.tokenRefreshInterval || options.tokenRefreshInterval < 5000)
       options.tokenRefreshInterval = 5000
 
+    if (!options.sessionMaxAge || options.sessionMaxAge <= 0)
+      options.sessionMaxAge = 60 * 60 * 24 * 30 // 30 days
+
     nuxt.options.runtimeConfig.public.mongocamp = defu(nuxt.options.runtimeConfig.public.mongocamp,
       {
         url: options.url,
         paginationSize: options.paginationSize,
         refreshToken: options.refreshToken,
         tokenRefreshInterval: options.tokenRefreshInterval,
+        sessionMaxAge: options.sessionMaxAge,
       },
     )
 

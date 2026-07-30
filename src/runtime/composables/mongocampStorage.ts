@@ -1,5 +1,5 @@
 import type { UserProfile } from '../api'
-import { useCookie } from '#app'
+import { useCookie, useRuntimeConfig } from '#app'
 
 export interface MongocampSession {
   token: string
@@ -7,7 +7,9 @@ export interface MongocampSession {
 }
 
 export function useMongocampStorage() {
-  return useCookie<MongocampSession>('mongocamp', {
+  const config = useRuntimeConfig()
+  return useCookie<MongocampSession>('mongocamp-session', {
     default: () => ({ token: '', profile: { user: '', isAdmin: false } }),
+    maxAge: config.public.mongocamp?.sessionMaxAge ?? 60 * 60 * 24 * 30
   })
 }
