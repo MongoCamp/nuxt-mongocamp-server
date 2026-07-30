@@ -1,6 +1,19 @@
 # Changelog
 
 
+## v1.5.2
+
+[compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.5.1...v1.5.2)
+
+### 💅 Refactors
+
+- Integrate `useMongocampStorage` into `useMongocampUser` for default profile state ([03dc110](https://github.com/MongoCamp/mongocamp-nuxt/commit/03dc110))
+- Clean up token and user state handling, add default for `refreshToken` option ([c3a7abc](https://github.com/MongoCamp/mongocamp-nuxt/commit/c3a7abc))
+
+### ❤️ Contributors
+
+- Sfxcode ([@sfxcode](https://github.com/sfxcode))
+
 ## v1.5.1
 
 [compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.5.0...v1.5.1)
