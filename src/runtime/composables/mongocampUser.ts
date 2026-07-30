@@ -1,8 +1,9 @@
-import type { Ref } from 'vue'
+import type { ComputedRef } from 'vue'
+import { computed } from 'vue'
 import type { UserProfile } from '../api'
-import { useState } from '#app'
 import { useMongocampStorage } from './mongocampStorage'
 
-export function useMongocampUser(): Ref<UserProfile> {
-  return useState<UserProfile>('mongocamp.user', () => useMongocampStorage().value.profile)
+export function useMongocampUser(): ComputedRef<UserProfile> {
+  const state = useMongocampStorage()
+  return computed(() => state.value.profile)
 }

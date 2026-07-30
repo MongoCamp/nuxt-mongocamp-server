@@ -28,7 +28,7 @@ export default defineNuxtConfig({
 | `url`                   | `string`  | —       | Required. Base URL of the MongoCamp server.                                                    |
 | `apiKey`                | `string`  | —       | Optional. Stored server-side only; picked up automatically by `useMongocampApi(event)`.        |
 | `paginationSize`        | `number`  | `500`   | Default rows per page for search/list composables. Values below 10 fall back to the default.   |
-| `refreshToken`          | `boolean` | —       | Whether the client auto-refreshes the session token on an interval after login.                |
+| `refreshToken`          | `boolean` | `false` | Whether the client auto-refreshes the session token on an interval after login.                |
 | `tokenRefreshInterval`  | `number`  | `5000`  | Refresh interval in ms. Values below 5000 fall back to the default.                             |
 | `sessionMaxAge`         | `number`  | `2592000` (30 days) | Max age in seconds of the `mongocamp-session` cookie. Values <= 0 fall back to the default.  |
 
@@ -38,10 +38,10 @@ A missing `url` throws during `nuxi dev`/`nuxi build`/`nuxi generate` (not durin
 
 | Composable                          | Purpose                                                                 |
 | ------------------------------------| ------------------------------------------------------------------------|
-| `useMongocampApi()`                 | Builds all 11 generated API clients, authenticated with the browser session token. |
+| `useMongocampApi()`                 | Builds all 11 generated API clients, authenticated with the browser session token. A `401` response from any of them clears the local session automatically. |
 | `useMongocampAuth()`                | Login/logout, `isLoggedIn`, `userRoles`/`userGrants`, and token-refresh lifecycle. |
 | `useMongocampStorage()`             | The session cookie (`{ token, profile }`) backing auth state; SSR-safe.  |
-| `useMongocampUser()`                | Reactive current user profile.                                          |
+| `useMongocampUser()`                | Reactive current user profile, derived from `useMongocampStorage()` (read-only). |
 | `useMongocampUrl()`                 | The configured base URL.                                                |
 | `useMongocampSearch()`              | `find`/`findAll`/`findByField` document search helpers.                 |
 | `usePaginatedFind(collection, opts)`| Reactive pagination wrapper (`page`, `documents`, `pending`, `error`, `nextPage`/`previousPage`/`goToPage`). |

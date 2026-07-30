@@ -9,7 +9,7 @@ export interface ModuleOptions {
   url: string
   apiKey?: string
   paginationSize?: number
-  refreshToken: boolean
+  refreshToken?: boolean
   tokenRefreshInterval: number
   sessionMaxAge?: number
 }
@@ -58,6 +58,11 @@ export default defineNuxtModule<ModuleOptions>({
       consola.warn(`[mongocamp] tokenRefreshInterval of ${options.tokenRefreshInterval} is below the minimum of 5000, falling back to 5000`)
     if (!options.tokenRefreshInterval || options.tokenRefreshInterval < 5000)
       options.tokenRefreshInterval = 5000
+
+    if (options.refreshToken === undefined) {
+      consola.warn('[mongocamp] "refreshToken" module option is not set, falling back to false (no auto token refresh)')
+      options.refreshToken = false
+    }
 
     if (!options.sessionMaxAge || options.sessionMaxAge <= 0)
       options.sessionMaxAge = 60 * 60 * 24 * 30 // 30 days

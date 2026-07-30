@@ -6,7 +6,6 @@ import { toMongocampError } from '../utils/toMongocampError'
 
 import { useMongocampApi } from './mongocampApi'
 import { useMongocampStorage } from './mongocampStorage'
-import { useMongocampUser } from './mongocampUser'
 import { useRuntimeConfig, useState } from '#app'
 
 export function useMongocampAuth() {
@@ -16,7 +15,6 @@ export function useMongocampAuth() {
 
   const state = useMongocampStorage()
   const { authApi } = useMongocampApi()
-  const user = useMongocampUser()
 
   // shared across every useMongocampAuth() caller so only one interval ever runs per session
   const updateTokenInterval = useState<number | undefined>('mongocamp.tokenRefreshInterval', () => undefined)
@@ -53,7 +51,6 @@ export function useMongocampAuth() {
   function updateUserState(result: LoginResult) {
     state.value.token = (result.authToken)
     state.value.profile = result.userProfile
-    user.value = result.userProfile
   }
 
   const login = async (loginId: string, loginPassword: string): Promise<UserProfile> => {
@@ -70,9 +67,7 @@ export function useMongocampAuth() {
       authApi.logout().catch(e => consola.error(e))
 
     state.value.token = ''
-    const profile: UserProfile = { user: '', isAdmin: false }
-    state.value.profile = profile
-    user.value = profile
+    state.value.profile = { user: '', isAdmin: false }
   }
 
   const isLoggedIn = computed(() => (state.value.token?.length ?? 0) > 0)
