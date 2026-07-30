@@ -1,6 +1,24 @@
 # Changelog
 
 
+## v1.5.1
+
+[compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.5.0...v1.5.1)
+
+### 🚀 Enhancements
+
+- Add sessionMaxAge module option for configurable cookie lifespan ([970c7d1](https://github.com/MongoCamp/mongocamp-nuxt/commit/970c7d1))
+
+### 🏡 Chore
+
+- Update release script to use patch version bumps ([662f80d](https://github.com/MongoCamp/mongocamp-nuxt/commit/662f80d))
+- Update dependencies in `pnpm-lock.yaml` to latest versions ([0cb767e](https://github.com/MongoCamp/mongocamp-nuxt/commit/0cb767e))
+- Fix minor formatting issue with `maxAge` default value in `useMongocampStorage` ([4204574](https://github.com/MongoCamp/mongocamp-nuxt/commit/4204574))
+
+### ❤️ Contributors
+
+- Sfxcode ([@sfxcode](https://github.com/sfxcode))
+
 ## v1.5.0
 
 [compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.4.4...v1.5.0)
