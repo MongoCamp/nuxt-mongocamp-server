@@ -21,7 +21,7 @@ export default defineNuxtConfig({
   mongocamp: {
     url: process.env.MONGOCAMP_URL,
     apiKey: process.env.NITRO_MONGOCAMP_API_KEY,
-    refreshToken: false,
+    refreshToken: true,
     tokenRefreshInterval: 10000,
   },
 
