@@ -7,14 +7,16 @@ apis/DatabaseApi.ts
 apis/DocumentApi.ts
 apis/FileApi.ts
 apis/IndexApi.ts
-apis/InformationApi.ts
 apis/JobsApi.ts
+apis/SystemApi.ts
 apis/index.ts
 docs/AdminApi.md
 docs/ApplicationApi.md
 docs/AuthApi.md
 docs/BucketApi.md
 docs/BucketInformation.md
+docs/ClusterInformation.md
+docs/ClusterMemberInformation.md
 docs/CollectionApi.md
 docs/CollectionStatus.md
 docs/DatabaseApi.md
@@ -30,7 +32,6 @@ docs/IndexCreateRequest.md
 docs/IndexCreateResponse.md
 docs/IndexDropResponse.md
 docs/IndexOptionsRequest.md
-docs/InformationApi.md
 docs/InsertResponse.md
 docs/JobConfig.md
 docs/JobInformation.md
@@ -53,6 +54,7 @@ docs/SchemaAnalysis.md
 docs/SchemaAnalysisField.md
 docs/SchemaAnalysisFieldType.md
 docs/SettingsResponse.md
+docs/SystemApi.md
 docs/UpdateFileInformationRequest.md
 docs/UpdateRequest.md
 docs/UpdateResponse.md
@@ -62,6 +64,8 @@ docs/UserProfile.md
 docs/Version.md
 index.ts
 models/BucketInformation.ts
+models/ClusterInformation.ts
+models/ClusterMemberInformation.ts
 models/CollectionStatus.ts
 models/DatabaseInfo.ts
 models/DeleteResponse.ts

@@ -366,7 +366,7 @@ This endpoint does not need any parameter.
 
 Refresh User
 
-Refresh Token and return Login Information
+Refresh Token and return Login Information. A new token is issued on every call, the previous tokens stay valid until they expire or the user logs out with them.
 
 ### Example
 

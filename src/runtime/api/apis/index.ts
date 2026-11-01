@@ -9,5 +9,5 @@ export * from './DatabaseApi';
 export * from './DocumentApi';
 export * from './FileApi';
 export * from './IndexApi';
-export * from './InformationApi';
 export * from './JobsApi';
+export * from './SystemApi';

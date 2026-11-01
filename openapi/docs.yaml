@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: mongocamp-library
-  version: 1.5.10
+  version: 1.6.1
 paths:
   /auth/login:
     post:
@@ -153,7 +153,9 @@ paths:
       tags:
       - Auth
       summary: Refresh User
-      description: Refresh Token and return Login Information
+      description: Refresh Token and return Login Information. A new token is issued
+        on every call, the previous tokens stay valid until they expire or the user
+        logs out with them.
       operationId: refreshToken
       responses:
         '200':
@@ -449,8 +451,8 @@ paths:
                 items:
                   $ref: '#/components/schemas/UserProfile'
         '400':
-          description: 'Invalid value for: query parameter filter, Invalid value for:
-            query parameter rowsPerPage, Invalid value for: query parameter page'
+          description: 'Invalid value for: query parameter rowsPerPage, Invalid value
+            for: query parameter page'
           content:
             text/plain:
               schema:
@@ -889,8 +891,8 @@ paths:
                 items:
                   $ref: '#/components/schemas/Role'
         '400':
-          description: 'Invalid value for: query parameter filter, Invalid value for:
-            query parameter rowsPerPage, Invalid value for: query parameter page'
+          description: 'Invalid value for: query parameter rowsPerPage, Invalid value
+            for: query parameter page'
           content:
             text/plain:
               schema:
@@ -1233,10 +1235,8 @@ paths:
                 items:
                   $ref: '#/components/schemas/FileInformation'
         '400':
-          description: 'Invalid value for: query parameter filter, Invalid value for:
-            query parameter sort, Invalid value for: query parameter projection, Invalid
-            value for: query parameter rowsPerPage, Invalid value for: query parameter
-            page'
+          description: 'Invalid value for: query parameter rowsPerPage, Invalid value
+            for: query parameter page'
           content:
             text/plain:
               schema:
@@ -1296,8 +1296,8 @@ paths:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/FileUploadForm'
-            example: 'Part(file,FileRange(/tmp/prefix14723180015267959272suffix,None),Map(filename
-              -> prefix14723180015267959272suffix),List(Content-Type: application/octet-stream))'
+            example: 'Part(file,FileRange(/tmp/prefix12814107999030433659suffix,None),Map(filename
+              -> prefix12814107999030433659suffix),List(Content-Type: application/octet-stream))'
         required: true
       responses:
         '200':
@@ -1307,8 +1307,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/InsertResponse'
         '400':
-          description: 'Invalid value for: body, Invalid value for: query parameter
-            fileName'
+          description: 'Invalid value for: body'
           content:
             text/plain:
               schema:
@@ -1982,8 +1981,8 @@ paths:
         description: Include all details for the Collection
         required: false
         schema:
-          type: boolean
           default: false
+          type: boolean
       responses:
         '200':
           description: ''
@@ -2173,9 +2172,9 @@ paths:
         description: How deep should the objects extracted
         required: false
         schema:
+          default: 3
           type: integer
           format: int32
-          default: 3
       responses:
         '200':
           description: ''
@@ -2248,9 +2247,9 @@ paths:
         description: How deep should the objects extracted
         required: false
         schema:
+          default: 3
           type: integer
           format: int32
-          default: 3
       responses:
         '200':
           description: ''
@@ -2785,8 +2784,8 @@ paths:
         description: Shutdown Server and don`t send reboot event.
         required: false
         schema:
-          type: boolean
           default: false
+          type: boolean
       responses:
         '200':
           description: ''
@@ -3102,20 +3101,20 @@ paths:
         description: MongoDB sorting
         required: false
         schema:
+          default: []
           type: array
           items:
             type: string
-          default: []
         example: []
       - name: projection
         in: query
         description: MongoDB projection
         required: false
         schema:
+          default: []
           type: array
           items:
             type: string
-          default: []
         example: []
       - name: rowsPerPage
         in: query
@@ -3173,9 +3172,7 @@ paths:
                   $ref: '#/components/schemas/Map_Any'
         '400':
           description: 'Invalid value for: query parameter filter, Invalid value for:
-            query parameter sort, Invalid value for: query parameter projection, Invalid
-            value for: query parameter rowsPerPage, Invalid value for: query parameter
-            page'
+            query parameter rowsPerPage, Invalid value for: query parameter page'
           content:
             text/plain:
               schema:
@@ -3233,7 +3230,7 @@ paths:
               key1: value
               key2: true
               key3:
-                creationDate: '2024-10-11T16:43:24.553Z'
+                creationDate: '2026-11-01T17:27:18.162Z'
         required: true
       responses:
         '200':
@@ -4093,8 +4090,8 @@ paths:
         description: Sort your index ascending
         required: false
         schema:
-          type: boolean
           default: true
+          type: boolean
       requestBody:
         content:
           application/json:
@@ -4170,8 +4167,8 @@ paths:
         description: Sort your index ascending
         required: false
         schema:
-          type: boolean
           default: true
+          type: boolean
       - name: name
         in: query
         description: Name for your index
@@ -4186,8 +4183,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/IndexCreateResponse'
         '400':
-          description: 'Invalid value for: query parameter sortAscending, Invalid
-            value for: query parameter name'
+          description: 'Invalid value for: query parameter sortAscending'
           content:
             text/plain:
               schema:
@@ -4247,15 +4243,15 @@ paths:
         description: Expiring Duration in format 15d (https://www.scala-lang.org/api/2.13.7/scala/concurrent/duration/Duration.html)
         required: true
         schema:
-          type: string
           default: 15d
+          type: string
       - name: sortAscending
         in: query
         description: Sort your index ascending
         required: false
         schema:
-          type: boolean
           default: true
+          type: boolean
       - name: name
         in: query
         description: Name for your index
@@ -4270,8 +4266,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/IndexCreateResponse'
         '400':
-          description: 'Invalid value for: query parameter sortAscending, Invalid
-            value for: query parameter name'
+          description: 'Invalid value for: query parameter sortAscending'
           content:
             text/plain:
               schema:
@@ -4378,7 +4373,7 @@ paths:
   /version:
     get:
       tags:
-      - Information
+      - System
       summary: Version Information
       description: Version Info of the MongoCamp API
       operationId: version
@@ -4530,8 +4525,8 @@ paths:
         description: Group Name of the Job
         required: true
         schema:
-          type: string
           default: Default
+          type: string
       - name: jobName
         in: path
         description: Name of the Job
@@ -4587,8 +4582,8 @@ paths:
         description: Group Name of the Job
         required: true
         schema:
-          type: string
           default: Default
+          type: string
       - name: jobName
         in: path
         description: Name of the Job
@@ -4644,8 +4639,8 @@ paths:
         description: Group Name of the Job
         required: true
         schema:
-          type: string
           default: Default
+          type: string
       - name: jobName
         in: path
         description: Name of the Job
@@ -4747,15 +4742,60 @@ paths:
       - httpAuth: []
       - httpAuth1: []
       - apiKeyAuth: []
+  /system/cluster:
+    get:
+      tags:
+      - System
+      summary: Registered Jobs
+      description: Returns the List of all registered Jobs with full information
+      operationId: viewCluster
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterInformation'
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
 components:
   schemas:
     BucketInformation:
+      title: BucketInformation
+      type: object
       required:
       - name
       - files
       - size
       - avgObjectSize
-      type: object
       properties:
         name:
           type: string
@@ -4768,7 +4808,41 @@ components:
         avgObjectSize:
           type: number
           format: double
+    ClusterInformation:
+      title: ClusterInformation
+      type: object
+      required:
+      - coordinator
+      properties:
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClusterMemberInformation'
+        coordinator:
+          $ref: '#/components/schemas/ClusterMemberInformation'
+    ClusterMemberInformation:
+      title: ClusterMemberInformation
+      type: object
+      required:
+      - name
+      - siteMaster
+      - siteAddress
+      - multicast
+      - coordinator
+      properties:
+        name:
+          type: string
+        siteMaster:
+          type: boolean
+        siteAddress:
+          type: boolean
+        multicast:
+          type: boolean
+        coordinator:
+          type: boolean
     CollectionStatus:
+      title: CollectionStatus
+      type: object
       required:
       - ns
       - collectionType
@@ -4783,7 +4857,6 @@ components:
       - ok
       - fetched
       - map
-      type: object
       properties:
         ns:
           type: string
@@ -4821,13 +4894,14 @@ components:
         map:
           $ref: '#/components/schemas/Map_Any'
     DatabaseInfo:
+      title: DatabaseInfo
+      type: object
       required:
       - name
       - sizeOnDisk
       - empty
       - fetched
       - map
-      type: object
       properties:
         name:
           type: string
@@ -4842,10 +4916,11 @@ components:
         map:
           $ref: '#/components/schemas/Map_Any'
     DeleteResponse:
+      title: DeleteResponse
+      type: object
       required:
       - wasAcknowledged
       - deletedCount
-      type: object
       properties:
         wasAcknowledged:
           type: boolean
@@ -4853,11 +4928,12 @@ components:
           type: integer
           format: int64
     ErrorDescription:
+      title: ErrorDescription
+      type: object
       required:
       - code
       - msg
       - additionalInfo
-      type: object
       properties:
         code:
           type: integer
@@ -4867,6 +4943,8 @@ components:
         additionalInfo:
           type: string
     FileInformation:
+      title: FileInformation
+      type: object
       required:
       - _id
       - filename
@@ -4874,7 +4952,6 @@ components:
       - chunkSize
       - uploadDate
       - metadata
-      type: object
       properties:
         _id:
           type: string
@@ -4892,10 +4969,11 @@ components:
         metadata:
           $ref: '#/components/schemas/Map_Any'
     FileUploadForm:
+      title: FileUploadForm
+      type: object
       required:
       - file
       - metaData
-      type: object
       properties:
         file:
           type: string
@@ -4903,13 +4981,14 @@ components:
         metaData:
           type: string
     Grant:
+      title: Grant
+      type: object
       required:
       - name
       - read
       - write
       - administrate
       - grantType
-      type: object
       properties:
         name:
           type: string
@@ -4922,29 +5001,33 @@ components:
         grantType:
           type: string
     IndexCreateRequest:
+      title: IndexCreateRequest
+      type: object
       required:
       - keys
-      type: object
       properties:
         keys:
           $ref: '#/components/schemas/Map_Int'
         indexOptionsRequest:
           $ref: '#/components/schemas/IndexOptionsRequest'
     IndexCreateResponse:
+      title: IndexCreateResponse
+      type: object
       required:
       - name
-      type: object
       properties:
         name:
           type: string
     IndexDropResponse:
+      title: IndexDropResponse
+      type: object
       required:
       - dropped
-      type: object
       properties:
         dropped:
           type: boolean
     IndexOptionsRequest:
+      title: IndexOptionsRequest
       type: object
       properties:
         name:
@@ -4967,9 +5050,10 @@ components:
           type: number
           format: double
     InsertResponse:
+      title: InsertResponse
+      type: object
       required:
       - wasAcknowledged
-      type: object
       properties:
         wasAcknowledged:
           type: boolean
@@ -4978,6 +5062,8 @@ components:
           items:
             type: string
     JobConfig:
+      title: JobConfig
+      type: object
       required:
       - name
       - className
@@ -4985,7 +5071,6 @@ components:
       - cronExpression
       - group
       - priority
-      type: object
       properties:
         name:
           type: string
@@ -5001,14 +5086,14 @@ components:
           type: integer
           format: int32
     JobInformation:
+      title: JobInformation
+      type: object
       required:
       - name
       - group
       - jobClassName
-      - description
       - cronExpression
       - priority
-      type: object
       properties:
         name:
           type: string
@@ -5032,11 +5117,12 @@ components:
         scheduleInformation:
           type: string
     JsonSchema:
+      title: JsonSchema
+      type: object
       required:
       - $schema
       - $ref
       - definitions
-      type: object
       properties:
         $schema:
           type: string
@@ -5045,12 +5131,13 @@ components:
         definitions:
           $ref: '#/components/schemas/Map_JsonSchemaDefinition'
     JsonSchemaDefinition:
+      title: JsonSchemaDefinition
+      type: object
       required:
       - type
       - title
       - additionalProperties
       - properties
-      type: object
       properties:
         type:
           type: string
@@ -5065,42 +5152,47 @@ components:
         properties:
           $ref: '#/components/schemas/Map_Map_String_Any'
     JsonValue_Any:
+      title: JsonValue_Any
+      type: object
       required:
       - value
-      type: object
       properties:
         value:
           type: string
     JsonValue_Boolean:
+      title: JsonValue_Boolean
+      type: object
       required:
       - value
-      type: object
       properties:
         value:
           type: boolean
     JsonValue_String:
+      title: JsonValue_String
+      type: object
       required:
       - value
-      type: object
       properties:
         value:
           type: string
     Login:
+      title: Login
+      type: object
       required:
       - userId
       - password
-      type: object
       properties:
         userId:
           type: string
         password:
           type: string
     LoginResult:
+      title: LoginResult
+      type: object
       required:
       - authToken
       - userProfile
       - expirationDate
-      type: object
       properties:
         authToken:
           type: string
@@ -5110,26 +5202,31 @@ components:
           type: string
           format: date-time
     Map_Any:
+      title: Map_Any
       type: object
       additionalProperties:
         type: string
     Map_Int:
+      title: Map_Int
       type: object
       additionalProperties:
         type: integer
         format: int32
     Map_JsonSchemaDefinition:
+      title: Map_JsonSchemaDefinition
       type: object
       additionalProperties:
         $ref: '#/components/schemas/JsonSchemaDefinition'
     Map_Map_String_Any:
+      title: Map_Map_String_Any
       type: object
       additionalProperties:
         $ref: '#/components/schemas/Map_Any'
     MongoAggregateRequest:
+      title: MongoAggregateRequest
+      type: object
       required:
       - allowDiskUse
-      type: object
       properties:
         pipeline:
           type: array
@@ -5138,13 +5235,14 @@ components:
         allowDiskUse:
           type: boolean
     MongoCampConfiguration:
+      title: MongoCampConfiguration
+      type: object
       required:
       - key
       - value
       - configType
       - comment
       - needsRestartForActivation
-      type: object
       properties:
         key:
           type: string
@@ -5157,11 +5255,12 @@ components:
         needsRestartForActivation:
           type: boolean
     MongoFindRequest:
+      title: MongoFindRequest
+      type: object
       required:
       - filter
       - sort
       - projection
-      type: object
       properties:
         filter:
           $ref: '#/components/schemas/Map_Any'
@@ -5170,6 +5269,8 @@ components:
         projection:
           $ref: '#/components/schemas/Map_Any'
     MongoIndex:
+      title: MongoIndex
+      type: object
       required:
       - name
       - unique
@@ -5182,7 +5283,6 @@ components:
       - text
       - fetched
       - map
-      type: object
       properties:
         name:
           type: string
@@ -5214,27 +5314,30 @@ components:
         map:
           $ref: '#/components/schemas/Map_Any'
     PasswordUpdateRequest:
+      title: PasswordUpdateRequest
+      type: object
       required:
       - password
-      type: object
       properties:
         password:
           type: string
     PipelineStage:
+      title: PipelineStage
+      type: object
       required:
       - stage
       - value
-      type: object
       properties:
         stage:
           type: string
         value:
           type: string
     Role:
+      title: Role
+      type: object
       required:
       - name
       - isAdmin
-      type: object
       properties:
         name:
           type: string
@@ -5245,11 +5348,12 @@ components:
           items:
             $ref: '#/components/schemas/Grant'
     SchemaAnalysis:
+      title: SchemaAnalysis
+      type: object
       required:
       - count
       - sample
       - percentageOfAnalysed
-      type: object
       properties:
         count:
           type: integer
@@ -5265,12 +5369,13 @@ components:
           items:
             $ref: '#/components/schemas/SchemaAnalysisField'
     SchemaAnalysisField:
+      title: SchemaAnalysisField
+      type: object
       required:
       - name
       - fullName
       - count
       - percentageOfParent
-      type: object
       properties:
         name:
           type: string
@@ -5291,11 +5396,12 @@ components:
           items:
             $ref: '#/components/schemas/SchemaAnalysisField'
     SchemaAnalysisFieldType:
+      title: SchemaAnalysisFieldType
+      type: object
       required:
       - fieldType
       - count
       - percentageOfParent
-      type: object
       properties:
         fieldType:
           type: string
@@ -5306,9 +5412,10 @@ components:
           type: number
           format: double
     SettingsResponse:
+      title: SettingsResponse
+      type: object
       required:
       - configurations
-      type: object
       properties:
         routesPlugins:
           type: array
@@ -5325,6 +5432,7 @@ components:
         configurations:
           $ref: '#/components/schemas/Map_Any'
     UpdateFileInformationRequest:
+      title: UpdateFileInformationRequest
       type: object
       properties:
         filename:
@@ -5332,21 +5440,23 @@ components:
         metadata:
           $ref: '#/components/schemas/Map_Any'
     UpdateRequest:
+      title: UpdateRequest
+      type: object
       required:
       - document
       - filter
-      type: object
       properties:
         document:
           $ref: '#/components/schemas/Map_Any'
         filter:
           $ref: '#/components/schemas/Map_Any'
     UpdateResponse:
+      title: UpdateResponse
+      type: object
       required:
       - wasAcknowledged
       - modifiedCount
       - matchedCount
-      type: object
       properties:
         wasAcknowledged:
           type: boolean
@@ -5361,9 +5471,10 @@ components:
           type: integer
           format: int64
     UpdateRoleRequest:
+      title: UpdateRoleRequest
+      type: object
       required:
       - isAdmin
-      type: object
       properties:
         isAdmin:
           type: boolean
@@ -5372,10 +5483,11 @@ components:
           items:
             $ref: '#/components/schemas/Grant'
     UserInformation:
+      title: UserInformation
+      type: object
       required:
       - userId
       - password
-      type: object
       properties:
         userId:
           type: string
@@ -5388,10 +5500,11 @@ components:
           items:
             type: string
     UserProfile:
+      title: UserProfile
+      type: object
       required:
       - user
       - isAdmin
-      type: object
       properties:
         user:
           type: string
@@ -5408,11 +5521,12 @@ components:
           items:
             $ref: '#/components/schemas/Grant'
     Version:
+      title: Version
+      type: object
       required:
       - name
       - version
       - builtAt
-      type: object
       properties:
         name:
           type: string

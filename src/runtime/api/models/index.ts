@@ -1,6 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 export * from './BucketInformation';
+export * from './ClusterInformation';
+export * from './ClusterMemberInformation';
 export * from './CollectionStatus';
 export * from './DatabaseInfo';
 export * from './DeleteResponse';

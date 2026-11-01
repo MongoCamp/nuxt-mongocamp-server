@@ -99,7 +99,7 @@ example().catch(console.error);
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** |  |  -  |
-| **400** | Invalid value for: query parameter sortAscending, Invalid value for: query parameter name |  -  |
+| **400** | Invalid value for: query parameter sortAscending |  -  |
 | **0** |  |  * x-error-code - Error Code <br>  * x-error-message - Message of the MongoCampException <br>  * x-error-additional-info - Additional information for the MongoCampException <br>  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
@@ -438,7 +438,7 @@ example().catch(console.error);
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** |  |  -  |
-| **400** | Invalid value for: query parameter sortAscending, Invalid value for: query parameter name |  -  |
+| **400** | Invalid value for: query parameter sortAscending |  -  |
 | **0** |  |  * x-error-code - Error Code <br>  * x-error-message - Message of the MongoCampException <br>  * x-error-additional-info - Additional information for the MongoCampException <br>  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)

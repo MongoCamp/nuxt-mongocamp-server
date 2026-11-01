@@ -379,7 +379,7 @@ async function example() {
     // string | The name of your MongoDb Collection
     collectionName: collectionName_example,
     // { [key: string]: string; } | JSON Representation for your Document.
-    requestBody: {"key1":"value","key2":true,"key3":{"creationDate":"2024-10-11T16:43:24.553Z"}},
+    requestBody: {"key1":"value","key2":true,"key3":{"creationDate":"2026-11-01T17:27:18.162Z"}},
   } satisfies InsertRequest;
 
   try {
@@ -594,7 +594,7 @@ example().catch(console.error);
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** |  |  * x-pagination-count-rows - count all elements <br>  * x-pagination-rows-per-page - Count elements per page <br>  * x-pagination-current-page - Current page <br>  * x-pagination-count-pages - Count pages <br>  |
-| **400** | Invalid value for: query parameter filter, Invalid value for: query parameter sort, Invalid value for: query parameter projection, Invalid value for: query parameter rowsPerPage, Invalid value for: query parameter page |  -  |
+| **400** | Invalid value for: query parameter filter, Invalid value for: query parameter rowsPerPage, Invalid value for: query parameter page |  -  |
 | **0** |  |  * x-error-code - Error Code <br>  * x-error-message - Message of the MongoCampException <br>  * x-error-additional-info - Additional information for the MongoCampException <br>  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
