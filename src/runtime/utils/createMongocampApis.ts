@@ -9,7 +9,7 @@ import {
   DocumentApi,
   FileApi,
   IndexApi,
-  InformationApi,
+  SystemApi,
   JobsApi,
 } from '../api'
 
@@ -24,7 +24,7 @@ export function createMongocampApis(configuration: Configuration) {
     documentApi: new DocumentApi(configuration),
     fileApi: new FileApi(configuration),
     indexApi: new IndexApi(configuration),
-    informationApi: new InformationApi(configuration),
+    systemApi: new SystemApi(configuration),
     jobApi: new JobsApi(configuration),
   }
 }

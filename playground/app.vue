@@ -3,13 +3,13 @@ import { consola } from 'consola'
 
 const url = useMongocampUrl()
 
-const { informationApi } = useMongocampApi()
+const { systemApi } = useMongocampApi()
 const { findByField } = useMongocampSearch()
 
 const { login, logout, isLoggedIn, userGrants } = useMongocampAuth()
 const state = useMongocampStorage()
 
-const { data: version, refresh: reloadVersion } = await useLazyAsyncData('version', () => informationApi.version())
+const { data: version, refresh: reloadVersion } = await useLazyAsyncData('version', () => systemApi.version())
 
 const { data: adminRole, refresh: reloadRole } = await useLazyAsyncData('adminRole', () => findByField('mc_roles', 'name1', 'admin*'))
 
