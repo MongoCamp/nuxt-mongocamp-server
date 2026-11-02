@@ -11,13 +11,13 @@ Name | Type
 `unique` | boolean
 `version` | number
 `namespace` | string
-`keys` | { [key: string]: string; }
-`weights` | { [key: string]: string; }
+`keys` | { [key: string]: any; }
+`weights` | { [key: string]: any; }
 `expire` | boolean
 `expireAfterSeconds` | number
 `text` | boolean
 `fetched` | Date
-`map` | { [key: string]: string; }
+`map` | { [key: string]: any; }
 
 ## Example
 

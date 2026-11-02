@@ -9,7 +9,7 @@ Name | Type
 `routesPlugins` | Array&lt;string&gt;
 `filePlugins` | Array&lt;string&gt;
 `ignoredPlugins` | Array&lt;string&gt;
-`configurations` | { [key: string]: string; }
+`configurations` | { [key: string]: any; }
 
 ## Example
 

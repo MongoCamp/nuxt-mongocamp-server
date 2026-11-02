@@ -6,8 +6,8 @@
 
 Name | Type
 ------------ | -------------
-`document` | { [key: string]: string; }
-`filter` | { [key: string]: string; }
+`document` | { [key: string]: any; }
+`filter` | { [key: string]: any; }
 
 ## Example
 

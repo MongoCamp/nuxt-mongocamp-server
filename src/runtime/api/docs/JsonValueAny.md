@@ -6,7 +6,7 @@
 
 Name | Type
 ------------ | -------------
-`value` | string
+`value` | any
 
 ## Example
 

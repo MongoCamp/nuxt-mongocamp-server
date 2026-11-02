@@ -7,7 +7,7 @@
 Name | Type
 ------------ | -------------
 `key` | string
-`value` | string
+`value` | any
 `configType` | string
 `comment` | string
 `needsRestartForActivation` | boolean

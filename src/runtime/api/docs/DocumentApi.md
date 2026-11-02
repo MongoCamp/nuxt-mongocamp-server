@@ -99,7 +99,7 @@ example().catch(console.error);
 
 ## deleteMany
 
-> DeleteResponse deleteMany(collectionName, requestBody)
+> DeleteResponse deleteMany(collectionName, requestBody, matchAll)
 
 Delete Many in Collection
 
@@ -130,8 +130,10 @@ async function example() {
   const body = {
     // string | The name of your MongoDb Collection
     collectionName: collectionName_example,
-    // { [key: string]: string; }
+    // { [key: string]: any; }
     requestBody: Object,
+    // boolean | Allow an empty filter, that matches all documents of the collection (optional)
+    matchAll: true,
   } satisfies DeleteManyRequest;
 
   try {
@@ -152,7 +154,8 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **collectionName** | `string` | The name of your MongoDb Collection | [Defaults to `undefined`] |
-| **requestBody** | `{ [key: string]: string; }` |  | |
+| **requestBody** | `{ [key: string]: any; }` |  | |
+| **matchAll** | `boolean` | Allow an empty filter, that matches all documents of the collection | [Optional] [Defaults to `false`] |
 
 ### Return type
 
@@ -172,7 +175,7 @@ example().catch(console.error);
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** |  |  -  |
-| **400** | Invalid value for: body |  -  |
+| **400** | Invalid value for: body, Invalid value for: query parameter matchAll |  -  |
 | **0** |  |  * x-error-code - Error Code <br>  * x-error-message - Message of the MongoCampException <br>  * x-error-additional-info - Additional information for the MongoCampException <br>  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
@@ -180,7 +183,7 @@ example().catch(console.error);
 
 ## find
 
-> Array&lt;{ [key: string]: string; }&gt; find(collectionName, mongoFindRequest, rowsPerPage, page)
+> Array&lt;{ [key: string]: any; }&gt; find(collectionName, mongoFindRequest, rowsPerPage, page)
 
 Documents in Collection
 
@@ -243,7 +246,7 @@ example().catch(console.error);
 
 ### Return type
 
-**Array<{ [key: string]: string; }>**
+**Array<{ [key: string]: any; }>**
 
 ### Authorization
 
@@ -267,7 +270,7 @@ example().catch(console.error);
 
 ## getDocument
 
-> { [key: string]: string; } getDocument(collectionName, documentId)
+> { [key: string]: any; } getDocument(collectionName, documentId)
 
 Document from Collection
 
@@ -324,7 +327,7 @@ example().catch(console.error);
 
 ### Return type
 
-**{ [key: string]: string; }**
+**{ [key: string]: any; }**
 
 ### Authorization
 
@@ -378,8 +381,8 @@ async function example() {
   const body = {
     // string | The name of your MongoDb Collection
     collectionName: collectionName_example,
-    // { [key: string]: string; } | JSON Representation for your Document.
-    requestBody: {"key1":"value","key2":true,"key3":{"creationDate":"2026-11-01T17:27:18.162Z"}},
+    // { [key: string]: any; } | JSON Representation for your Document.
+    requestBody: {"key1":"value","key2":true,"key3":{"creationDate":"2026-11-02T05:03:40.430Z"}},
   } satisfies InsertRequest;
 
   try {
@@ -400,7 +403,7 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **collectionName** | `string` | The name of your MongoDb Collection | [Defaults to `undefined`] |
-| **requestBody** | `{ [key: string]: string; }` | JSON Representation for your Document. | |
+| **requestBody** | `{ [key: string]: any; }` | JSON Representation for your Document. | |
 
 ### Return type
 
@@ -459,7 +462,7 @@ async function example() {
   const body = {
     // string | The name of your MongoDb Collection
     collectionName: collectionName_example,
-    // Array<{ [key: string]: string; }> (optional)
+    // Array<{ [key: string]: any; }> (optional)
     requestBody: ...,
   } satisfies InsertManyRequest;
 
@@ -481,7 +484,7 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **collectionName** | `string` | The name of your MongoDb Collection | [Defaults to `undefined`] |
-| **requestBody** | `Array<{ [key: string]: string; }>` |  | [Optional] |
+| **requestBody** | `Array<{ [key: string]: any; }>` |  | [Optional] |
 
 ### Return type
 
@@ -509,7 +512,7 @@ example().catch(console.error);
 
 ## listDocuments
 
-> Array&lt;{ [key: string]: string; }&gt; listDocuments(collectionName, filter, sort, projection, rowsPerPage, page)
+> Array&lt;{ [key: string]: any; }&gt; listDocuments(collectionName, filter, sort, projection, rowsPerPage, page)
 
 Documents in Collection
 
@@ -578,7 +581,7 @@ example().catch(console.error);
 
 ### Return type
 
-**Array<{ [key: string]: string; }>**
+**Array<{ [key: string]: any; }>**
 
 ### Authorization
 
@@ -594,7 +597,7 @@ example().catch(console.error);
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** |  |  * x-pagination-count-rows - count all elements <br>  * x-pagination-rows-per-page - Count elements per page <br>  * x-pagination-current-page - Current page <br>  * x-pagination-count-pages - Count pages <br>  |
-| **400** | Invalid value for: query parameter filter, Invalid value for: query parameter rowsPerPage, Invalid value for: query parameter page |  -  |
+| **400** | Invalid value for: query parameter rowsPerPage, Invalid value for: query parameter page |  -  |
 | **0** |  |  * x-error-code - Error Code <br>  * x-error-message - Message of the MongoCampException <br>  * x-error-additional-info - Additional information for the MongoCampException <br>  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
@@ -635,7 +638,7 @@ async function example() {
     collectionName: collectionName_example,
     // string | DocumentId to update
     documentId: documentId_example,
-    // { [key: string]: string; }
+    // { [key: string]: any; }
     requestBody: Object,
   } satisfies UpdateRequest;
 
@@ -658,7 +661,7 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **collectionName** | `string` | The name of your MongoDb Collection | [Defaults to `undefined`] |
 | **documentId** | `string` | DocumentId to update | [Defaults to `undefined`] |
-| **requestBody** | `{ [key: string]: string; }` |  | |
+| **requestBody** | `{ [key: string]: any; }` |  | |
 
 ### Return type
 
@@ -719,7 +722,7 @@ async function example() {
     collectionName: collectionName_example,
     // string | DocumentId to update
     documentId: documentId_example,
-    // { [key: string]: string; }
+    // { [key: string]: any; }
     requestBody: Object,
   } satisfies UpdateDocumentPartialRequest;
 
@@ -742,7 +745,7 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **collectionName** | `string` | The name of your MongoDb Collection | [Defaults to `undefined`] |
 | **documentId** | `string` | DocumentId to update | [Defaults to `undefined`] |
-| **requestBody** | `{ [key: string]: string; }` |  | |
+| **requestBody** | `{ [key: string]: any; }` |  | |
 
 ### Return type
 
@@ -770,7 +773,7 @@ example().catch(console.error);
 
 ## updateMany
 
-> UpdateResponse updateMany(collectionName, updateRequest)
+> UpdateResponse updateMany(collectionName, updateRequest, matchAll)
 
 Update many in Collection
 
@@ -803,6 +806,8 @@ async function example() {
     collectionName: collectionName_example,
     // UpdateRequest
     updateRequest: ...,
+    // boolean | Allow an empty filter, that matches all documents of the collection (optional)
+    matchAll: true,
   } satisfies UpdateManyRequest;
 
   try {
@@ -824,6 +829,7 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **collectionName** | `string` | The name of your MongoDb Collection | [Defaults to `undefined`] |
 | **updateRequest** | [UpdateRequest](UpdateRequest.md) |  | |
+| **matchAll** | `boolean` | Allow an empty filter, that matches all documents of the collection | [Optional] [Defaults to `false`] |
 
 ### Return type
 
@@ -843,7 +849,7 @@ example().catch(console.error);
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** |  |  -  |
-| **400** | Invalid value for: body |  -  |
+| **400** | Invalid value for: body, Invalid value for: query parameter matchAll |  -  |
 | **0** |  |  * x-error-code - Error Code <br>  * x-error-message - Message of the MongoCampException <br>  * x-error-additional-info - Additional information for the MongoCampException <br>  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)

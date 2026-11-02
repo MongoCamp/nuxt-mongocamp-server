@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: mongocamp-library
-  version: 1.6.1
+  version: 1.6.3
 paths:
   /auth/login:
     post:
@@ -154,8 +154,9 @@ paths:
       - Auth
       summary: Refresh User
       description: Refresh Token and return Login Information. A new token is issued
-        on every call, the previous tokens stay valid until they expire or the user
-        logs out with them.
+        on every call, the bearer token that was used for the call stays valid for
+        a grace period (AUTH_REFRESH_GRACE_DURATION, default 60 seconds) and is invalid
+        afterwards.
       operationId: refreshToken
       responses:
         '200':
@@ -194,6 +195,7 @@ paths:
       - httpAuth: []
       - httpAuth1: []
       - apiKeyAuth: []
+      - httpAuth: []
   /auth/profile/password:
     patch:
       tags:
@@ -1296,8 +1298,8 @@ paths:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/FileUploadForm'
-            example: 'Part(file,FileRange(/tmp/prefix12814107999030433659suffix,None),Map(filename
-              -> prefix12814107999030433659suffix),List(Content-Type: application/octet-stream))'
+            example: 'Part(file,FileRange(/tmp/prefix14192638948623794776suffix,None),Map(filename
+              -> prefix14192638948623794776suffix),List(Content-Type: application/octet-stream))'
         required: true
       responses:
         '200':
@@ -2350,7 +2352,10 @@ paths:
       tags:
       - Collection
       summary: Aggregate in Collection
-      description: Aggregate in a given Collection
+      description: Aggregate in a given Collection. The value of a stage is any JSON
+        value. Operators that run JavaScript on the database server or write to collections
+        (`$function`, `$accumulator`, `$where`, `$out`, `$merge`, `$currentOp`, `$listSessions`
+        by default, configured with AGGREGATION_STAGES_DENIED) are refused with 403.
       operationId: aggregate
       parameters:
       - name: collectionName
@@ -2528,8 +2533,7 @@ paths:
             application/json:
               schema:
                 type: array
-                items:
-                  type: string
+                items: {}
         '400':
           description: 'Invalid value for: query parameter rowsPerPage, Invalid value
             for: query parameter page'
@@ -3171,8 +3175,8 @@ paths:
                 items:
                   $ref: '#/components/schemas/Map_Any'
         '400':
-          description: 'Invalid value for: query parameter filter, Invalid value for:
-            query parameter rowsPerPage, Invalid value for: query parameter page'
+          description: 'Invalid value for: query parameter rowsPerPage, Invalid value
+            for: query parameter page'
           content:
             text/plain:
               schema:
@@ -3230,7 +3234,7 @@ paths:
               key1: value
               key2: true
               key3:
-                creationDate: '2026-11-01T17:27:18.162Z'
+                creationDate: '2026-11-02T05:03:40.430Z'
         required: true
       responses:
         '200':
@@ -3474,6 +3478,13 @@ paths:
         required: true
         schema:
           type: string
+      - name: matchAll
+        in: query
+        description: Allow an empty filter, that matches all documents of the collection
+        required: false
+        schema:
+          default: false
+          type: boolean
       requestBody:
         content:
           application/json:
@@ -3488,7 +3499,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/UpdateResponse'
         '400':
-          description: 'Invalid value for: body'
+          description: 'Invalid value for: body, Invalid value for: query parameter
+            matchAll'
           content:
             text/plain:
               schema:
@@ -3537,6 +3549,13 @@ paths:
         required: true
         schema:
           type: string
+      - name: matchAll
+        in: query
+        description: Allow an empty filter, that matches all documents of the collection
+        required: false
+        schema:
+          default: false
+          type: boolean
       requestBody:
         content:
           application/json:
@@ -3551,7 +3570,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/DeleteResponse'
         '400':
-          description: 'Invalid value for: body'
+          description: 'Invalid value for: body, Invalid value for: query parameter
+            matchAll'
           content:
             text/plain:
               schema:
@@ -5157,8 +5177,7 @@ components:
       required:
       - value
       properties:
-        value:
-          type: string
+        value: {}
     JsonValue_Boolean:
       title: JsonValue_Boolean
       type: object
@@ -5204,8 +5223,7 @@ components:
     Map_Any:
       title: Map_Any
       type: object
-      additionalProperties:
-        type: string
+      additionalProperties: {}
     Map_Int:
       title: Map_Int
       type: object
@@ -5246,8 +5264,7 @@ components:
       properties:
         key:
           type: string
-        value:
-          type: string
+        value: {}
         configType:
           type: string
         comment:
@@ -5330,8 +5347,7 @@ components:
       properties:
         stage:
           type: string
-        value:
-          type: string
+        value: {}
     Role:
       title: Role
       type: object

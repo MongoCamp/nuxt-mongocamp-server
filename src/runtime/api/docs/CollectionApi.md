@@ -19,11 +19,11 @@ All URIs are relative to *http://localhost*
 
 ## aggregate
 
-> Array&lt;{ [key: string]: string; }&gt; aggregate(collectionName, mongoAggregateRequest, rowsPerPage, page)
+> Array&lt;{ [key: string]: any; }&gt; aggregate(collectionName, mongoAggregateRequest, rowsPerPage, page)
 
 Aggregate in Collection
 
-Aggregate in a given Collection
+Aggregate in a given Collection. The value of a stage is any JSON value. Operators that run JavaScript on the database server or write to collections (&#x60;$function&#x60;, &#x60;$accumulator&#x60;, &#x60;$where&#x60;, &#x60;$out&#x60;, &#x60;$merge&#x60;, &#x60;$currentOp&#x60;, &#x60;$listSessions&#x60; by default, configured with AGGREGATION_STAGES_DENIED) are refused with 403.
 
 ### Example
 
@@ -82,7 +82,7 @@ example().catch(console.error);
 
 ### Return type
 
-**Array<{ [key: string]: string; }>**
+**Array<{ [key: string]: any; }>**
 
 ### Authorization
 
@@ -260,7 +260,7 @@ example().catch(console.error);
 
 ## distinct
 
-> Array&lt;string&gt; distinct(collectionName, field, rowsPerPage, page)
+> Array&lt;any&gt; distinct(collectionName, field, rowsPerPage, page)
 
 Distinct in Collection
 
@@ -323,7 +323,7 @@ example().catch(console.error);
 
 ### Return type
 
-**Array<string>**
+**Array<any>**
 
 ### Authorization
 

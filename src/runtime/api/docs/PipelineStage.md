@@ -7,7 +7,7 @@
 Name | Type
 ------------ | -------------
 `stage` | string
-`value` | string
+`value` | any
 
 ## Example
 

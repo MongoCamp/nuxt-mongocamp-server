@@ -366,7 +366,7 @@ This endpoint does not need any parameter.
 
 Refresh User
 
-Refresh Token and return Login Information. A new token is issued on every call, the previous tokens stay valid until they expire or the user logs out with them.
+Refresh Token and return Login Information. A new token is issued on every call, the bearer token that was used for the call stays valid for a grace period (AUTH_REFRESH_GRACE_DURATION, default 60 seconds) and is invalid afterwards.
 
 ### Example
 

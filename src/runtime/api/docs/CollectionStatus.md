@@ -18,7 +18,7 @@ Name | Type
 `totalIndexSize` | number
 `ok` | number
 `fetched` | Date
-`map` | { [key: string]: string; }
+`map` | { [key: string]: any; }
 
 ## Example
 
