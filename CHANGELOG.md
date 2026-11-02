@@ -1,6 +1,30 @@
 # Changelog
 
 
+## v1.6.3
+
+[compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.5.2...v1.6.3)
+
+### 🚀 Enhancements
+
+- Add ClusterInformation and ClusterMemberInformation models, update version to 1.6.1 ([0966161](https://github.com/MongoCamp/mongocamp-nuxt/commit/0966161))
+
+### 🩹 Fixes
+
+- Enable refreshToken in mongocamp configuration and update dependencies ([8501e16](https://github.com/MongoCamp/mongocamp-nuxt/commit/8501e16))
+- Set playground package type to module to silence MODULE_TYPELESS_PACKAGE_JSON ([7d749e0](https://github.com/MongoCamp/mongocamp-nuxt/commit/7d749e0))
+- Update types from string to any in various models and API definitions, bump version to 1.6.3 ([12f71f3](https://github.com/MongoCamp/mongocamp-nuxt/commit/12f71f3))
+- Use SystemApi (renamed from InformationApi) after API regeneration ([d9e4f7c](https://github.com/MongoCamp/mongocamp-nuxt/commit/d9e4f7c))
+- Bump version to 1.6.2 in package.json ([2756071](https://github.com/MongoCamp/mongocamp-nuxt/commit/2756071))
+
+### ✅ Tests
+
+- Add tests for toMongocampError and auth/user/storage composables ([a9c1890](https://github.com/MongoCamp/mongocamp-nuxt/commit/a9c1890))
+
+### ❤️ Contributors
+
+- Sfxcode ([@sfxcode](https://github.com/sfxcode))
+
 ## v1.5.2
 
 [compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.5.1...v1.5.2)

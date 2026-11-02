@@ -1,6 +1,6 @@
 {
   "name": "@sfxcode/nuxt-mongocamp-server",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "license": "MIT",
   "type": "module",
   "exports": {
