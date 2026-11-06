@@ -1,6 +1,20 @@
 # Changelog
 
 
+## v1.7.0
+
+[compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.6.3...v1.7.0)
+
+### 🩹 Fixes
+
+- Update OpenAPI document version to 1.7.1 and add new fields to InsertResponse ([8c7bc5b](https://github.com/MongoCamp/mongocamp-nuxt/commit/8c7bc5b))
+- Update dependencies to latest versions in package.json ([4fd999c](https://github.com/MongoCamp/mongocamp-nuxt/commit/4fd999c))
+- Update release script to use minor versioning for changelog ([a55f3ad](https://github.com/MongoCamp/mongocamp-nuxt/commit/a55f3ad))
+
+### ❤️ Contributors
+
+- Sfxcode ([@sfxcode](https://github.com/sfxcode))
+
 ## v1.6.3
 
 [compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.5.2...v1.6.3)
