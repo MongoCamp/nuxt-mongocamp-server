@@ -18,7 +18,10 @@ docs/BucketInformation.md
 docs/ClusterInformation.md
 docs/ClusterMemberInformation.md
 docs/CollectionApi.md
+docs/CollectionPermission.md
 docs/CollectionStatus.md
+docs/CollectionSummary.md
+docs/CountResponse.md
 docs/DatabaseApi.md
 docs/DatabaseInfo.md
 docs/DeleteResponse.md
@@ -32,6 +35,8 @@ docs/IndexCreateRequest.md
 docs/IndexCreateResponse.md
 docs/IndexDropResponse.md
 docs/IndexOptionsRequest.md
+docs/IndexUsage.md
+docs/InsertError.md
 docs/InsertResponse.md
 docs/JobConfig.md
 docs/JobInformation.md
@@ -53,6 +58,7 @@ docs/Role.md
 docs/SchemaAnalysis.md
 docs/SchemaAnalysisField.md
 docs/SchemaAnalysisFieldType.md
+docs/SearchRequest.md
 docs/SettingsResponse.md
 docs/SystemApi.md
 docs/UpdateFileInformationRequest.md
@@ -66,7 +72,10 @@ index.ts
 models/BucketInformation.ts
 models/ClusterInformation.ts
 models/ClusterMemberInformation.ts
+models/CollectionPermission.ts
 models/CollectionStatus.ts
+models/CollectionSummary.ts
+models/CountResponse.ts
 models/DatabaseInfo.ts
 models/DeleteResponse.ts
 models/ErrorDescription.ts
@@ -76,6 +85,8 @@ models/IndexCreateRequest.ts
 models/IndexCreateResponse.ts
 models/IndexDropResponse.ts
 models/IndexOptionsRequest.ts
+models/IndexUsage.ts
+models/InsertError.ts
 models/InsertResponse.ts
 models/JobConfig.ts
 models/JobInformation.ts
@@ -96,6 +107,7 @@ models/Role.ts
 models/SchemaAnalysis.ts
 models/SchemaAnalysisField.ts
 models/SchemaAnalysisFieldType.ts
+models/SearchRequest.ts
 models/SettingsResponse.ts
 models/UpdateFileInformationRequest.ts
 models/UpdateRequest.ts

@@ -11,6 +11,7 @@ All URIs are relative to *http://localhost*
 | [**logoutByDelete**](AuthApi.md#logoutbydelete) | **DELETE** /auth/logout | Logout User |
 | [**refreshToken**](AuthApi.md#refreshtoken) | **GET** /auth/token/refresh | Refresh User |
 | [**updatePassword**](AuthApi.md#updatepassword) | **PATCH** /auth/profile/password | Update Password |
+| [**userPermissions**](AuthApi.md#userpermissions) | **GET** /auth/permissions | Collection permissions |
 | [**userProfile**](AuthApi.md#userprofile) | **GET** /auth/profile | User Profile |
 
 
@@ -502,6 +503,83 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** |  |  -  |
 | **400** | Invalid value for: body |  -  |
+| **0** |  |  * x-error-code - Error Code <br>  * x-error-message - Message of the MongoCampException <br>  * x-error-additional-info - Additional information for the MongoCampException <br>  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## userPermissions
+
+> Array&lt;CollectionPermission&gt; userPermissions(collection)
+
+Collection permissions
+
+Return the resolved rights (read, write, administrate) of the loggedin user for the collections of the default database
+
+### Example
+
+```ts
+import {
+  Configuration,
+  AuthApi,
+} from '';
+import type { UserPermissionsRequest } from '';
+
+async function example() {
+  console.log("🚀 Testing  SDK...");
+  const config = new Configuration({ 
+    // To configure HTTP basic authorization: httpAuth1
+    username: "YOUR USERNAME",
+    password: "YOUR PASSWORD",
+    // Configure HTTP bearer authorization: httpAuth
+    accessToken: "YOUR BEARER TOKEN",
+    // To configure API key authorization: apiKeyAuth
+    apiKey: "YOUR API KEY",
+  });
+  const api = new AuthApi(config);
+
+  const body = {
+    // string | Resolve the rights for this collection only (also if the user has none) (optional)
+    collection: collection_example,
+  } satisfies UserPermissionsRequest;
+
+  try {
+    const data = await api.userPermissions(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **collection** | `string` | Resolve the rights for this collection only (also if the user has none) | [Optional] [Defaults to `undefined`] |
+
+### Return type
+
+[**Array&lt;CollectionPermission&gt;**](CollectionPermission.md)
+
+### Authorization
+
+[httpAuth1](../README.md#httpAuth1), [httpAuth](../README.md#httpAuth), [apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** |  |  -  |
 | **0** |  |  * x-error-code - Error Code <br>  * x-error-message - Message of the MongoCampException <br>  * x-error-additional-info - Additional information for the MongoCampException <br>  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)

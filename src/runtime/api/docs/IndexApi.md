@@ -11,6 +11,7 @@ All URIs are relative to *http://localhost*
 | [**createUniqueIndex**](IndexApi.md#createuniqueindex) | **PUT** /mongodb/collections/{collectionName}/index/field/{fieldName}/unique | Create Unique Index |
 | [**deleteIndex**](IndexApi.md#deleteindex) | **DELETE** /mongodb/collections/{collectionName}/index/{indexName} | Delete Index |
 | [**index**](IndexApi.md#index) | **GET** /mongodb/collections/{collectionName}/index/{indexName} | Index for Collection |
+| [**indexStats**](IndexApi.md#indexstats) | **GET** /mongodb/collections/{collectionName}/index/stats | Index usage for Collection |
 | [**listIndices**](IndexApi.md#listindices) | **GET** /mongodb/collections/{collectionName}/index | List Indices for Collection |
 
 
@@ -584,6 +585,83 @@ example().catch(console.error);
 ### Return type
 
 [**MongoIndex**](MongoIndex.md)
+
+### Authorization
+
+[httpAuth1](../README.md#httpAuth1), [httpAuth](../README.md#httpAuth), [apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** |  |  -  |
+| **0** |  |  * x-error-code - Error Code <br>  * x-error-message - Message of the MongoCampException <br>  * x-error-additional-info - Additional information for the MongoCampException <br>  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## indexStats
+
+> Array&lt;IndexUsage&gt; indexStats(collectionName)
+
+Index usage for Collection
+
+How often every Index of the given Collection was used since the counting started. Replaces the aggregation stage $indexStats, which is denied by default because its result contains the address of the database server.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  IndexApi,
+} from '';
+import type { IndexStatsRequest } from '';
+
+async function example() {
+  console.log("🚀 Testing  SDK...");
+  const config = new Configuration({ 
+    // To configure HTTP basic authorization: httpAuth1
+    username: "YOUR USERNAME",
+    password: "YOUR PASSWORD",
+    // Configure HTTP bearer authorization: httpAuth
+    accessToken: "YOUR BEARER TOKEN",
+    // To configure API key authorization: apiKeyAuth
+    apiKey: "YOUR API KEY",
+  });
+  const api = new IndexApi(config);
+
+  const body = {
+    // string | The name of your MongoDb Collection
+    collectionName: collectionName_example,
+  } satisfies IndexStatsRequest;
+
+  try {
+    const data = await api.indexStats(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **collectionName** | `string` | The name of your MongoDb Collection | [Defaults to `undefined`] |
+
+### Return type
+
+[**Array&lt;IndexUsage&gt;**](IndexUsage.md)
 
 ### Authorization
 

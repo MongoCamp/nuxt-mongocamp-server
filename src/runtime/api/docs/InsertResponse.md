@@ -8,6 +8,8 @@ Name | Type
 ------------ | -------------
 `wasAcknowledged` | boolean
 `insertedIds` | Array&lt;string&gt;
+`insertedCount` | number
+`errors` | [Array&lt;InsertError&gt;](InsertError.md)
 
 ## Example
 
@@ -18,6 +20,8 @@ import type { InsertResponse } from ''
 const example = {
   "wasAcknowledged": null,
   "insertedIds": null,
+  "insertedCount": null,
+  "errors": null,
 } satisfies InsertResponse
 
 console.log(example)

@@ -12,6 +12,7 @@ All URIs are relative to *http://localhost*
 | [**getCollectionInformation**](CollectionApi.md#getcollectioninformation) | **GET** /mongodb/collections/{collectionName} | Collection Information |
 | [**getJsonSchema**](CollectionApi.md#getjsonschema) | **GET** /mongodb/collections/{collectionName}/schema | Collection Fields |
 | [**getSchemaAnalysis**](CollectionApi.md#getschemaanalysis) | **GET** /mongodb/collections/{collectionName}/schema/analysis | Collection Fields |
+| [**listCollectionInformation**](CollectionApi.md#listcollectioninformation) | **GET** /mongodb/collections/info | Information of all Collections |
 | [**listCollections**](CollectionApi.md#listcollections) | **GET** /mongodb/collections | List of Collections |
 | [**listCollectionsByDatabase**](CollectionApi.md#listcollectionsbydatabase) | **GET** /mongodb/databases/{databaseName}/collections | List of Collections |
 
@@ -19,11 +20,11 @@ All URIs are relative to *http://localhost*
 
 ## aggregate
 
-> Array&lt;{ [key: string]: any; }&gt; aggregate(collectionName, mongoAggregateRequest, rowsPerPage, page)
+> Array&lt;{ [key: string]: any; }&gt; aggregate(collectionName, mongoAggregateRequest, rowsPerPage, page, filter)
 
 Aggregate in Collection
 
-Aggregate in a given Collection. The value of a stage is any JSON value. Operators that run JavaScript on the database server or write to collections (&#x60;$function&#x60;, &#x60;$accumulator&#x60;, &#x60;$where&#x60;, &#x60;$out&#x60;, &#x60;$merge&#x60;, &#x60;$currentOp&#x60;, &#x60;$listSessions&#x60; by default, configured with AGGREGATION_STAGES_DENIED) are refused with 403.
+Aggregate in a given Collection. The value of a stage is any JSON value. Operators that run JavaScript on the database server or write to collections (&#x60;$function&#x60;, &#x60;$accumulator&#x60;, &#x60;$where&#x60;, &#x60;$out&#x60;, &#x60;$merge&#x60;, &#x60;$currentOp&#x60;, &#x60;$listSessions&#x60;, &#x60;$collStats&#x60;, &#x60;$indexStats&#x60; by default, configured with AGGREGATION_STAGES_DENIED) are refused with 403.
 
 ### Example
 
@@ -56,6 +57,8 @@ async function example() {
     rowsPerPage: 100,
     // number | Requested page of the ResultSets (optional)
     page: 1,
+    // string | Filter Query like on the list of documents, applied as the first stage of the pipeline. Not possible for a pipeline that starts with $geoNear, $search or $vectorSearch. (optional)
+    filter: filter_example,
   } satisfies AggregateRequest;
 
   try {
@@ -79,6 +82,7 @@ example().catch(console.error);
 | **mongoAggregateRequest** | [MongoAggregateRequest](MongoAggregateRequest.md) |  | |
 | **rowsPerPage** | `number` | Count elements per page | [Optional] [Defaults to `undefined`] |
 | **page** | `number` | Requested page of the ResultSets | [Optional] [Defaults to `undefined`] |
+| **filter** | `string` | Filter Query like on the list of documents, applied as the first stage of the pipeline. Not possible for a pipeline that starts with $geoNear, $search or $vectorSearch. | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -670,6 +674,83 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** |  |  -  |
 | **400** | Invalid value for: query parameter sampleSize, Invalid value for: query parameter deepth |  -  |
+| **0** |  |  * x-error-code - Error Code <br>  * x-error-message - Message of the MongoCampException <br>  * x-error-additional-info - Additional information for the MongoCampException <br>  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## listCollectionInformation
+
+> Array&lt;CollectionSummary&gt; listCollectionInformation(name)
+
+Information of all Collections
+
+The numbers of all Collections of the default database that the user may read in one request (count, size, storage size, average size of a document, number and size of the indices). A Collection without statistics, for example a view, is listed with available false.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  CollectionApi,
+} from '';
+import type { ListCollectionInformationRequest } from '';
+
+async function example() {
+  console.log("🚀 Testing  SDK...");
+  const config = new Configuration({ 
+    // To configure HTTP basic authorization: httpAuth1
+    username: "YOUR USERNAME",
+    password: "YOUR PASSWORD",
+    // Configure HTTP bearer authorization: httpAuth
+    accessToken: "YOUR BEARER TOKEN",
+    // To configure API key authorization: apiKeyAuth
+    apiKey: "YOUR API KEY",
+  });
+  const api = new CollectionApi(config);
+
+  const body = {
+    // Array<string> | Only the Collections with these names, by default all Collections that the user may read (optional)
+    name: ...,
+  } satisfies ListCollectionInformationRequest;
+
+  try {
+    const data = await api.listCollectionInformation(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **name** | `Array<string>` | Only the Collections with these names, by default all Collections that the user may read | [Optional] |
+
+### Return type
+
+[**Array&lt;CollectionSummary&gt;**](CollectionSummary.md)
+
+### Authorization
+
+[httpAuth1](../README.md#httpAuth1), [httpAuth](../README.md#httpAuth), [apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** |  |  -  |
 | **0** |  |  * x-error-code - Error Code <br>  * x-error-message - Message of the MongoCampException <br>  * x-error-additional-info - Additional information for the MongoCampException <br>  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
