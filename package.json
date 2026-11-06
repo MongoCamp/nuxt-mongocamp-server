@@ -43,24 +43,24 @@
     "api-codegen": "openapi-generator-cli generate -i ./openapi/docs.yaml -g typescript-fetch -o src/runtime/api --additional-properties=typescriptThreePlus=true,supportsES6=true"
   },
   "dependencies": {
-    "@nuxt/kit": "^4.6.3",
+    "@nuxt/kit": "^4.6.4",
     "@vueuse/nuxt": "^15.0.0",
     "consola": "^3.4.2",
     "defu": "^6.1.7"
   },
   "devDependencies": {
-    "@nuxt/devtools": "^4.0.0",
+    "@nuxt/devtools": "^4.1.0",
     "@nuxt/eslint-config": "^1.17.0",
     "@nuxt/module-builder": "^1.0.3",
-    "@nuxt/schema": "^4.6.3",
+    "@nuxt/schema": "^4.6.4",
     "@nuxt/test-utils": "^4.3.4",
     "@openapitools/openapi-generator-cli": "^2.42.0",
     "@types/node": "^26.6.6",
     "@unocss/nuxt": "^66.12.0",
     "changelogen": "^0.6.2",
     "eslint": "^10.14.0",
-    "nuxt": "^4.6.3",
-    "vitest": "^5.0.5"
+    "nuxt": "^4.6.4",
+    "vitest": "^5.1.0"
   },
   "packageManager": "pnpm@10.30.0+sha512.2b5753de015d480eeb88f5b5b61e0051f05b4301808a82ec8b840c9d2adf7748eb352c83f5c1593ca703ff1017295bc3fdd3119abb9686efc96b9fcb18200937"
 }
