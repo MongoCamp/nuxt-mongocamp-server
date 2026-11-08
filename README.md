@@ -2,6 +2,10 @@
 
 Nuxt module wrapping a generated OpenAPI client for [MongoCamp](https://mongocamp.io), with composables for browser-session auth and server-side API-key/bearer auth.
 
+## MongoCamp Server
+
+This module is a client for [MongoCamp Server](https://github.com/MongoCamp/mongocamp-server), a REST API server for MongoDB that provides authentication, user/role management, and collection, document and index APIs. The OpenAPI client in this module is generated from the server's OpenAPI spec, so the module version should match a compatible server version. See the [server repository](https://github.com/MongoCamp/mongocamp-server) for installation, configuration and API documentation.
+
 ## Setup
 
 ```bash
