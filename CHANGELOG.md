@@ -1,6 +1,24 @@
 # Changelog
 
 
+## v1.8.0
+
+[compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.7.0...v1.8.0)
+
+### 🩹 Fixes
+
+- Update @nuxt/test-utils to version 4.4.0 in package.json ([998661f](https://github.com/MongoCamp/mongocamp-nuxt/commit/998661f))
+- Update OpenAPI document version to 1.8.1 and add new fields to IndexCreateRequest and IndexOptionsRequest ([1291be8](https://github.com/MongoCamp/mongocamp-nuxt/commit/1291be8))
+
+### 📖 Documentation
+
+- Add MongoCamp Server information to README.md ([723eb75](https://github.com/MongoCamp/mongocamp-nuxt/commit/723eb75))
+- Add Nuxt UI MongoCamp information to README.md ([906b2b8](https://github.com/MongoCamp/mongocamp-nuxt/commit/906b2b8))
+
+### ❤️ Contributors
+
+- Sfxcode ([@sfxcode](https://github.com/sfxcode))
+
 ## v1.7.0
 
 [compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.6.3...v1.7.0)
