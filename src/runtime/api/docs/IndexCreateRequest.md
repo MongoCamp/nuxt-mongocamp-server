@@ -8,6 +8,7 @@ Name | Type
 ------------ | -------------
 `keys` | { [key: string]: number; }
 `indexOptionsRequest` | [IndexOptionsRequest](IndexOptionsRequest.md)
+`orderedKeys` | [Array&lt;IndexKey&gt;](IndexKey.md)
 
 ## Example
 
@@ -18,6 +19,7 @@ import type { IndexCreateRequest } from ''
 const example = {
   "keys": null,
   "indexOptionsRequest": null,
+  "orderedKeys": null,
 } satisfies IndexCreateRequest
 
 console.log(example)

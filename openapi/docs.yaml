@@ -1,12 +1,12 @@
 openapi: 3.1.0
 info:
   title: mongocamp-library
-  version: 1.7.1
+  version: 1.8.1
 paths:
   /auth/login:
     post:
       tags:
-        - Auth
+      - Auth
       summary: Login User
       description: Login for one user and return Login Information
       operationId: login
@@ -62,7 +62,7 @@ paths:
   /auth/logout:
     post:
       tags:
-        - Auth
+      - Auth
       summary: Logout User
       description: Logout by bearer Token
       operationId: logout
@@ -100,13 +100,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
-        - httpAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+      - httpAuth: []
     delete:
       tags:
-        - Auth
+      - Auth
       summary: Logout User
       description: Logout by bearer Token
       operationId: logoutByDelete
@@ -144,14 +144,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
-        - httpAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+      - httpAuth: []
   /auth/token/refresh:
     get:
       tags:
-        - Auth
+      - Auth
       summary: Refresh User
       description: Refresh Token and return Login Information. A new token is issued
         on every call, the bearer token that was used for the call stays valid for
@@ -192,14 +192,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
-        - httpAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+      - httpAuth: []
   /auth/profile/password:
     patch:
       tags:
-        - Auth
+      - Auth
       summary: Update Password
       description: Change Password of logged in User
       operationId: updatePassword
@@ -249,13 +249,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /auth/profile/apikey:
     patch:
       tags:
-        - Auth
+      - Auth
       summary: Update ApiKey
       description: Generate new ApiKey of logged in User
       operationId: generateNewApiKey
@@ -293,13 +293,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /auth/profile:
     get:
       tags:
-        - Auth
+      - Auth
       summary: User Profile
       description: Return the User Profile of loggedin user
       operationId: userProfile
@@ -337,25 +337,25 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /auth/permissions:
     get:
       tags:
-        - Auth
+      - Auth
       summary: Collection permissions
       description: Return the resolved rights (read, write, administrate) of the loggedin
         user for the collections of the default database
       operationId: userPermissions
       parameters:
-        - name: collection
-          in: query
-          description: Resolve the rights for this collection only (also if the user
-            has none)
-          required: false
-          schema:
-            type: string
+      - name: collection
+        in: query
+        description: Resolve the rights for this collection only (also if the user
+          has none)
+        required: false
+        schema:
+          type: string
       responses:
         '200':
           description: ''
@@ -392,13 +392,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /auth/authenticated:
     get:
       tags:
-        - Auth
+      - Auth
       summary: Check Authentication
       description: Check a given Login for is authenticated
       operationId: isAuthenticated
@@ -436,39 +436,39 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /admin/users:
     get:
       tags:
-        - Admin
+      - Admin
       summary: List Users
       description: List all Users or filtered
       operationId: listUsers
       parameters:
-        - name: filter
-          in: query
-          description: filter after userId by contains
-          required: false
-          schema:
-            type: string
-        - name: rowsPerPage
-          in: query
-          description: Count elements per page
-          required: false
-          schema:
-            type: integer
-            format: int64
-          example: 100
-        - name: page
-          in: query
-          description: Requested page of the ResultSets
-          required: false
-          schema:
-            type: integer
-            format: int64
-          example: 1
+      - name: filter
+        in: query
+        description: filter after userId by contains
+        required: false
+        schema:
+          type: string
+      - name: rowsPerPage
+        in: query
+        description: Count elements per page
+        required: false
+        schema:
+          type: integer
+          format: int64
+        example: 100
+      - name: page
+        in: query
+        description: Requested page of the ResultSets
+        required: false
+        schema:
+          type: integer
+          format: int64
+        example: 1
       responses:
         '200':
           description: ''
@@ -541,12 +541,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
     put:
       tags:
-        - Admin
+      - Admin
       summary: Add User
       description: Add a new User
       operationId: addUser
@@ -596,23 +596,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /admin/users/{userId}/apikey:
     patch:
       tags:
-        - Admin
+      - Admin
       summary: Update ApiKey
       description: Generate an new APIkey for the user
       operationId: gnerateNewApiKeyForUser
       parameters:
-        - name: userId
-          in: path
-          description: UserId to Update
-          required: true
-          schema:
-            type: string
+      - name: userId
+        in: path
+        description: UserId to Update
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: ''
@@ -647,23 +647,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /admin/users/{userId}/password:
     patch:
       tags:
-        - Admin
+      - Admin
       summary: Update Password
       description: Change Password of User
       operationId: updatePasswordForUser
       parameters:
-        - name: userId
-          in: path
-          description: UserId to Update
-          required: true
-          schema:
-            type: string
+      - name: userId
+        in: path
+        description: UserId to Update
+        required: true
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -710,23 +710,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /admin/users/{userId}/roles:
     patch:
       tags:
-        - Admin
+      - Admin
       summary: Update User Roles
       description: Update Roles of User
       operationId: updateRolesForUser
       parameters:
-        - name: userId
-          in: path
-          description: UserId to Update
-          required: true
-          schema:
-            type: string
+      - name: userId
+        in: path
+        description: UserId to Update
+        required: true
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -775,23 +775,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /admin/users/{userId}:
     get:
       tags:
-        - Admin
+      - Admin
       summary: UserProfile for userId
       description: Get UserProfile for user
       operationId: getUser
       parameters:
-        - name: userId
-          in: path
-          description: UserId to search
-          required: true
-          schema:
-            type: string
+      - name: userId
+        in: path
+        description: UserId to search
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: ''
@@ -826,22 +826,22 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
     delete:
       tags:
-        - Admin
+      - Admin
       summary: Delete User
       description: Delete User
       operationId: deleteUser
       parameters:
-        - name: userId
-          in: path
-          description: UserId to Delete
-          required: true
-          schema:
-            type: string
+      - name: userId
+        in: path
+        description: UserId to Delete
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: ''
@@ -876,39 +876,39 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /admin/roles:
     get:
       tags:
-        - Admin
+      - Admin
       summary: List Roles
       description: List all Roles or filtered
       operationId: listRoles
       parameters:
-        - name: filter
-          in: query
-          description: filter after userId by contains
-          required: false
-          schema:
-            type: string
-        - name: rowsPerPage
-          in: query
-          description: Count elements per page
-          required: false
-          schema:
-            type: integer
-            format: int64
-          example: 100
-        - name: page
-          in: query
-          description: Requested page of the ResultSets
-          required: false
-          schema:
-            type: integer
-            format: int64
-          example: 1
+      - name: filter
+        in: query
+        description: filter after userId by contains
+        required: false
+        schema:
+          type: string
+      - name: rowsPerPage
+        in: query
+        description: Count elements per page
+        required: false
+        schema:
+          type: integer
+          format: int64
+        example: 100
+      - name: page
+        in: query
+        description: Requested page of the ResultSets
+        required: false
+        schema:
+          type: integer
+          format: int64
+        example: 1
       responses:
         '200':
           description: ''
@@ -981,12 +981,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
     put:
       tags:
-        - Admin
+      - Admin
       summary: Add Role
       description: Add a new Role
       operationId: addRole
@@ -1036,23 +1036,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /admin/roles/{roleName}:
     get:
       tags:
-        - Admin
+      - Admin
       summary: Get Role
       description: Get Role by RoleKey
       operationId: getRole
       parameters:
-        - name: roleName
-          in: path
-          description: RoleKey to search
-          required: true
-          schema:
-            type: string
+      - name: roleName
+        in: path
+        description: RoleKey to search
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: ''
@@ -1087,22 +1087,22 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
     delete:
       tags:
-        - Admin
+      - Admin
       summary: Delete Role
       description: Delete Role
       operationId: deleteRole
       parameters:
-        - name: roleName
-          in: path
-          description: RoleKey
-          required: true
-          schema:
-            type: string
+      - name: roleName
+        in: path
+        description: RoleKey
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: ''
@@ -1137,22 +1137,22 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
     patch:
       tags:
-        - Admin
+      - Admin
       summary: Update Role
       description: Update Role
       operationId: updateRole
       parameters:
-        - name: roleName
-          in: path
-          description: RoleKey
-          required: true
-          schema:
-            type: string
+      - name: roleName
+        in: path
+        description: RoleKey
+        required: true
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -1199,60 +1199,60 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /mongodb/buckets/{bucketName}/files:
     get:
       tags:
-        - File
+      - File
       summary: Files in Bucket
       description: Get Files paginated from given Bucket
       operationId: listFiles
       parameters:
-        - name: bucketName
-          in: path
-          description: The name of your MongoDb Collection
-          required: true
-          schema:
-            type: string
-        - name: filter
-          in: query
-          description: MongoDB Filter Query by Default all filter
-          required: false
-          schema:
-            type: string
-          example: {}
-        - name: sort
-          in: query
-          description: MongoDB sorting
-          required: false
-          schema:
-            type: string
-          example: {}
-        - name: projection
-          in: query
-          description: MongoDB projection
-          required: false
-          schema:
-            type: string
-          example: {}
-        - name: rowsPerPage
-          in: query
-          description: Count elements per page
-          required: false
-          schema:
-            type: integer
-            format: int64
-          example: 100
-        - name: page
-          in: query
-          description: Requested page of the ResultSets
-          required: false
-          schema:
-            type: integer
-            format: int64
-          example: 1
+      - name: bucketName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: filter
+        in: query
+        description: MongoDB Filter Query by Default all filter
+        required: false
+        schema:
+          type: string
+        example: {}
+      - name: sort
+        in: query
+        description: MongoDB sorting
+        required: false
+        schema:
+          type: string
+        example: {}
+      - name: projection
+        in: query
+        description: MongoDB projection
+        required: false
+        schema:
+          type: string
+        example: {}
+      - name: rowsPerPage
+        in: query
+        description: Count elements per page
+        required: false
+        schema:
+          type: integer
+          format: int64
+        example: 100
+      - name: page
+        in: query
+        description: Requested page of the ResultSets
+        required: false
+        schema:
+          type: integer
+          format: int64
+        example: 1
       responses:
         '200':
           description: ''
@@ -1325,36 +1325,36 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
     put:
       tags:
-        - File
+      - File
       summary: Insert File
       description: Insert one File in given Bucket
       operationId: insertFile
       parameters:
-        - name: bucketName
-          in: path
-          description: The name of your MongoDb Collection
-          required: true
-          schema:
-            type: string
-        - name: fileName
-          in: query
-          description: override filename of uploaded file
-          required: false
-          schema:
-            type: string
+      - name: bucketName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: fileName
+        in: query
+        description: override filename of uploaded file
+        required: false
+        schema:
+          type: string
       requestBody:
         description: Request um neue Einträge mittels einer Datei anzulegen
         content:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/FileUploadForm'
-            example: 'Part(file,FileRange(/tmp/prefix12314634217238828249suffix,None),Map(filename
-              -> prefix12314634217238828249suffix),List(Content-Type: application/octet-stream))'
+            example: 'Part(file,FileRange(/tmp/prefix929971639888939818suffix,None),Map(filename
+              -> prefix929971639888939818suffix),List(Content-Type: application/octet-stream))'
         required: true
       responses:
         '200':
@@ -1396,39 +1396,39 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
     post:
       tags:
-        - File
+      - File
       summary: Files in Bucket
       description: Alternative to GET Route for more complex queries and URL max.
         Length
       operationId: findFiles
       parameters:
-        - name: bucketName
-          in: path
-          description: The name of your MongoDb Collection
-          required: true
-          schema:
-            type: string
-        - name: rowsPerPage
-          in: query
-          description: Count elements per page
-          required: false
-          schema:
-            type: integer
-            format: int64
-          example: 100
-        - name: page
-          in: query
-          description: Requested page of the ResultSets
-          required: false
-          schema:
-            type: integer
-            format: int64
-          example: 1
+      - name: bucketName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: rowsPerPage
+        in: query
+        description: Count elements per page
+        required: false
+        schema:
+          type: integer
+          format: int64
+        example: 100
+      - name: page
+        in: query
+        description: Requested page of the ResultSets
+        required: false
+        schema:
+          type: integer
+          format: int64
+        example: 1
       requestBody:
         content:
           application/json:
@@ -1515,29 +1515,29 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /mongodb/buckets/{bucketName}/files/{fileId}:
     get:
       tags:
-        - File
+      - File
       summary: FileInformation from Bucket
       description: Get one FileInformation from given Bucket
       operationId: getFileInformation
       parameters:
-        - name: bucketName
-          in: path
-          description: The name of your MongoDb Collection
-          required: true
-          schema:
-            type: string
-        - name: fileId
-          in: path
-          description: fileId to read
-          required: true
-          schema:
-            type: string
+      - name: bucketName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: fileId
+        in: path
+        description: fileId to read
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: ''
@@ -1572,28 +1572,28 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
     delete:
       tags:
-        - File
+      - File
       summary: Delete File from Bucket
       description: Delete one File from given Bucket
       operationId: deleteFile
       parameters:
-        - name: bucketName
-          in: path
-          description: The name of your MongoDb Collection
-          required: true
-          schema:
-            type: string
-        - name: fileId
-          in: path
-          description: fileId to delete
-          required: true
-          schema:
-            type: string
+      - name: bucketName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: fileId
+        in: path
+        description: fileId to delete
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: ''
@@ -1628,28 +1628,28 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
     patch:
       tags:
-        - File
+      - File
       summary: Update FileInformation in Bucket
       description: Replace MetaData and potential update FileName
       operationId: updateFileInformation
       parameters:
-        - name: bucketName
-          in: path
-          description: The name of your MongoDb Collection
-          required: true
-          schema:
-            type: string
-        - name: fileId
-          in: path
-          description: fileId to update
-          required: true
-          schema:
-            type: string
+      - name: bucketName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: fileId
+        in: path
+        description: fileId to update
+        required: true
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -1696,29 +1696,29 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /mongodb/buckets/{bucketName}/files/{fileId}/file:
     get:
       tags:
-        - File
+      - File
       summary: File from Bucket
       description: Get File from given Bucket
       operationId: getFile
       parameters:
-        - name: bucketName
-          in: path
-          description: The name of your MongoDb Collection
-          required: true
-          schema:
-            type: string
-        - name: fileId
-          in: path
-          description: FileId to read
-          required: true
-          schema:
-            type: string
+      - name: bucketName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: fileId
+        in: path
+        description: FileId to read
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: ''
@@ -1772,13 +1772,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /mongodb/buckets:
     get:
       tags:
-        - Bucket
+      - Bucket
       summary: List of Buckets
       description: List of all Buckets of the default database
       operationId: listBuckets
@@ -1818,23 +1818,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /mongodb/buckets/{bucketName}:
     get:
       tags:
-        - Bucket
+      - Bucket
       summary: Bucket Information
       description: All Information about a single Bucket
       operationId: getBucket
       parameters:
-        - name: bucketName
-          in: path
-          description: The name of your MongoDb Collection
-          required: true
-          schema:
-            type: string
+      - name: bucketName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: ''
@@ -1869,22 +1869,22 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
     delete:
       tags:
-        - Bucket
+      - Bucket
       summary: Delete Bucket
       description: Delete a given Bucket
       operationId: deleteBucket
       parameters:
-        - name: bucketName
-          in: path
-          description: The name of your MongoDb Collection
-          required: true
-          schema:
-            type: string
+      - name: bucketName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: ''
@@ -1919,23 +1919,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /mongodb/buckets/{bucketName}/clear:
     delete:
       tags:
-        - Bucket
+      - Bucket
       summary: Clear Bucket
       description: Delete all Files in Bucket
       operationId: clearBucket
       parameters:
-        - name: bucketName
-          in: path
-          description: The name of your MongoDb Collection
-          required: true
-          schema:
-            type: string
+      - name: bucketName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: ''
@@ -1970,13 +1970,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /mongodb/collections:
     get:
       tags:
-        - Collection
+      - Collection
       summary: List of Collections
       description: List of all Collections of the default database
       operationId: listCollections
@@ -2016,13 +2016,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /mongodb/collections/info:
     get:
       tags:
-        - Collection
+      - Collection
       summary: Information of all Collections
       description: The numbers of all Collections of the default database that the
         user may read in one request (count, size, storage size, average size of a
@@ -2030,16 +2030,16 @@ paths:
         for example a view, is listed with available false.
       operationId: listCollectionInformation
       parameters:
-        - name: name
-          in: query
-          description: Only the Collections with these names, by default all Collections
-            that the user may read
-          required: false
-          schema:
-            default: []
-            type: array
-            items:
-              type: string
+      - name: name
+        in: query
+        description: Only the Collections with these names, by default all Collections
+          that the user may read
+        required: false
+        schema:
+          default: []
+          type: array
+          items:
+            type: string
       responses:
         '200':
           description: ''
@@ -2076,30 +2076,30 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /mongodb/collections/{collectionName}:
     get:
       tags:
-        - Collection
+      - Collection
       summary: Collection Information
       description: All Information about a single Collection
       operationId: getCollectionInformation
       parameters:
-        - name: collectionName
-          in: path
-          description: The name of your MongoDb Collection
-          required: true
-          schema:
-            type: string
-        - name: includeDetails
-          in: query
-          description: Include all details for the Collection
-          required: false
-          schema:
-            default: false
-            type: boolean
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: includeDetails
+        in: query
+        description: Include all details for the Collection
+        required: false
+        schema:
+          default: false
+          type: boolean
       responses:
         '200':
           description: ''
@@ -2140,22 +2140,22 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
     delete:
       tags:
-        - Collection
+      - Collection
       summary: Delete Collection
       description: Delete a given Collection
       operationId: deleteCollection
       parameters:
-        - name: collectionName
-          in: path
-          description: The name of your MongoDb Collection
-          required: true
-          schema:
-            type: string
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: ''
@@ -2190,32 +2190,32 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /mongodb/collections/{collectionName}/fields:
     get:
       tags:
-        - Collection
+      - Collection
       summary: Collection Fields
       description: List the Fields in a given collection
       operationId: getCollectionFields
       parameters:
-        - name: collectionName
-          in: path
-          description: The name of your MongoDb Collection
-          required: true
-          schema:
-            type: string
-        - name: sample size
-          in: query
-          description: Use sample size greater 0 (e.g. 1000) for better performance
-            on big collections
-          required: false
-          schema:
-            type: integer
-            format: int32
-          example: 1000
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: sample size
+        in: query
+        description: Use sample size greater 0 (e.g. 1000) for better performance
+          on big collections
+        required: false
+        schema:
+          type: integer
+          format: int32
+        example: 1000
       responses:
         '200':
           description: ''
@@ -2258,40 +2258,120 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /mongodb/collections/{collectionName}/fields/detail:
+    get:
+      tags:
+      - Collection
+      summary: Fields of a Collection with types
+      description: All fields of a collection as a flat list, one entry per path (`address.city`,
+        `tags[]` for the elements of an array) with the types of the values and how
+        often every type was found in the analysed documents.
+      operationId: getFieldDetails
+      parameters:
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: sampleSize
+        in: query
+        description: Number of documents that are analysed, 1000 by default. A greater
+          sample is more exact and slower on big collections.
+        required: false
+        schema:
+          default: 1000
+          type: integer
+          format: int32
+        example: 1000
+      - name: depth
+        in: query
+        description: How deep should the objects extracted
+        required: false
+        schema:
+          default: 3
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FieldInfo'
+        '400':
+          description: 'Invalid value for: query parameter sampleSize, Invalid value
+            for: query parameter depth'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /mongodb/collections/{collectionName}/schema:
     get:
       tags:
-        - Collection
+      - Collection
       summary: Collection Fields
       description: List the Fields in a given collection
       operationId: getJsonSchema
       parameters:
-        - name: collectionName
-          in: path
-          description: The name of your MongoDb Collection
-          required: true
-          schema:
-            type: string
-        - name: sampleSize
-          in: query
-          description: Use sample size greater 0 (e.g. 5000) for better performance
-            on big collections
-          required: false
-          schema:
-            type: integer
-            format: int32
-          example: 5000
-        - name: deepth
-          in: query
-          description: How deep should the objects extracted
-          required: false
-          schema:
-            default: 3
-            type: integer
-            format: int32
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: sampleSize
+        in: query
+        description: Use sample size greater 0 (e.g. 5000) for better performance
+          on big collections
+        required: false
+        schema:
+          type: integer
+          format: int32
+        example: 5000
+      - name: deepth
+        in: query
+        description: How deep should the objects extracted
+        required: false
+        schema:
+          default: 3
+          type: integer
+          format: int32
       responses:
         '200':
           description: ''
@@ -2333,40 +2413,40 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /mongodb/collections/{collectionName}/schema/analysis:
     get:
       tags:
-        - Collection
+      - Collection
       summary: Collection Fields
       description: List the Fields in a given collection
       operationId: getSchemaAnalysis
       parameters:
-        - name: collectionName
-          in: path
-          description: The name of your MongoDb Collection
-          required: true
-          schema:
-            type: string
-        - name: sampleSize
-          in: query
-          description: Use sample size greater 0 (e.g. 5000) for better performance
-            on big collections
-          required: false
-          schema:
-            type: integer
-            format: int32
-          example: 5000
-        - name: deepth
-          in: query
-          description: How deep should the objects extracted
-          required: false
-          schema:
-            default: 3
-            type: integer
-            format: int32
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: sampleSize
+        in: query
+        description: Use sample size greater 0 (e.g. 5000) for better performance
+          on big collections
+        required: false
+        schema:
+          type: integer
+          format: int32
+        example: 5000
+      - name: deepth
+        in: query
+        description: How deep should the objects extracted
+        required: false
+        schema:
+          default: 3
+          type: integer
+          format: int32
       responses:
         '200':
           description: ''
@@ -2408,23 +2488,167 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /mongodb/collections/{collectionName}/rename:
+    post:
+      tags:
+      - Collection
+      summary: Rename Collection
+      description: 'Rename a Collection in the database, with its Documents and Indices.
+        The target is a name in the database of the Collection. The administrate grant
+        for the Collection and the write grant for the target are needed. An existing
+        target is a conflict (409), unless dropTarget is true and the user has the
+        administrate grant for it: it is replaced then.'
+      operationId: renameCollection
+      parameters:
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RenameRequest'
+            example:
+              target: newName
+              dropTarget: false
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RenameResponse'
+        '400':
+          description: 'Invalid value for: body'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /mongodb/collections/{collectionName}/copy:
+    post:
+      tags:
+      - Collection
+      summary: Copy Collection
+      description: 'Copy a Collection in the database, optionally only the documents
+        that match a Lucene filter, with its indices (withIndexes, true by default).
+        The target is a name in the database of the Collection. The read grant for
+        the Collection and the write grant for the target are needed. An existing
+        target is a conflict (409), unless dropTarget is true and the user has the
+        administrate grant for it: it is replaced when the copy is complete. The copy
+        is made in one request, a big collection takes its time.'
+      operationId: copyCollection
+      parameters:
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CopyRequest'
+            example:
+              target: copyOfCollection
+              filter: type:company
+              withIndexes: true
+              dropTarget: false
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CopyResponse'
+        '400':
+          description: 'Invalid value for: body'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /mongodb/collections/{collectionName}/clear:
     delete:
       tags:
-        - Collection
+      - Collection
       summary: Clear Collection
       description: Delete all Document in Collection
       operationId: clearCollection
       parameters:
-        - name: collectionName
-          in: path
-          description: The name of your MongoDb Collection
-          required: true
-          schema:
-            type: string
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: ''
@@ -2459,13 +2683,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /mongodb/collections/{collectionName}/aggregate:
     post:
       tags:
-        - Collection
+      - Collection
       summary: Aggregate in Collection
       description: Aggregate in a given Collection. The value of a stage is any JSON
         value. Operators that run JavaScript on the database server or write to collections
@@ -2474,36 +2698,45 @@ paths:
         are refused with 403.
       operationId: aggregate
       parameters:
-        - name: collectionName
-          in: path
-          description: The name of your MongoDb Collection
-          required: true
-          schema:
-            type: string
-        - name: rowsPerPage
-          in: query
-          description: Count elements per page
-          required: false
-          schema:
-            type: integer
-            format: int64
-          example: 100
-        - name: page
-          in: query
-          description: Requested page of the ResultSets
-          required: false
-          schema:
-            type: integer
-            format: int64
-          example: 1
-        - name: filter
-          in: query
-          description: Filter Query like on the list of documents, applied as the first
-            stage of the pipeline. Not possible for a pipeline that starts with $geoNear,
-            $search or $vectorSearch.
-          required: false
-          schema:
-            type: string
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: rowsPerPage
+        in: query
+        description: Count elements per page
+        required: false
+        schema:
+          type: integer
+          format: int64
+        example: 100
+      - name: page
+        in: query
+        description: Requested page of the ResultSets
+        required: false
+        schema:
+          type: integer
+          format: int64
+        example: 1
+      - name: filter
+        in: query
+        description: Filter Query like on the list of documents, applied as the first
+          stage of the pipeline. Not possible for a pipeline that starts with $geoNear,
+          $search or $vectorSearch.
+        required: false
+        schema:
+          type: string
+      - name: extendedJson
+        in: query
+        description: 'relaxed or canonical: the documents with the types of their
+          values as MongoDB Extended JSON ({"$oid": ...}, {"$date": ...}, {"$numberDecimal":
+          ...}, canonical also {"$numberInt": ...}, {"$numberLong": ...} and {"$numberDouble":
+          ...}). Without the parameter the documents are returned as before.'
+        required: false
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -2582,45 +2815,45 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /mongodb/collections/{collectionName}/distinct/{field}:
     post:
       tags:
-        - Collection
+      - Collection
       summary: Distinct in Collection
       description: Distinct for Field in a given Collection
       operationId: distinct
       parameters:
-        - name: collectionName
-          in: path
-          description: The name of your MongoDb Collection
-          required: true
-          schema:
-            type: string
-        - name: field
-          in: path
-          description: The field for your distinct Request.
-          required: true
-          schema:
-            type: string
-        - name: rowsPerPage
-          in: query
-          description: Count elements per page
-          required: false
-          schema:
-            type: integer
-            format: int64
-          example: 100
-        - name: page
-          in: query
-          description: Requested page of the ResultSets
-          required: false
-          schema:
-            type: integer
-            format: int64
-          example: 1
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: field
+        in: path
+        description: The field for your distinct Request.
+        required: true
+        schema:
+          type: string
+      - name: rowsPerPage
+        in: query
+        description: Count elements per page
+        required: false
+        schema:
+          type: integer
+          format: int64
+        example: 100
+      - name: page
+        in: query
+        description: Requested page of the ResultSets
+        required: false
+        schema:
+          type: integer
+          format: int64
+        example: 1
       responses:
         '200':
           description: ''
@@ -2692,13 +2925,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /system/settings:
     get:
       tags:
-        - Application
+      - Application
       summary: System Settings
       description: Returns the Settings of the running MongoCamp Application.
       operationId: settings
@@ -2736,13 +2969,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /system/configurations:
     get:
       tags:
-        - Application
+      - Application
       summary: List Configurations
       description: List all Configurations or filtered
       operationId: listConfigurations
@@ -2782,23 +3015,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /system/configurations/{configurationKey}:
     get:
       tags:
-        - Application
+      - Application
       summary: Configuration for configurationKey
       description: Get Configuration for key
       operationId: getConfig
       parameters:
-        - name: configurationKey
-          in: path
-          description: configurationKey to get
-          required: true
-          schema:
-            type: string
+      - name: configurationKey
+        in: path
+        description: configurationKey to get
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: ''
@@ -2833,22 +3066,22 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
     patch:
       tags:
-        - Application
+      - Application
       summary: Update Configuration
       description: Update Configuration with the value
       operationId: updateConfiguration
       parameters:
-        - name: configurationKey
-          in: path
-          description: configurationKey to edit
-          required: true
-          schema:
-            type: string
+      - name: configurationKey
+        in: path
+        description: configurationKey to edit
+        required: true
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -2895,25 +3128,25 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /system:
     delete:
       tags:
-        - Application
+      - Application
       summary: Shutdown MongoCamp
       description: Shutdown the running MongoCamp Application. CLI Mode will automatically
         restart the Application.
       operationId: shutdown
       parameters:
-        - name: force
-          in: query
-          description: Shutdown Server and don`t send reboot event.
-          required: false
-          schema:
-            default: false
-            type: boolean
+      - name: force
+        in: query
+        description: Shutdown Server and don`t send reboot event.
+        required: false
+        schema:
+          default: false
+          type: boolean
       responses:
         '200':
           description: ''
@@ -2954,13 +3187,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /mongodb/databases:
     get:
       tags:
-        - Database
+      - Database
       summary: List of Databases
       description: List of all Databases
       operationId: ListDatabases
@@ -3000,13 +3233,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /mongodb/databases/infos:
     get:
       tags:
-        - Database
+      - Database
       summary: List of Database Infos
       description: List of all Databases Infos
       operationId: databaseInfos
@@ -3046,23 +3279,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /mongodb/databases/{databaseName}:
     get:
       tags:
-        - Database
+      - Database
       summary: Database Infos of selected Database
       description: All Information about given Database
       operationId: getDatabaseInfo
       parameters:
-        - name: databaseName
-          in: path
-          description: Name of your Database
-          required: true
-          schema:
-            type: string
+      - name: databaseName
+        in: path
+        description: Name of your Database
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: ''
@@ -3097,22 +3330,22 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
     delete:
       tags:
-        - Database
+      - Database
       summary: Delete Database
       description: Delete given Database
       operationId: deleteDatabase
       parameters:
-        - name: databaseName
-          in: path
-          description: Name of your Database
-          required: true
-          schema:
-            type: string
+      - name: databaseName
+        in: path
+        description: Name of your Database
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: ''
@@ -3147,24 +3380,24 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /mongodb/databases/{databaseName}/collections:
     get:
       tags:
-        - Database
-        - Collection
+      - Database
+      - Collection
       summary: List of Collections
       description: List of all Collections of the given database
       operationId: listCollectionsByDatabase
       parameters:
-        - name: databaseName
-          in: path
-          description: Name of your Database
-          required: true
-          schema:
-            type: string
+      - name: databaseName
+        in: path
+        description: Name of your Database
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: ''
@@ -3201,65 +3434,74 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /mongodb/collections/{collectionName}/documents:
     get:
       tags:
-        - Document
+      - Document
       summary: Documents in Collection
       description: Get Documents paginated from given Collection
       operationId: listDocuments
       parameters:
-        - name: collectionName
-          in: path
-          description: The name of your MongoDb Collection
-          required: true
-          schema:
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: filter
+        in: query
+        description: MongoDB Filter Query by Default all filter
+        required: false
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: MongoDB sorting
+        required: false
+        schema:
+          default: []
+          type: array
+          items:
             type: string
-        - name: filter
-          in: query
-          description: MongoDB Filter Query by Default all filter
-          required: false
-          schema:
+        example: []
+      - name: projection
+        in: query
+        description: MongoDB projection
+        required: false
+        schema:
+          default: []
+          type: array
+          items:
             type: string
-        - name: sort
-          in: query
-          description: MongoDB sorting
-          required: false
-          schema:
-            default: []
-            type: array
-            items:
-              type: string
-          example: []
-        - name: projection
-          in: query
-          description: MongoDB projection
-          required: false
-          schema:
-            default: []
-            type: array
-            items:
-              type: string
-          example: []
-        - name: rowsPerPage
-          in: query
-          description: Count elements per page
-          required: false
-          schema:
-            type: integer
-            format: int64
-          example: 100
-        - name: page
-          in: query
-          description: Requested page of the ResultSets
-          required: false
-          schema:
-            type: integer
-            format: int64
-          example: 1
+        example: []
+      - name: rowsPerPage
+        in: query
+        description: Count elements per page
+        required: false
+        schema:
+          type: integer
+          format: int64
+        example: 100
+      - name: page
+        in: query
+        description: Requested page of the ResultSets
+        required: false
+        schema:
+          type: integer
+          format: int64
+        example: 1
+      - name: extendedJson
+        in: query
+        description: 'relaxed or canonical: the documents with the types of their
+          values as MongoDB Extended JSON ({"$oid": ...}, {"$date": ...}, {"$numberDecimal":
+          ...}, canonical also {"$numberInt": ...}, {"$numberLong": ...} and {"$numberDouble":
+          ...}). Without the parameter the documents are returned as before.'
+        required: false
+        schema:
+          type: string
       responses:
         '200':
           description: ''
@@ -3332,22 +3574,22 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
     put:
       tags:
-        - Document
+      - Document
       summary: Insert Document
       description: Insert one Document in given Collection
       operationId: insert
       parameters:
-        - name: collectionName
-          in: path
-          description: The name of your MongoDb Collection
-          required: true
-          schema:
-            type: string
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
       requestBody:
         description: JSON Representation for your Document.
         content:
@@ -3358,7 +3600,7 @@ paths:
               key1: value
               key2: true
               key3:
-                creationDate: '2026-11-06T06:04:09.291Z'
+                creationDate: '2026-11-08T16:48:08.839Z'
         required: true
       responses:
         '200':
@@ -3400,39 +3642,48 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
     post:
       tags:
-        - Document
+      - Document
       summary: Documents in Collection
       description: Alternative to GET Route for more complex queries and URL max.
         Length
       operationId: find
       parameters:
-        - name: collectionName
-          in: path
-          description: The name of your MongoDb Collection
-          required: true
-          schema:
-            type: string
-        - name: rowsPerPage
-          in: query
-          description: Count elements per page
-          required: false
-          schema:
-            type: integer
-            format: int64
-          example: 100
-        - name: page
-          in: query
-          description: Requested page of the ResultSets
-          required: false
-          schema:
-            type: integer
-            format: int64
-          example: 1
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: rowsPerPage
+        in: query
+        description: Count elements per page
+        required: false
+        schema:
+          type: integer
+          format: int64
+        example: 100
+      - name: page
+        in: query
+        description: Requested page of the ResultSets
+        required: false
+        schema:
+          type: integer
+          format: int64
+        example: 1
+      - name: extendedJson
+        in: query
+        description: 'relaxed or canonical: the documents with the types of their
+          values as MongoDB Extended JSON ({"$oid": ...}, {"$date": ...}, {"$numberDecimal":
+          ...}, canonical also {"$numberInt": ...}, {"$numberLong": ...} and {"$numberDouble":
+          ...}). Without the parameter the documents are returned as before.'
+        required: false
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -3520,31 +3771,31 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /mongodb/collections/{collectionName}/documents/count:
     get:
       tags:
-        - Document
+      - Document
       summary: Count Documents in Collection
       description: Count the Documents of the given Collection that match the filter
         without loading them
       operationId: countDocuments
       parameters:
-        - name: collectionName
-          in: path
-          description: The name of your MongoDb Collection
-          required: true
-          schema:
-            type: string
-        - name: filter
-          in: query
-          description: Filter Query like on the list of documents, by default all documents
-            are counted
-          required: false
-          schema:
-            type: string
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: filter
+        in: query
+        description: Filter Query like on the list of documents, by default all documents
+          are counted
+        required: false
+        schema:
+          type: string
       responses:
         '200':
           description: ''
@@ -3579,13 +3830,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /mongodb/collections/{collectionName}/documents/search:
     post:
       tags:
-        - Document
+      - Document
       summary: Search Documents in Collection
       description: 'The list of documents with the parameters in the request body:
         for filters that are too long for the URL (a URL of more than 2048 characters
@@ -3594,28 +3845,37 @@ paths:
         headers are the same.'
       operationId: searchDocuments
       parameters:
-        - name: collectionName
-          in: path
-          description: The name of your MongoDb Collection
-          required: true
-          schema:
-            type: string
-        - name: rowsPerPage
-          in: query
-          description: Count elements per page
-          required: false
-          schema:
-            type: integer
-            format: int64
-          example: 100
-        - name: page
-          in: query
-          description: Requested page of the ResultSets
-          required: false
-          schema:
-            type: integer
-            format: int64
-          example: 1
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: rowsPerPage
+        in: query
+        description: Count elements per page
+        required: false
+        schema:
+          type: integer
+          format: int64
+        example: 100
+      - name: page
+        in: query
+        description: Requested page of the ResultSets
+        required: false
+        schema:
+          type: integer
+          format: int64
+        example: 1
+      - name: extendedJson
+        in: query
+        description: 'relaxed or canonical: the documents with the types of their
+          values as MongoDB Extended JSON ({"$oid": ...}, {"$date": ...}, {"$numberDecimal":
+          ...}, canonical also {"$numberInt": ...}, {"$numberLong": ...} and {"$numberDouble":
+          ...}). Without the parameter the documents are returned as before.'
+        required: false
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -3624,10 +3884,10 @@ paths:
             example:
               filter: name:John AND age:[18 TO 65]
               sort:
-                - -age
+              - -age
               projection:
-                - name
-                - age
+              - name
+              - age
         required: true
       responses:
         '200':
@@ -3701,32 +3961,219 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /mongodb/collections/{collectionName}/documents/export:
+    get:
+      tags:
+      - Document
+      summary: Export Documents of a Collection
+      description: 'Download the documents of a Collection as a stream: ndjson (one
+        JSON document per line), json (one array) or csv (a header line, nested values
+        as JSON, a text with a comma, a quote or a line break in quotes). The documents
+        are written while the database delivers them, the memory of the server does
+        not depend on the size of the Collection. The columns of a csv export are
+        the fields of `projection`, by default the fields of the first 1000 documents.
+        With extendedJson the types of the values are explicit. A failure while the
+        stream is running ends the stream, the status is 200 by then.'
+      operationId: exportDocuments
+      parameters:
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: format
+        in: query
+        description: ndjson (one JSON document per line), json (one array) or csv
+        required: false
+        schema:
+          default: ndjson
+          type: string
+      - name: filter
+        in: query
+        description: Filter Query like on the list of documents, by default all documents
+          are exported
+        required: false
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: Sorting like on the list of documents, a leading - sorts descending
+        required: false
+        schema:
+          default: []
+          type: array
+          items:
+            type: string
+      - name: projection
+        in: query
+        description: The fields to export, for csv they are the columns in this order
+        required: false
+        schema:
+          default: []
+          type: array
+          items:
+            type: string
+      - name: limit
+        in: query
+        description: The greatest number of documents, by default all
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: extendedJson
+        in: query
+        description: 'relaxed or canonical: the documents with the types of their
+          values as MongoDB Extended JSON ({"$oid": ...}, {"$date": ...}, {"$numberDecimal":
+          ...}, canonical also {"$numberInt": ...}, {"$numberLong": ...} and {"$numberDouble":
+          ...}). Without the parameter the documents are returned as before.'
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers:
+            Content-Disposition:
+              required: true
+              schema:
+                type: string
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          description: 'Invalid value for: query parameter limit'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /mongodb/collections/{collectionName}/documents/import:
+    post:
+      tags:
+      - Document
+      summary: Import Documents into a Collection
+      description: 'Store the documents of the request body: one JSON document per
+        line (NDJSON, as written by the export). A line is read like a document in
+        the body of an insert (Extended JSON wrappers, dates). The body is read as
+        a stream and the documents are stored in batches without ordering, a line
+        that cannot be stored does not stop the others: the answer counts what was
+        read, stored and failed and names the first failed lines (`errors`, `index`
+        is the number of the line). The size of the body is limited by IMPORT_MAX_BYTES
+        (413 above), there is no time limit.'
+      operationId: importDocuments
+      parameters:
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              type: string
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportResponse'
+        '400':
+          description: 'Invalid value for: body'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /mongodb/collections/{collectionName}/documents/many/insert:
     put:
       tags:
-        - Document
+      - Document
       summary: Insert many Documents
       description: Insert many documents in given Collection
       operationId: insertMany
       parameters:
-        - name: collectionName
-          in: path
-          description: The name of your MongoDb Collection
-          required: true
-          schema:
-            type: string
-        - name: ordered
-          in: query
-          description: 'true (default): the insert stops at the first document that
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: ordered
+        in: query
+        description: 'true (default): the insert stops at the first document that
           fails (answer 409 for a duplicate key). false: all documents that can be
           stored are stored, the others are listed in `errors` of the answer.'
-          required: false
-          schema:
-            default: true
-            type: boolean
+        required: false
+        schema:
+          default: true
+          type: boolean
       requestBody:
         content:
           application/json:
@@ -3776,37 +4223,37 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /mongodb/collections/{collectionName}/documents/many/update:
     patch:
       tags:
-        - Document
+      - Document
       summary: Update many in Collection
       description: Update many Document in given Collection
       operationId: updateMany
       parameters:
-        - name: collectionName
-          in: path
-          description: The name of your MongoDb Collection
-          required: true
-          schema:
-            type: string
-        - name: matchAll
-          in: query
-          description: Allow an empty filter, that matches all documents of the collection
-          required: false
-          schema:
-            default: false
-            type: boolean
-        - name: filter
-          in: query
-          description: Filter Query like on the list of documents, as an alternative
-            to the filter of the request body. Use only one of both.
-          required: false
-          schema:
-            type: string
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: matchAll
+        in: query
+        description: Allow an empty filter, that matches all documents of the collection
+        required: false
+        schema:
+          default: false
+          type: boolean
+      - name: filter
+        in: query
+        description: Filter Query like on the list of documents, as an alternative
+          to the filter of the request body. Use only one of both.
+        required: false
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -3854,37 +4301,37 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /mongodb/collections/{collectionName}/documents/many/delete:
     delete:
       tags:
-        - Document
+      - Document
       summary: Delete Many in Collection
       description: Delete many Document in given Collection
       operationId: deleteMany
       parameters:
-        - name: collectionName
-          in: path
-          description: The name of your MongoDb Collection
-          required: true
-          schema:
-            type: string
-        - name: matchAll
-          in: query
-          description: Allow an empty filter, that matches all documents of the collection
-          required: false
-          schema:
-            default: false
-            type: boolean
-        - name: filter
-          in: query
-          description: Filter Query like on the list of documents, as an alternative
-            to the filter of the request body. Use only one of both.
-          required: false
-          schema:
-            type: string
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: matchAll
+        in: query
+        description: Allow an empty filter, that matches all documents of the collection
+        required: false
+        schema:
+          default: false
+          type: boolean
+      - name: filter
+        in: query
+        description: Filter Query like on the list of documents, as an alternative
+          to the filter of the request body. Use only one of both.
+        required: false
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -3932,29 +4379,38 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /mongodb/collections/{collectionName}/documents/{documentId}:
     get:
       tags:
-        - Document
+      - Document
       summary: Document from Collection
       description: Get one Document from given Collection
       operationId: getDocument
       parameters:
-        - name: collectionName
-          in: path
-          description: The name of your MongoDb Collection
-          required: true
-          schema:
-            type: string
-        - name: documentId
-          in: path
-          description: DocumentId to read
-          required: true
-          schema:
-            type: string
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: documentId
+        in: path
+        description: DocumentId to read
+        required: true
+        schema:
+          type: string
+      - name: extendedJson
+        in: query
+        description: 'relaxed or canonical: the documents with the types of their
+          values as MongoDB Extended JSON ({"$oid": ...}, {"$date": ...}, {"$numberDecimal":
+          ...}, canonical also {"$numberInt": ...}, {"$numberLong": ...} and {"$numberDouble":
+          ...}). Without the parameter the documents are returned as before.'
+        required: false
+        schema:
+          type: string
       responses:
         '200':
           description: ''
@@ -3989,28 +4445,28 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
     delete:
       tags:
-        - Document
+      - Document
       summary: Delete Document from Collection
       description: Delete one Document from given Collection
       operationId: delete
       parameters:
-        - name: collectionName
-          in: path
-          description: The name of your MongoDb Collection
-          required: true
-          schema:
-            type: string
-        - name: documentId
-          in: path
-          description: DocumentId to delete
-          required: true
-          schema:
-            type: string
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: documentId
+        in: path
+        description: DocumentId to delete
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: ''
@@ -4045,29 +4501,29 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
     patch:
       tags:
-        - Document
+      - Document
       summary: Update Document in Collection
       description: '''Replace'' one Document with the new document from Request in
         Collection'
       operationId: update
       parameters:
-        - name: collectionName
-          in: path
-          description: The name of your MongoDb Collection
-          required: true
-          schema:
-            type: string
-        - name: documentId
-          in: path
-          description: DocumentId to update
-          required: true
-          schema:
-            type: string
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: documentId
+        in: path
+        description: DocumentId to update
+        required: true
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -4114,29 +4570,29 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /mongodb/collections/{collectionName}/documents/{documentId}/partial:
     patch:
       tags:
-        - Document
+      - Document
       summary: Update Document Parts in Collection
       description: Update the document Parts with the values from the Request
       operationId: updateDocumentPartial
       parameters:
-        - name: collectionName
-          in: path
-          description: The name of your MongoDb Collection
-          required: true
-          schema:
-            type: string
-        - name: documentId
-          in: path
-          description: DocumentId to update
-          required: true
-          schema:
-            type: string
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: documentId
+        in: path
+        description: DocumentId to update
+        required: true
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -4183,23 +4639,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /mongodb/collections/{collectionName}/index:
     get:
       tags:
-        - Index
+      - Index
       summary: List Indices for Collection
       description: List all Indices for given Collection
       operationId: listIndices
       parameters:
-        - name: collectionName
-          in: path
-          description: The name of your MongoDb Collection
-          required: true
-          schema:
-            type: string
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: ''
@@ -4236,22 +4692,22 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
     put:
       tags:
-        - Index
+      - Index
       summary: Create Index for Collection
       description: Create Index for given Collection
       operationId: createIndex
       parameters:
-        - name: collectionName
-          in: path
-          description: The name of your MongoDb Collection
-          required: true
-          schema:
-            type: string
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -4298,25 +4754,25 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /mongodb/collections/{collectionName}/index/stats:
     get:
       tags:
-        - Index
+      - Index
       summary: Index usage for Collection
       description: How often every Index of the given Collection was used since the
         counting started. Replaces the aggregation stage $indexStats, which is denied
         by default because its result contains the address of the database server.
       operationId: indexStats
       parameters:
-        - name: collectionName
-          in: path
-          description: The name of your MongoDb Collection
-          required: true
-          schema:
-            type: string
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: ''
@@ -4353,29 +4809,85 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /mongodb/collections/{collectionName}/index/details:
+    get:
+      tags:
+      - Index
+      summary: Indices with details for Collection
+      description: 'All Indices of the given Collection as the database reports them:
+        the keys in the order of the index (`direction` is 1, -1 or the type of the
+        key, a text index lists its fields), unique, sparse, hidden, partial filter,
+        collation, weights, default language and expiration.'
+      operationId: indexDetails
+      parameters:
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/IndexInfo'
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /mongodb/collections/{collectionName}/index/{indexName}:
     get:
       tags:
-        - Index
+      - Index
       summary: Index for Collection
       description: Index by Name for given Collection
       operationId: index
       parameters:
-        - name: collectionName
-          in: path
-          description: The name of your MongoDb Collection
-          required: true
-          schema:
-            type: string
-        - name: indexName
-          in: path
-          description: The name of your Index
-          required: true
-          schema:
-            type: string
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: indexName
+        in: path
+        description: The name of your Index
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: ''
@@ -4410,28 +4922,28 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
     delete:
       tags:
-        - Index
+      - Index
       summary: Delete Index
       description: Delete Index by Name for given Collection
       operationId: deleteIndex
       parameters:
-        - name: collectionName
-          in: path
-          description: The name of your MongoDb Collection
-          required: true
-          schema:
-            type: string
-        - name: indexName
-          in: path
-          description: The name of your Index
-          required: true
-          schema:
-            type: string
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: indexName
+        in: path
+        description: The name of your Index
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: ''
@@ -4466,36 +4978,36 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /mongodb/collections/{collectionName}/index/field/{fieldName}:
     put:
       tags:
-        - Index
+      - Index
       summary: Create Index by Field for Collection
       description: Create Index by Field for given Collection
       operationId: createIndexForField
       parameters:
-        - name: collectionName
-          in: path
-          description: The name of your MongoDb Collection
-          required: true
-          schema:
-            type: string
-        - name: fieldName
-          in: path
-          description: The field Name for your index
-          required: true
-          schema:
-            type: string
-        - name: sortAscending
-          in: query
-          description: Sort your index ascending
-          required: false
-          schema:
-            default: true
-            type: boolean
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: fieldName
+        in: path
+        description: The field Name for your index
+        required: true
+        schema:
+          type: string
+      - name: sortAscending
+        in: query
+        description: Sort your index ascending
+        required: false
+        schema:
+          default: true
+          type: boolean
       requestBody:
         content:
           application/json:
@@ -4543,42 +5055,42 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /mongodb/collections/{collectionName}/index/field/{fieldName}/unique:
     put:
       tags:
-        - Index
+      - Index
       summary: Create Unique Index
       description: Create Unique Index by Field for given Collection
       operationId: createUniqueIndex
       parameters:
-        - name: collectionName
-          in: path
-          description: The name of your MongoDb Collection
-          required: true
-          schema:
-            type: string
-        - name: fieldName
-          in: path
-          description: The field Name for your index
-          required: true
-          schema:
-            type: string
-        - name: sortAscending
-          in: query
-          description: Sort your index ascending
-          required: false
-          schema:
-            default: true
-            type: boolean
-        - name: name
-          in: query
-          description: Name for your index
-          required: false
-          schema:
-            type: string
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: fieldName
+        in: path
+        description: The field Name for your index
+        required: true
+        schema:
+          type: string
+      - name: sortAscending
+        in: query
+        description: Sort your index ascending
+        required: false
+        schema:
+          default: true
+          type: boolean
+      - name: name
+        in: query
+        description: Name for your index
+        required: false
+        schema:
+          type: string
       responses:
         '200':
           description: ''
@@ -4619,49 +5131,49 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /mongodb/collections/{collectionName}/index/field/{fieldName}/{duration}/expiring:
     put:
       tags:
-        - Index
+      - Index
       summary: Create expiring Index by Field for Collection
       description: Create expiring Index by Field for given Collection
       operationId: createExpiringIndex
       parameters:
-        - name: collectionName
-          in: path
-          description: The name of your MongoDb Collection
-          required: true
-          schema:
-            type: string
-        - name: fieldName
-          in: path
-          description: The field Name for your index
-          required: true
-          schema:
-            type: string
-        - name: duration
-          in: path
-          description: Expiring Duration in format 15d (https://www.scala-lang.org/api/2.13.7/scala/concurrent/duration/Duration.html)
-          required: true
-          schema:
-            default: 15d
-            type: string
-        - name: sortAscending
-          in: query
-          description: Sort your index ascending
-          required: false
-          schema:
-            default: true
-            type: boolean
-        - name: name
-          in: query
-          description: Name for your index
-          required: false
-          schema:
-            type: string
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: fieldName
+        in: path
+        description: The field Name for your index
+        required: true
+        schema:
+          type: string
+      - name: duration
+        in: path
+        description: Expiring Duration in format 15d (https://www.scala-lang.org/api/2.13.7/scala/concurrent/duration/Duration.html)
+        required: true
+        schema:
+          default: 15d
+          type: string
+      - name: sortAscending
+        in: query
+        description: Sort your index ascending
+        required: false
+        schema:
+          default: true
+          type: boolean
+      - name: name
+        in: query
+        description: Name for your index
+        required: false
+        schema:
+          type: string
       responses:
         '200':
           description: ''
@@ -4702,29 +5214,29 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /mongodb/collections/{collectionName}/index/field/{fieldName}/text:
     put:
       tags:
-        - Index
+      - Index
       summary: Create text index by field for collection
       description: Create text index by field for given collection
       operationId: createTextIndex
       parameters:
-        - name: collectionName
-          in: path
-          description: The name of your MongoDb Collection
-          required: true
-          schema:
-            type: string
-        - name: fieldName
-          in: path
-          description: The field Name for your index
-          required: true
-          schema:
-            type: string
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      - name: fieldName
+        in: path
+        description: The field Name for your index
+        required: true
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -4771,13 +5283,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /version:
     get:
       tags:
-        - System
+      - System
       summary: Version Information
       description: Version Info of the MongoCamp API
       operationId: version
@@ -4817,7 +5329,7 @@ paths:
   /system/jobs:
     get:
       tags:
-        - Jobs
+      - Jobs
       summary: Registered Jobs
       description: Returns the List of all registered Jobs with full information
       operationId: jobsList
@@ -4857,12 +5369,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
     put:
       tags:
-        - Jobs
+      - Jobs
       summary: Register Job
       description: Register an Job and return the JobInformation with next schedule
         information
@@ -4913,30 +5425,30 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /system/jobs/{jobGroup}/{jobName}:
     post:
       tags:
-        - Jobs
+      - Jobs
       summary: Execute Job
       description: Execute scheduled Job manually
       operationId: executeJob
       parameters:
-        - name: jobGroup
-          in: path
-          description: Group Name of the Job
-          required: true
-          schema:
-            default: Default
-            type: string
-        - name: jobName
-          in: path
-          description: Name of the Job
-          required: true
-          schema:
-            type: string
+      - name: jobGroup
+        in: path
+        description: Group Name of the Job
+        required: true
+        schema:
+          default: Default
+          type: string
+      - name: jobName
+        in: path
+        description: Name of the Job
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: ''
@@ -4971,29 +5483,29 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
     delete:
       tags:
-        - Jobs
+      - Jobs
       summary: Delete Job
       description: Delete Job and reload all Job Information
       operationId: deleteJob
       parameters:
-        - name: jobGroup
-          in: path
-          description: Group Name of the Job
-          required: true
-          schema:
-            default: Default
-            type: string
-        - name: jobName
-          in: path
-          description: Name of the Job
-          required: true
-          schema:
-            type: string
+      - name: jobGroup
+        in: path
+        description: Group Name of the Job
+        required: true
+        schema:
+          default: Default
+          type: string
+      - name: jobName
+        in: path
+        description: Name of the Job
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: ''
@@ -5028,29 +5540,29 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
     patch:
       tags:
-        - Jobs
+      - Jobs
       summary: Update Job
       description: Add Job and get JobInformation back
       operationId: updateJob
       parameters:
-        - name: jobGroup
-          in: path
-          description: Group Name of the Job
-          required: true
-          schema:
-            default: Default
-            type: string
-        - name: jobName
-          in: path
-          description: Name of the Job
-          required: true
-          schema:
-            type: string
+      - name: jobGroup
+        in: path
+        description: Group Name of the Job
+        required: true
+        schema:
+          default: Default
+          type: string
+      - name: jobName
+        in: path
+        description: Name of the Job
+        required: true
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -5097,13 +5609,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /system/jobs/classes:
     get:
       tags:
-        - Jobs
+      - Jobs
       summary: Possible Jobs
       description: Returns the List of possible job classes
       operationId: possibleJobsList
@@ -5143,13 +5655,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
   /system/cluster:
     get:
       tags:
-        - System
+      - System
       summary: Registered Jobs
       description: Returns the List of all registered Jobs with full information
       operationId: viewCluster
@@ -5187,19 +5699,19 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
       security:
-        - httpAuth: []
-        - httpAuth1: []
-        - apiKeyAuth: []
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
 components:
   schemas:
     BucketInformation:
       title: BucketInformation
       type: object
       required:
-        - name
-        - files
-        - size
-        - avgObjectSize
+      - name
+      - files
+      - size
+      - avgObjectSize
       properties:
         name:
           type: string
@@ -5216,7 +5728,7 @@ components:
       title: ClusterInformation
       type: object
       required:
-        - coordinator
+      - coordinator
       properties:
         members:
           type: array
@@ -5228,11 +5740,11 @@ components:
       title: ClusterMemberInformation
       type: object
       required:
-        - name
-        - siteMaster
-        - siteAddress
-        - multicast
-        - coordinator
+      - name
+      - siteMaster
+      - siteAddress
+      - multicast
+      - coordinator
       properties:
         name:
           type: string
@@ -5248,10 +5760,10 @@ components:
       title: CollectionPermission
       type: object
       required:
-        - name
-        - read
-        - write
-        - administrate
+      - name
+      - read
+      - write
+      - administrate
       properties:
         name:
           type: string
@@ -5265,19 +5777,19 @@ components:
       title: CollectionStatus
       type: object
       required:
-        - ns
-        - collectionType
-        - scaleFactor
-        - size
-        - count
-        - storageSize
-        - avgObjSize
-        - nindexes
-        - indexSizes
-        - totalIndexSize
-        - ok
-        - fetched
-        - map
+      - ns
+      - collectionType
+      - scaleFactor
+      - size
+      - count
+      - storageSize
+      - avgObjSize
+      - nindexes
+      - indexSizes
+      - totalIndexSize
+      - ok
+      - fetched
+      - map
       properties:
         ns:
           type: string
@@ -5318,15 +5830,15 @@ components:
       title: CollectionSummary
       type: object
       required:
-        - name
-        - collectionType
-        - count
-        - size
-        - storageSize
-        - avgObjSize
-        - nindexes
-        - totalIndexSize
-        - available
+      - name
+      - collectionType
+      - count
+      - size
+      - storageSize
+      - avgObjSize
+      - nindexes
+      - totalIndexSize
+      - available
       properties:
         name:
           type: string
@@ -5352,11 +5864,41 @@ components:
           format: int64
         available:
           type: boolean
+    CopyRequest:
+      title: CopyRequest
+      type: object
+      required:
+      - target
+      properties:
+        target:
+          type: string
+        filter:
+          type: string
+        withIndexes:
+          type: boolean
+        dropTarget:
+          type: boolean
+    CopyResponse:
+      title: CopyResponse
+      type: object
+      required:
+      - name
+      - count
+      - indexes
+      properties:
+        name:
+          type: string
+        count:
+          type: integer
+          format: int64
+        indexes:
+          type: integer
+          format: int32
     CountResponse:
       title: CountResponse
       type: object
       required:
-        - count
+      - count
       properties:
         count:
           type: integer
@@ -5365,11 +5907,11 @@ components:
       title: DatabaseInfo
       type: object
       required:
-        - name
-        - sizeOnDisk
-        - empty
-        - fetched
-        - map
+      - name
+      - sizeOnDisk
+      - empty
+      - fetched
+      - map
       properties:
         name:
           type: string
@@ -5387,8 +5929,8 @@ components:
       title: DeleteResponse
       type: object
       required:
-        - wasAcknowledged
-        - deletedCount
+      - wasAcknowledged
+      - deletedCount
       properties:
         wasAcknowledged:
           type: boolean
@@ -5399,9 +5941,9 @@ components:
       title: ErrorDescription
       type: object
       required:
-        - code
-        - msg
-        - additionalInfo
+      - code
+      - msg
+      - additionalInfo
       properties:
         code:
           type: integer
@@ -5410,16 +5952,40 @@ components:
           type: string
         additionalInfo:
           type: string
+    FieldInfo:
+      title: FieldInfo
+      type: object
+      required:
+      - path
+      properties:
+        path:
+          type: string
+        types:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldTypeCount'
+    FieldTypeCount:
+      title: FieldTypeCount
+      type: object
+      required:
+      - type
+      - count
+      properties:
+        type:
+          type: string
+        count:
+          type: integer
+          format: int64
     FileInformation:
       title: FileInformation
       type: object
       required:
-        - _id
-        - filename
-        - length
-        - chunkSize
-        - uploadDate
-        - metadata
+      - _id
+      - filename
+      - length
+      - chunkSize
+      - uploadDate
+      - metadata
       properties:
         _id:
           type: string
@@ -5440,8 +6006,8 @@ components:
       title: FileUploadForm
       type: object
       required:
-        - file
-        - metaData
+      - file
+      - metaData
       properties:
         file:
           type: string
@@ -5452,11 +6018,11 @@ components:
       title: Grant
       type: object
       required:
-        - name
-        - read
-        - write
-        - administrate
-        - grantType
+      - name
+      - read
+      - write
+      - administrate
+      - grantType
       properties:
         name:
           type: string
@@ -5468,21 +6034,47 @@ components:
           type: boolean
         grantType:
           type: string
+    ImportResponse:
+      title: ImportResponse
+      type: object
+      required:
+      - read
+      - inserted
+      - failed
+      - errorsTruncated
+      properties:
+        read:
+          type: integer
+          format: int64
+        inserted:
+          type: integer
+          format: int64
+        failed:
+          type: integer
+          format: int64
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/InsertError'
+        errorsTruncated:
+          type: boolean
     IndexCreateRequest:
       title: IndexCreateRequest
       type: object
-      required:
-        - keys
       properties:
         keys:
           $ref: '#/components/schemas/Map_Int'
         indexOptionsRequest:
           $ref: '#/components/schemas/IndexOptionsRequest'
+        orderedKeys:
+          type: array
+          items:
+            $ref: '#/components/schemas/IndexKey'
     IndexCreateResponse:
       title: IndexCreateResponse
       type: object
       required:
-        - name
+      - name
       properties:
         name:
           type: string
@@ -5490,10 +6082,57 @@ components:
       title: IndexDropResponse
       type: object
       required:
-        - dropped
+      - dropped
       properties:
         dropped:
           type: boolean
+    IndexInfo:
+      title: IndexInfo
+      type: object
+      required:
+      - name
+      - unique
+      - sparse
+      - hidden
+      - version
+      properties:
+        name:
+          type: string
+        keys:
+          type: array
+          items:
+            $ref: '#/components/schemas/IndexKey'
+        unique:
+          type: boolean
+        sparse:
+          type: boolean
+        hidden:
+          type: boolean
+        partialFilterExpression:
+          $ref: '#/components/schemas/Map_Any'
+        collation:
+          $ref: '#/components/schemas/Map_Any'
+        weights:
+          $ref: '#/components/schemas/Map_Any'
+        defaultLanguage:
+          type: string
+        expireAfterSeconds:
+          type: integer
+          format: int64
+        version:
+          type: integer
+          format: int32
+    IndexKey:
+      title: IndexKey
+      type: object
+      required:
+      - field
+      - direction
+      properties:
+        field:
+          type: string
+        direction:
+          type: string
     IndexOptionsRequest:
       title: IndexOptionsRequest
       type: object
@@ -5517,14 +6156,24 @@ components:
         min:
           type: number
           format: double
+        sparse:
+          type: boolean
+        hidden:
+          type: boolean
+        partialFilterExpression:
+          $ref: '#/components/schemas/Map_Any'
+        weights:
+          $ref: '#/components/schemas/Map_Int'
+        collation:
+          $ref: '#/components/schemas/Map_Any'
     IndexUsage:
       title: IndexUsage
       type: object
       required:
-        - name
-        - key
-        - ops
-        - since
+      - name
+      - key
+      - ops
+      - since
       properties:
         name:
           type: string
@@ -5540,9 +6189,9 @@ components:
       title: InsertError
       type: object
       required:
-        - index
-        - code
-        - message
+      - index
+      - code
+      - message
       properties:
         index:
           type: integer
@@ -5556,7 +6205,7 @@ components:
       title: InsertResponse
       type: object
       required:
-        - wasAcknowledged
+      - wasAcknowledged
       properties:
         wasAcknowledged:
           type: boolean
@@ -5575,12 +6224,12 @@ components:
       title: JobConfig
       type: object
       required:
-        - name
-        - className
-        - description
-        - cronExpression
-        - group
-        - priority
+      - name
+      - className
+      - description
+      - cronExpression
+      - group
+      - priority
       properties:
         name:
           type: string
@@ -5599,11 +6248,11 @@ components:
       title: JobInformation
       type: object
       required:
-        - name
-        - group
-        - jobClassName
-        - cronExpression
-        - priority
+      - name
+      - group
+      - jobClassName
+      - cronExpression
+      - priority
       properties:
         name:
           type: string
@@ -5630,9 +6279,9 @@ components:
       title: JsonSchema
       type: object
       required:
-        - $schema
-        - $ref
-        - definitions
+      - $schema
+      - $ref
+      - definitions
       properties:
         $schema:
           type: string
@@ -5644,10 +6293,10 @@ components:
       title: JsonSchemaDefinition
       type: object
       required:
-        - type
-        - title
-        - additionalProperties
-        - properties
+      - type
+      - title
+      - additionalProperties
+      - properties
       properties:
         type:
           type: string
@@ -5665,14 +6314,14 @@ components:
       title: JsonValue_Any
       type: object
       required:
-        - value
+      - value
       properties:
         value: {}
     JsonValue_Boolean:
       title: JsonValue_Boolean
       type: object
       required:
-        - value
+      - value
       properties:
         value:
           type: boolean
@@ -5680,7 +6329,7 @@ components:
       title: JsonValue_String
       type: object
       required:
-        - value
+      - value
       properties:
         value:
           type: string
@@ -5688,8 +6337,8 @@ components:
       title: Login
       type: object
       required:
-        - userId
-        - password
+      - userId
+      - password
       properties:
         userId:
           type: string
@@ -5699,9 +6348,9 @@ components:
       title: LoginResult
       type: object
       required:
-        - authToken
-        - userProfile
-        - expirationDate
+      - authToken
+      - userProfile
+      - expirationDate
       properties:
         authToken:
           type: string
@@ -5734,7 +6383,7 @@ components:
       title: MongoAggregateRequest
       type: object
       required:
-        - allowDiskUse
+      - allowDiskUse
       properties:
         pipeline:
           type: array
@@ -5746,11 +6395,11 @@ components:
       title: MongoCampConfiguration
       type: object
       required:
-        - key
-        - value
-        - configType
-        - comment
-        - needsRestartForActivation
+      - key
+      - value
+      - configType
+      - comment
+      - needsRestartForActivation
       properties:
         key:
           type: string
@@ -5765,9 +6414,9 @@ components:
       title: MongoFindRequest
       type: object
       required:
-        - filter
-        - sort
-        - projection
+      - filter
+      - sort
+      - projection
       properties:
         filter:
           $ref: '#/components/schemas/Map_Any'
@@ -5779,17 +6428,17 @@ components:
       title: MongoIndex
       type: object
       required:
-        - name
-        - unique
-        - version
-        - namespace
-        - keys
-        - weights
-        - expire
-        - expireAfterSeconds
-        - text
-        - fetched
-        - map
+      - name
+      - unique
+      - version
+      - namespace
+      - keys
+      - weights
+      - expire
+      - expireAfterSeconds
+      - text
+      - fetched
+      - map
       properties:
         name:
           type: string
@@ -5824,7 +6473,7 @@ components:
       title: PasswordUpdateRequest
       type: object
       required:
-        - password
+      - password
       properties:
         password:
           type: string
@@ -5832,18 +6481,36 @@ components:
       title: PipelineStage
       type: object
       required:
-        - stage
-        - value
+      - stage
+      - value
       properties:
         stage:
           type: string
         value: {}
+    RenameRequest:
+      title: RenameRequest
+      type: object
+      required:
+      - target
+      properties:
+        target:
+          type: string
+        dropTarget:
+          type: boolean
+    RenameResponse:
+      title: RenameResponse
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
     Role:
       title: Role
       type: object
       required:
-        - name
-        - isAdmin
+      - name
+      - isAdmin
       properties:
         name:
           type: string
@@ -5857,9 +6524,9 @@ components:
       title: SchemaAnalysis
       type: object
       required:
-        - count
-        - sample
-        - percentageOfAnalysed
+      - count
+      - sample
+      - percentageOfAnalysed
       properties:
         count:
           type: integer
@@ -5878,10 +6545,10 @@ components:
       title: SchemaAnalysisField
       type: object
       required:
-        - name
-        - fullName
-        - count
-        - percentageOfParent
+      - name
+      - fullName
+      - count
+      - percentageOfParent
       properties:
         name:
           type: string
@@ -5905,9 +6572,9 @@ components:
       title: SchemaAnalysisFieldType
       type: object
       required:
-        - fieldType
-        - count
-        - percentageOfParent
+      - fieldType
+      - count
+      - percentageOfParent
       properties:
         fieldType:
           type: string
@@ -5935,7 +6602,7 @@ components:
       title: SettingsResponse
       type: object
       required:
-        - configurations
+      - configurations
       properties:
         routesPlugins:
           type: array
@@ -5963,8 +6630,8 @@ components:
       title: UpdateRequest
       type: object
       required:
-        - document
-        - filter
+      - document
+      - filter
       properties:
         document:
           $ref: '#/components/schemas/Map_Any'
@@ -5974,9 +6641,9 @@ components:
       title: UpdateResponse
       type: object
       required:
-        - wasAcknowledged
-        - modifiedCount
-        - matchedCount
+      - wasAcknowledged
+      - modifiedCount
+      - matchedCount
       properties:
         wasAcknowledged:
           type: boolean
@@ -5994,7 +6661,7 @@ components:
       title: UpdateRoleRequest
       type: object
       required:
-        - isAdmin
+      - isAdmin
       properties:
         isAdmin:
           type: boolean
@@ -6006,8 +6673,8 @@ components:
       title: UserInformation
       type: object
       required:
-        - userId
-        - password
+      - userId
+      - password
       properties:
         userId:
           type: string
@@ -6023,8 +6690,8 @@ components:
       title: UserProfile
       type: object
       required:
-        - user
-        - isAdmin
+      - user
+      - isAdmin
       properties:
         user:
           type: string
@@ -6044,9 +6711,9 @@ components:
       title: Version
       type: object
       required:
-        - name
-        - version
-        - builtAt
+      - name
+      - version
+      - builtAt
       properties:
         name:
           type: string

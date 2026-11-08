@@ -7,8 +7,10 @@ All URIs are relative to *http://localhost*
 | [**_delete**](DocumentApi.md#_delete) | **DELETE** /mongodb/collections/{collectionName}/documents/{documentId} | Delete Document from Collection |
 | [**countDocuments**](DocumentApi.md#countdocuments) | **GET** /mongodb/collections/{collectionName}/documents/count | Count Documents in Collection |
 | [**deleteMany**](DocumentApi.md#deletemany) | **DELETE** /mongodb/collections/{collectionName}/documents/many/delete | Delete Many in Collection |
+| [**exportDocuments**](DocumentApi.md#exportdocuments) | **GET** /mongodb/collections/{collectionName}/documents/export | Export Documents of a Collection |
 | [**find**](DocumentApi.md#find) | **POST** /mongodb/collections/{collectionName}/documents | Documents in Collection |
 | [**getDocument**](DocumentApi.md#getdocument) | **GET** /mongodb/collections/{collectionName}/documents/{documentId} | Document from Collection |
+| [**importDocuments**](DocumentApi.md#importdocuments) | **POST** /mongodb/collections/{collectionName}/documents/import | Import Documents into a Collection |
 | [**insert**](DocumentApi.md#insert) | **PUT** /mongodb/collections/{collectionName}/documents | Insert Document |
 | [**insertMany**](DocumentApi.md#insertmany) | **PUT** /mongodb/collections/{collectionName}/documents/many/insert | Insert many Documents |
 | [**listDocuments**](DocumentApi.md#listdocuments) | **GET** /mongodb/collections/{collectionName}/documents | Documents in Collection |
@@ -266,9 +268,105 @@ example().catch(console.error);
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
+## exportDocuments
+
+> string exportDocuments(collectionName, format, filter, sort, projection, limit, extendedJson)
+
+Export Documents of a Collection
+
+Download the documents of a Collection as a stream: ndjson (one JSON document per line), json (one array) or csv (a header line, nested values as JSON, a text with a comma, a quote or a line break in quotes). The documents are written while the database delivers them, the memory of the server does not depend on the size of the Collection. The columns of a csv export are the fields of &#x60;projection&#x60;, by default the fields of the first 1000 documents. With extendedJson the types of the values are explicit. A failure while the stream is running ends the stream, the status is 200 by then.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  DocumentApi,
+} from '';
+import type { ExportDocumentsRequest } from '';
+
+async function example() {
+  console.log("🚀 Testing  SDK...");
+  const config = new Configuration({ 
+    // To configure HTTP basic authorization: httpAuth1
+    username: "YOUR USERNAME",
+    password: "YOUR PASSWORD",
+    // Configure HTTP bearer authorization: httpAuth
+    accessToken: "YOUR BEARER TOKEN",
+    // To configure API key authorization: apiKeyAuth
+    apiKey: "YOUR API KEY",
+  });
+  const api = new DocumentApi(config);
+
+  const body = {
+    // string | The name of your MongoDb Collection
+    collectionName: collectionName_example,
+    // string | ndjson (one JSON document per line), json (one array) or csv (optional)
+    format: format_example,
+    // string | Filter Query like on the list of documents, by default all documents are exported (optional)
+    filter: filter_example,
+    // Array<string> | Sorting like on the list of documents, a leading - sorts descending (optional)
+    sort: ...,
+    // Array<string> | The fields to export, for csv they are the columns in this order (optional)
+    projection: ...,
+    // number | The greatest number of documents, by default all (optional)
+    limit: 56,
+    // string | relaxed or canonical: the documents with the types of their values as MongoDB Extended JSON ({\"$oid\": ...}, {\"$date\": ...}, {\"$numberDecimal\": ...}, canonical also {\"$numberInt\": ...}, {\"$numberLong\": ...} and {\"$numberDouble\": ...}). Without the parameter the documents are returned as before. (optional)
+    extendedJson: extendedJson_example,
+  } satisfies ExportDocumentsRequest;
+
+  try {
+    const data = await api.exportDocuments(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **collectionName** | `string` | The name of your MongoDb Collection | [Defaults to `undefined`] |
+| **format** | `string` | ndjson (one JSON document per line), json (one array) or csv | [Optional] [Defaults to `&#39;ndjson&#39;`] |
+| **filter** | `string` | Filter Query like on the list of documents, by default all documents are exported | [Optional] [Defaults to `undefined`] |
+| **sort** | `Array<string>` | Sorting like on the list of documents, a leading - sorts descending | [Optional] |
+| **projection** | `Array<string>` | The fields to export, for csv they are the columns in this order | [Optional] |
+| **limit** | `number` | The greatest number of documents, by default all | [Optional] [Defaults to `undefined`] |
+| **extendedJson** | `string` | relaxed or canonical: the documents with the types of their values as MongoDB Extended JSON ({\&quot;$oid\&quot;: ...}, {\&quot;$date\&quot;: ...}, {\&quot;$numberDecimal\&quot;: ...}, canonical also {\&quot;$numberInt\&quot;: ...}, {\&quot;$numberLong\&quot;: ...} and {\&quot;$numberDouble\&quot;: ...}). Without the parameter the documents are returned as before. | [Optional] [Defaults to `undefined`] |
+
+### Return type
+
+**string**
+
+### Authorization
+
+[httpAuth1](../README.md#httpAuth1), [httpAuth](../README.md#httpAuth), [apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `text/plain`, `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** |  |  * Content-Disposition -  <br>  |
+| **400** | Invalid value for: query parameter limit |  -  |
+| **0** |  |  * x-error-code - Error Code <br>  * x-error-message - Message of the MongoCampException <br>  * x-error-additional-info - Additional information for the MongoCampException <br>  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
 ## find
 
-> Array&lt;{ [key: string]: any; }&gt; find(collectionName, mongoFindRequest, rowsPerPage, page)
+> Array&lt;{ [key: string]: any; }&gt; find(collectionName, mongoFindRequest, rowsPerPage, page, extendedJson)
 
 Documents in Collection
 
@@ -305,6 +403,8 @@ async function example() {
     rowsPerPage: 100,
     // number | Requested page of the ResultSets (optional)
     page: 1,
+    // string | relaxed or canonical: the documents with the types of their values as MongoDB Extended JSON ({\"$oid\": ...}, {\"$date\": ...}, {\"$numberDecimal\": ...}, canonical also {\"$numberInt\": ...}, {\"$numberLong\": ...} and {\"$numberDouble\": ...}). Without the parameter the documents are returned as before. (optional)
+    extendedJson: extendedJson_example,
   } satisfies FindRequest;
 
   try {
@@ -328,6 +428,7 @@ example().catch(console.error);
 | **mongoFindRequest** | [MongoFindRequest](MongoFindRequest.md) |  | |
 | **rowsPerPage** | `number` | Count elements per page | [Optional] [Defaults to `undefined`] |
 | **page** | `number` | Requested page of the ResultSets | [Optional] [Defaults to `undefined`] |
+| **extendedJson** | `string` | relaxed or canonical: the documents with the types of their values as MongoDB Extended JSON ({\&quot;$oid\&quot;: ...}, {\&quot;$date\&quot;: ...}, {\&quot;$numberDecimal\&quot;: ...}, canonical also {\&quot;$numberInt\&quot;: ...}, {\&quot;$numberLong\&quot;: ...} and {\&quot;$numberDouble\&quot;: ...}). Without the parameter the documents are returned as before. | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -355,7 +456,7 @@ example().catch(console.error);
 
 ## getDocument
 
-> { [key: string]: any; } getDocument(collectionName, documentId)
+> { [key: string]: any; } getDocument(collectionName, documentId, extendedJson)
 
 Document from Collection
 
@@ -388,6 +489,8 @@ async function example() {
     collectionName: collectionName_example,
     // string | DocumentId to read
     documentId: documentId_example,
+    // string | relaxed or canonical: the documents with the types of their values as MongoDB Extended JSON ({\"$oid\": ...}, {\"$date\": ...}, {\"$numberDecimal\": ...}, canonical also {\"$numberInt\": ...}, {\"$numberLong\": ...} and {\"$numberDouble\": ...}). Without the parameter the documents are returned as before. (optional)
+    extendedJson: extendedJson_example,
   } satisfies GetDocumentRequest;
 
   try {
@@ -409,6 +512,7 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **collectionName** | `string` | The name of your MongoDb Collection | [Defaults to `undefined`] |
 | **documentId** | `string` | DocumentId to read | [Defaults to `undefined`] |
+| **extendedJson** | `string` | relaxed or canonical: the documents with the types of their values as MongoDB Extended JSON ({\&quot;$oid\&quot;: ...}, {\&quot;$date\&quot;: ...}, {\&quot;$numberDecimal\&quot;: ...}, canonical also {\&quot;$numberInt\&quot;: ...}, {\&quot;$numberLong\&quot;: ...} and {\&quot;$numberDouble\&quot;: ...}). Without the parameter the documents are returned as before. | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -428,6 +532,87 @@ example().catch(console.error);
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** |  |  -  |
+| **0** |  |  * x-error-code - Error Code <br>  * x-error-message - Message of the MongoCampException <br>  * x-error-additional-info - Additional information for the MongoCampException <br>  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## importDocuments
+
+> ImportResponse importDocuments(collectionName, body)
+
+Import Documents into a Collection
+
+Store the documents of the request body: one JSON document per line (NDJSON, as written by the export). A line is read like a document in the body of an insert (Extended JSON wrappers, dates). The body is read as a stream and the documents are stored in batches without ordering, a line that cannot be stored does not stop the others: the answer counts what was read, stored and failed and names the first failed lines (&#x60;errors&#x60;, &#x60;index&#x60; is the number of the line). The size of the body is limited by IMPORT_MAX_BYTES (413 above), there is no time limit.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  DocumentApi,
+} from '';
+import type { ImportDocumentsRequest } from '';
+
+async function example() {
+  console.log("🚀 Testing  SDK...");
+  const config = new Configuration({ 
+    // To configure HTTP basic authorization: httpAuth1
+    username: "YOUR USERNAME",
+    password: "YOUR PASSWORD",
+    // Configure HTTP bearer authorization: httpAuth
+    accessToken: "YOUR BEARER TOKEN",
+    // To configure API key authorization: apiKeyAuth
+    apiKey: "YOUR API KEY",
+  });
+  const api = new DocumentApi(config);
+
+  const body = {
+    // string | The name of your MongoDb Collection
+    collectionName: collectionName_example,
+    // string
+    body: body_example,
+  } satisfies ImportDocumentsRequest;
+
+  try {
+    const data = await api.importDocuments(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **collectionName** | `string` | The name of your MongoDb Collection | [Defaults to `undefined`] |
+| **body** | `string` |  | |
+
+### Return type
+
+[**ImportResponse**](ImportResponse.md)
+
+### Authorization
+
+[httpAuth1](../README.md#httpAuth1), [httpAuth](../README.md#httpAuth), [apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `text/plain`
+- **Accept**: `application/json`, `text/plain`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** |  |  -  |
+| **400** | Invalid value for: body |  -  |
 | **0** |  |  * x-error-code - Error Code <br>  * x-error-message - Message of the MongoCampException <br>  * x-error-additional-info - Additional information for the MongoCampException <br>  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
@@ -467,7 +652,7 @@ async function example() {
     // string | The name of your MongoDb Collection
     collectionName: collectionName_example,
     // { [key: string]: any; } | JSON Representation for your Document.
-    requestBody: {"key1":"value","key2":true,"key3":{"creationDate":"2026-11-06T06:04:09.291Z"}},
+    requestBody: {"key1":"value","key2":true,"key3":{"creationDate":"2026-11-08T16:48:08.839Z"}},
   } satisfies InsertRequest;
 
   try {
@@ -600,7 +785,7 @@ example().catch(console.error);
 
 ## listDocuments
 
-> Array&lt;{ [key: string]: any; }&gt; listDocuments(collectionName, filter, sort, projection, rowsPerPage, page)
+> Array&lt;{ [key: string]: any; }&gt; listDocuments(collectionName, filter, sort, projection, rowsPerPage, page, extendedJson)
 
 Documents in Collection
 
@@ -641,6 +826,8 @@ async function example() {
     rowsPerPage: 100,
     // number | Requested page of the ResultSets (optional)
     page: 1,
+    // string | relaxed or canonical: the documents with the types of their values as MongoDB Extended JSON ({\"$oid\": ...}, {\"$date\": ...}, {\"$numberDecimal\": ...}, canonical also {\"$numberInt\": ...}, {\"$numberLong\": ...} and {\"$numberDouble\": ...}). Without the parameter the documents are returned as before. (optional)
+    extendedJson: extendedJson_example,
   } satisfies ListDocumentsRequest;
 
   try {
@@ -666,6 +853,7 @@ example().catch(console.error);
 | **projection** | `Array<string>` | MongoDB projection | [Optional] |
 | **rowsPerPage** | `number` | Count elements per page | [Optional] [Defaults to `undefined`] |
 | **page** | `number` | Requested page of the ResultSets | [Optional] [Defaults to `undefined`] |
+| **extendedJson** | `string` | relaxed or canonical: the documents with the types of their values as MongoDB Extended JSON ({\&quot;$oid\&quot;: ...}, {\&quot;$date\&quot;: ...}, {\&quot;$numberDecimal\&quot;: ...}, canonical also {\&quot;$numberInt\&quot;: ...}, {\&quot;$numberLong\&quot;: ...} and {\&quot;$numberDouble\&quot;: ...}). Without the parameter the documents are returned as before. | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -693,7 +881,7 @@ example().catch(console.error);
 
 ## searchDocuments
 
-> Array&lt;{ [key: string]: any; }&gt; searchDocuments(collectionName, searchRequest, rowsPerPage, page)
+> Array&lt;{ [key: string]: any; }&gt; searchDocuments(collectionName, searchRequest, rowsPerPage, page, extendedJson)
 
 Search Documents in Collection
 
@@ -730,6 +918,8 @@ async function example() {
     rowsPerPage: 100,
     // number | Requested page of the ResultSets (optional)
     page: 1,
+    // string | relaxed or canonical: the documents with the types of their values as MongoDB Extended JSON ({\"$oid\": ...}, {\"$date\": ...}, {\"$numberDecimal\": ...}, canonical also {\"$numberInt\": ...}, {\"$numberLong\": ...} and {\"$numberDouble\": ...}). Without the parameter the documents are returned as before. (optional)
+    extendedJson: extendedJson_example,
   } satisfies SearchDocumentsRequest;
 
   try {
@@ -753,6 +943,7 @@ example().catch(console.error);
 | **searchRequest** | [SearchRequest](SearchRequest.md) |  | |
 | **rowsPerPage** | `number` | Count elements per page | [Optional] [Defaults to `undefined`] |
 | **page** | `number` | Requested page of the ResultSets | [Optional] [Defaults to `undefined`] |
+| **extendedJson** | `string` | relaxed or canonical: the documents with the types of their values as MongoDB Extended JSON ({\&quot;$oid\&quot;: ...}, {\&quot;$date\&quot;: ...}, {\&quot;$numberDecimal\&quot;: ...}, canonical also {\&quot;$numberInt\&quot;: ...}, {\&quot;$numberLong\&quot;: ...} and {\&quot;$numberDouble\&quot;: ...}). Without the parameter the documents are returned as before. | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 

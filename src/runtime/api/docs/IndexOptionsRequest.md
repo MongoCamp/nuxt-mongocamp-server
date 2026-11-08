@@ -14,6 +14,11 @@ Name | Type
 `unique` | boolean
 `max` | number
 `min` | number
+`sparse` | boolean
+`hidden` | boolean
+`partialFilterExpression` | { [key: string]: any; }
+`weights` | { [key: string]: number; }
+`collation` | { [key: string]: any; }
 
 ## Example
 
@@ -30,6 +35,11 @@ const example = {
   "unique": null,
   "max": null,
   "min": null,
+  "sparse": null,
+  "hidden": null,
+  "partialFilterExpression": null,
+  "weights": null,
+  "collation": null,
 } satisfies IndexOptionsRequest
 
 console.log(example)

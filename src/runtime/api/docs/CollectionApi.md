@@ -6,21 +6,24 @@ All URIs are relative to *http://localhost*
 |------------- | ------------- | -------------|
 | [**aggregate**](CollectionApi.md#aggregate) | **POST** /mongodb/collections/{collectionName}/aggregate | Aggregate in Collection |
 | [**clearCollection**](CollectionApi.md#clearcollection) | **DELETE** /mongodb/collections/{collectionName}/clear | Clear Collection |
+| [**copyCollection**](CollectionApi.md#copycollection) | **POST** /mongodb/collections/{collectionName}/copy | Copy Collection |
 | [**deleteCollection**](CollectionApi.md#deletecollection) | **DELETE** /mongodb/collections/{collectionName} | Delete Collection |
 | [**distinct**](CollectionApi.md#distinct) | **POST** /mongodb/collections/{collectionName}/distinct/{field} | Distinct in Collection |
 | [**getCollectionFields**](CollectionApi.md#getcollectionfields) | **GET** /mongodb/collections/{collectionName}/fields | Collection Fields |
 | [**getCollectionInformation**](CollectionApi.md#getcollectioninformation) | **GET** /mongodb/collections/{collectionName} | Collection Information |
+| [**getFieldDetails**](CollectionApi.md#getfielddetails) | **GET** /mongodb/collections/{collectionName}/fields/detail | Fields of a Collection with types |
 | [**getJsonSchema**](CollectionApi.md#getjsonschema) | **GET** /mongodb/collections/{collectionName}/schema | Collection Fields |
 | [**getSchemaAnalysis**](CollectionApi.md#getschemaanalysis) | **GET** /mongodb/collections/{collectionName}/schema/analysis | Collection Fields |
 | [**listCollectionInformation**](CollectionApi.md#listcollectioninformation) | **GET** /mongodb/collections/info | Information of all Collections |
 | [**listCollections**](CollectionApi.md#listcollections) | **GET** /mongodb/collections | List of Collections |
 | [**listCollectionsByDatabase**](CollectionApi.md#listcollectionsbydatabase) | **GET** /mongodb/databases/{databaseName}/collections | List of Collections |
+| [**renameCollection**](CollectionApi.md#renamecollection) | **POST** /mongodb/collections/{collectionName}/rename | Rename Collection |
 
 
 
 ## aggregate
 
-> Array&lt;{ [key: string]: any; }&gt; aggregate(collectionName, mongoAggregateRequest, rowsPerPage, page, filter)
+> Array&lt;{ [key: string]: any; }&gt; aggregate(collectionName, mongoAggregateRequest, rowsPerPage, page, filter, extendedJson)
 
 Aggregate in Collection
 
@@ -59,6 +62,8 @@ async function example() {
     page: 1,
     // string | Filter Query like on the list of documents, applied as the first stage of the pipeline. Not possible for a pipeline that starts with $geoNear, $search or $vectorSearch. (optional)
     filter: filter_example,
+    // string | relaxed or canonical: the documents with the types of their values as MongoDB Extended JSON ({\"$oid\": ...}, {\"$date\": ...}, {\"$numberDecimal\": ...}, canonical also {\"$numberInt\": ...}, {\"$numberLong\": ...} and {\"$numberDouble\": ...}). Without the parameter the documents are returned as before. (optional)
+    extendedJson: extendedJson_example,
   } satisfies AggregateRequest;
 
   try {
@@ -83,6 +88,7 @@ example().catch(console.error);
 | **rowsPerPage** | `number` | Count elements per page | [Optional] [Defaults to `undefined`] |
 | **page** | `number` | Requested page of the ResultSets | [Optional] [Defaults to `undefined`] |
 | **filter** | `string` | Filter Query like on the list of documents, applied as the first stage of the pipeline. Not possible for a pipeline that starts with $geoNear, $search or $vectorSearch. | [Optional] [Defaults to `undefined`] |
+| **extendedJson** | `string` | relaxed or canonical: the documents with the types of their values as MongoDB Extended JSON ({\&quot;$oid\&quot;: ...}, {\&quot;$date\&quot;: ...}, {\&quot;$numberDecimal\&quot;: ...}, canonical also {\&quot;$numberInt\&quot;: ...}, {\&quot;$numberLong\&quot;: ...} and {\&quot;$numberDouble\&quot;: ...}). Without the parameter the documents are returned as before. | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -180,6 +186,87 @@ example().catch(console.error);
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** |  |  -  |
+| **0** |  |  * x-error-code - Error Code <br>  * x-error-message - Message of the MongoCampException <br>  * x-error-additional-info - Additional information for the MongoCampException <br>  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## copyCollection
+
+> CopyResponse copyCollection(collectionName, copyRequest)
+
+Copy Collection
+
+Copy a Collection in the database, optionally only the documents that match a Lucene filter, with its indices (withIndexes, true by default). The target is a name in the database of the Collection. The read grant for the Collection and the write grant for the target are needed. An existing target is a conflict (409), unless dropTarget is true and the user has the administrate grant for it: it is replaced when the copy is complete. The copy is made in one request, a big collection takes its time.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  CollectionApi,
+} from '';
+import type { CopyCollectionRequest } from '';
+
+async function example() {
+  console.log("🚀 Testing  SDK...");
+  const config = new Configuration({ 
+    // To configure HTTP basic authorization: httpAuth1
+    username: "YOUR USERNAME",
+    password: "YOUR PASSWORD",
+    // Configure HTTP bearer authorization: httpAuth
+    accessToken: "YOUR BEARER TOKEN",
+    // To configure API key authorization: apiKeyAuth
+    apiKey: "YOUR API KEY",
+  });
+  const api = new CollectionApi(config);
+
+  const body = {
+    // string | The name of your MongoDb Collection
+    collectionName: collectionName_example,
+    // CopyRequest
+    copyRequest: {"target":"copyOfCollection","filter":"type:company","withIndexes":true,"dropTarget":false},
+  } satisfies CopyCollectionRequest;
+
+  try {
+    const data = await api.copyCollection(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **collectionName** | `string` | The name of your MongoDb Collection | [Defaults to `undefined`] |
+| **copyRequest** | [CopyRequest](CopyRequest.md) |  | |
+
+### Return type
+
+[**CopyResponse**](CopyResponse.md)
+
+### Authorization
+
+[httpAuth1](../README.md#httpAuth1), [httpAuth](../README.md#httpAuth), [apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `text/plain`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** |  |  -  |
+| **400** | Invalid value for: body |  -  |
 | **0** |  |  * x-error-code - Error Code <br>  * x-error-message - Message of the MongoCampException <br>  * x-error-additional-info - Additional information for the MongoCampException <br>  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
@@ -506,6 +593,90 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** |  |  -  |
 | **400** | Invalid value for: query parameter includeDetails |  -  |
+| **0** |  |  * x-error-code - Error Code <br>  * x-error-message - Message of the MongoCampException <br>  * x-error-additional-info - Additional information for the MongoCampException <br>  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## getFieldDetails
+
+> Array&lt;FieldInfo&gt; getFieldDetails(collectionName, sampleSize, depth)
+
+Fields of a Collection with types
+
+All fields of a collection as a flat list, one entry per path (&#x60;address.city&#x60;, &#x60;tags[]&#x60; for the elements of an array) with the types of the values and how often every type was found in the analysed documents.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  CollectionApi,
+} from '';
+import type { GetFieldDetailsRequest } from '';
+
+async function example() {
+  console.log("🚀 Testing  SDK...");
+  const config = new Configuration({ 
+    // To configure HTTP basic authorization: httpAuth1
+    username: "YOUR USERNAME",
+    password: "YOUR PASSWORD",
+    // Configure HTTP bearer authorization: httpAuth
+    accessToken: "YOUR BEARER TOKEN",
+    // To configure API key authorization: apiKeyAuth
+    apiKey: "YOUR API KEY",
+  });
+  const api = new CollectionApi(config);
+
+  const body = {
+    // string | The name of your MongoDb Collection
+    collectionName: collectionName_example,
+    // number | Number of documents that are analysed, 1000 by default. A greater sample is more exact and slower on big collections. (optional)
+    sampleSize: 1000,
+    // number | How deep should the objects extracted (optional)
+    depth: 56,
+  } satisfies GetFieldDetailsRequest;
+
+  try {
+    const data = await api.getFieldDetails(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **collectionName** | `string` | The name of your MongoDb Collection | [Defaults to `undefined`] |
+| **sampleSize** | `number` | Number of documents that are analysed, 1000 by default. A greater sample is more exact and slower on big collections. | [Optional] [Defaults to `1000`] |
+| **depth** | `number` | How deep should the objects extracted | [Optional] [Defaults to `3`] |
+
+### Return type
+
+[**Array&lt;FieldInfo&gt;**](FieldInfo.md)
+
+### Authorization
+
+[httpAuth1](../README.md#httpAuth1), [httpAuth](../README.md#httpAuth), [apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `text/plain`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** |  |  -  |
+| **400** | Invalid value for: query parameter sampleSize, Invalid value for: query parameter depth |  -  |
 | **0** |  |  * x-error-code - Error Code <br>  * x-error-message - Message of the MongoCampException <br>  * x-error-additional-info - Additional information for the MongoCampException <br>  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
@@ -897,6 +1068,87 @@ example().catch(console.error);
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** |  |  -  |
+| **0** |  |  * x-error-code - Error Code <br>  * x-error-message - Message of the MongoCampException <br>  * x-error-additional-info - Additional information for the MongoCampException <br>  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## renameCollection
+
+> RenameResponse renameCollection(collectionName, renameRequest)
+
+Rename Collection
+
+Rename a Collection in the database, with its Documents and Indices. The target is a name in the database of the Collection. The administrate grant for the Collection and the write grant for the target are needed. An existing target is a conflict (409), unless dropTarget is true and the user has the administrate grant for it: it is replaced then.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  CollectionApi,
+} from '';
+import type { RenameCollectionRequest } from '';
+
+async function example() {
+  console.log("🚀 Testing  SDK...");
+  const config = new Configuration({ 
+    // To configure HTTP basic authorization: httpAuth1
+    username: "YOUR USERNAME",
+    password: "YOUR PASSWORD",
+    // Configure HTTP bearer authorization: httpAuth
+    accessToken: "YOUR BEARER TOKEN",
+    // To configure API key authorization: apiKeyAuth
+    apiKey: "YOUR API KEY",
+  });
+  const api = new CollectionApi(config);
+
+  const body = {
+    // string | The name of your MongoDb Collection
+    collectionName: collectionName_example,
+    // RenameRequest
+    renameRequest: {"target":"newName","dropTarget":false},
+  } satisfies RenameCollectionRequest;
+
+  try {
+    const data = await api.renameCollection(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **collectionName** | `string` | The name of your MongoDb Collection | [Defaults to `undefined`] |
+| **renameRequest** | [RenameRequest](RenameRequest.md) |  | |
+
+### Return type
+
+[**RenameResponse**](RenameResponse.md)
+
+### Authorization
+
+[httpAuth1](../README.md#httpAuth1), [httpAuth](../README.md#httpAuth), [apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `text/plain`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** |  |  -  |
+| **400** | Invalid value for: body |  -  |
 | **0** |  |  * x-error-code - Error Code <br>  * x-error-message - Message of the MongoCampException <br>  * x-error-additional-info - Additional information for the MongoCampException <br>  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
