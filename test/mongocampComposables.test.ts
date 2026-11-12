@@ -3,6 +3,7 @@ import { ref } from 'vue'
 
 const cookieOptions: Record<string, unknown>[] = []
 let runtimeConfig: Record<string, unknown> = { public: { mongocamp: {} } }
+let nuxtApp: Record<string, unknown> = {}
 const authApi = {
   login: vi.fn(),
   logout: vi.fn(),
@@ -12,6 +13,7 @@ const authApi = {
 
 vi.mock('#app', () => ({
   useRuntimeConfig: () => runtimeConfig,
+  useNuxtApp: () => nuxtApp,
   useState: (_key: string, init: () => unknown) => ref(init()),
   useCookie: (_name: string, options: { default: () => unknown } & Record<string, unknown>) => {
     cookieOptions.push(options)
@@ -43,6 +45,7 @@ const loginResult = {
 
 beforeEach(() => {
   sharedSession = undefined
+  nuxtApp = {}
   cookieOptions.length = 0
   runtimeConfig = { public: { mongocamp: {} } }
   Object.values(authApi).forEach(fn => fn.mockReset())
@@ -50,6 +53,13 @@ beforeEach(() => {
 })
 
 describe('useMongocampStorage', () => {
+  it('returns the same ref on every call so a login is visible to all callers', () => {
+    const a = useMongocampStorage()
+    const b = useMongocampStorage()
+    expect(a).toBe(b)
+    expect(cookieOptions).toHaveLength(1)
+  })
+
   it('defaults to an empty session', () => {
     expect(useMongocampStorage().value).toEqual({ token: '', profile: { user: '', isAdmin: false } })
   })
@@ -59,6 +69,7 @@ describe('useMongocampStorage', () => {
     expect(cookieOptions[0].maxAge).toBe(60 * 60 * 24 * 30)
 
     runtimeConfig = { public: { mongocamp: { sessionMaxAge: 120 } } }
+    nuxtApp = {}
     useMongocampStorage()
     expect(cookieOptions[1].maxAge).toBe(120)
   })

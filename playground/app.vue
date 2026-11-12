@@ -25,6 +25,8 @@ const { data: users, refresh: reloadUsers } = useFetch('/api/mongocamp/users')
 // client-side only: depends on the browser session token
 const collections = ref<string[]>([])
 const collectionsError = ref('')
+const userCollections = computed(() => collections.value.filter(name => !name.startsWith('mc_')))
+const mcCollections = computed(() => collections.value.filter(name => name.startsWith('mc_')))
 const selected = ref('')
 const browser = shallowRef<ReturnType<typeof usePaginatedFind> | null>(null)
 
@@ -177,14 +179,43 @@ onMounted(() => {
       </div>
       <div class="flex flex-wrap gap-2">
         <button
-          v-for="name in collections"
+          v-for="name in userCollections"
           :key="name"
           :class="name === selected ? 'btn-blue' : 'btn-green'"
           @click="selectCollection(name)"
         >
           {{ name }}
         </button>
+        <span
+          v-if="!userCollections.length && !collectionsError"
+          class="text-gray-500"
+        >
+          no user collections
+        </span>
       </div>
+    </div>
+
+    <h3 class="mt-6 font-semibold">
+      MongoCamp Collections (mc_*)
+    </h3>
+    <div
+      v-if="!isLoggedIn"
+      class="text-gray-500"
+    >
+      Log in to list collections.
+    </div>
+    <div
+      v-else
+      class="flex flex-wrap gap-2"
+    >
+      <button
+        v-for="name in mcCollections"
+        :key="name"
+        :class="name === selected ? 'btn-blue' : 'btn-green'"
+        @click="selectCollection(name)"
+      >
+        {{ name }}
+      </button>
     </div>
 
     <div
