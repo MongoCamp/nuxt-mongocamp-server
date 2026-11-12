@@ -11,9 +11,9 @@ Name | Type
 `unique` | boolean
 `sparse` | boolean
 `hidden` | boolean
-`partialFilterExpression` | { [key: string]: any; }
-`collation` | { [key: string]: any; }
-`weights` | { [key: string]: any; }
+`partialFilterExpression` | { [key: string]: any | null; }
+`collation` | { [key: string]: any | null; }
+`weights` | { [key: string]: any | null; }
 `defaultLanguage` | string
 `expireAfterSeconds` | number
 `version` | number

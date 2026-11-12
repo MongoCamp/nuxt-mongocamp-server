@@ -51,10 +51,10 @@
   "devDependencies": {
     "@nuxt/devtools": "^4.1.0",
     "@nuxt/eslint-config": "^1.17.0",
-    "@nuxt/module-builder": "^1.0.3",
+    "@nuxt/module-builder": "^1.0.4",
     "@nuxt/schema": "^4.6.4",
     "@nuxt/test-utils": "^4.4.0",
-    "@openapitools/openapi-generator-cli": "^2.42.0",
+    "@openapitools/openapi-generator-cli": "^2.42.2",
     "@types/node": "^26.6.6",
     "@unocss/nuxt": "^66.12.0",
     "changelogen": "^0.6.2",

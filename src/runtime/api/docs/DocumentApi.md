@@ -214,7 +214,7 @@ async function example() {
   const body = {
     // string | The name of your MongoDb Collection
     collectionName: collectionName_example,
-    // { [key: string]: any; }
+    // { [key: string]: any | null; }
     requestBody: Object,
     // boolean | Allow an empty filter, that matches all documents of the collection (optional)
     matchAll: true,
@@ -240,7 +240,7 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **collectionName** | `string` | The name of your MongoDb Collection | [Defaults to `undefined`] |
-| **requestBody** | `{ [key: string]: any; }` |  | |
+| **requestBody** | `{ [key: string]: any | null; }` |  | |
 | **matchAll** | `boolean` | Allow an empty filter, that matches all documents of the collection | [Optional] [Defaults to `false`] |
 | **filter** | `string` | Filter Query like on the list of documents, as an alternative to the filter of the request body. Use only one of both. | [Optional] [Defaults to `undefined`] |
 
@@ -366,7 +366,7 @@ example().catch(console.error);
 
 ## find
 
-> Array&lt;{ [key: string]: any; }&gt; find(collectionName, mongoFindRequest, rowsPerPage, page, extendedJson)
+> Array&lt;{ [key: string]: any | null; }&gt; find(collectionName, mongoFindRequest, rowsPerPage, page, extendedJson)
 
 Documents in Collection
 
@@ -432,7 +432,7 @@ example().catch(console.error);
 
 ### Return type
 
-**Array<{ [key: string]: any; }>**
+**Array<{ [key: string]: any | null; }>**
 
 ### Authorization
 
@@ -456,7 +456,7 @@ example().catch(console.error);
 
 ## getDocument
 
-> { [key: string]: any; } getDocument(collectionName, documentId, extendedJson)
+> { [key: string]: any | null; } getDocument(collectionName, documentId, extendedJson)
 
 Document from Collection
 
@@ -516,7 +516,7 @@ example().catch(console.error);
 
 ### Return type
 
-**{ [key: string]: any; }**
+**{ [key: string]: any | null; }**
 
 ### Authorization
 
@@ -651,8 +651,8 @@ async function example() {
   const body = {
     // string | The name of your MongoDb Collection
     collectionName: collectionName_example,
-    // { [key: string]: any; } | JSON Representation for your Document.
-    requestBody: {"key1":"value","key2":true,"key3":{"creationDate":"2026-11-08T16:48:08.839Z"}},
+    // { [key: string]: any | null; } | JSON Representation for your Document.
+    requestBody: {"key1":"value","key2":true,"key3":{"creationDate":"2026-11-12T19:00:42.728Z"}},
   } satisfies InsertRequest;
 
   try {
@@ -673,7 +673,7 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **collectionName** | `string` | The name of your MongoDb Collection | [Defaults to `undefined`] |
-| **requestBody** | `{ [key: string]: any; }` | JSON Representation for your Document. | |
+| **requestBody** | `{ [key: string]: any | null; }` | JSON Representation for your Document. | |
 
 ### Return type
 
@@ -734,7 +734,7 @@ async function example() {
     collectionName: collectionName_example,
     // boolean | true (default): the insert stops at the first document that fails (answer 409 for a duplicate key). false: all documents that can be stored are stored, the others are listed in `errors` of the answer. (optional)
     ordered: true,
-    // Array<{ [key: string]: any; }> (optional)
+    // Array<{ [key: string]: any | null; }> (optional)
     requestBody: ...,
   } satisfies InsertManyRequest;
 
@@ -757,7 +757,7 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **collectionName** | `string` | The name of your MongoDb Collection | [Defaults to `undefined`] |
 | **ordered** | `boolean` | true (default): the insert stops at the first document that fails (answer 409 for a duplicate key). false: all documents that can be stored are stored, the others are listed in &#x60;errors&#x60; of the answer. | [Optional] [Defaults to `true`] |
-| **requestBody** | `Array<{ [key: string]: any; }>` |  | [Optional] |
+| **requestBody** | `Array<{ [key: string]: any | null; }>` |  | [Optional] |
 
 ### Return type
 
@@ -785,7 +785,7 @@ example().catch(console.error);
 
 ## listDocuments
 
-> Array&lt;{ [key: string]: any; }&gt; listDocuments(collectionName, filter, sort, projection, rowsPerPage, page, extendedJson)
+> Array&lt;{ [key: string]: any | null; }&gt; listDocuments(collectionName, filter, sort, projection, rowsPerPage, page, extendedJson)
 
 Documents in Collection
 
@@ -857,7 +857,7 @@ example().catch(console.error);
 
 ### Return type
 
-**Array<{ [key: string]: any; }>**
+**Array<{ [key: string]: any | null; }>**
 
 ### Authorization
 
@@ -881,7 +881,7 @@ example().catch(console.error);
 
 ## searchDocuments
 
-> Array&lt;{ [key: string]: any; }&gt; searchDocuments(collectionName, searchRequest, rowsPerPage, page, extendedJson)
+> Array&lt;{ [key: string]: any | null; }&gt; searchDocuments(collectionName, searchRequest, rowsPerPage, page, extendedJson)
 
 Search Documents in Collection
 
@@ -947,7 +947,7 @@ example().catch(console.error);
 
 ### Return type
 
-**Array<{ [key: string]: any; }>**
+**Array<{ [key: string]: any | null; }>**
 
 ### Authorization
 
@@ -1004,7 +1004,7 @@ async function example() {
     collectionName: collectionName_example,
     // string | DocumentId to update
     documentId: documentId_example,
-    // { [key: string]: any; }
+    // { [key: string]: any | null; }
     requestBody: Object,
   } satisfies UpdateRequest;
 
@@ -1027,7 +1027,7 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **collectionName** | `string` | The name of your MongoDb Collection | [Defaults to `undefined`] |
 | **documentId** | `string` | DocumentId to update | [Defaults to `undefined`] |
-| **requestBody** | `{ [key: string]: any; }` |  | |
+| **requestBody** | `{ [key: string]: any | null; }` |  | |
 
 ### Return type
 
@@ -1088,7 +1088,7 @@ async function example() {
     collectionName: collectionName_example,
     // string | DocumentId to update
     documentId: documentId_example,
-    // { [key: string]: any; }
+    // { [key: string]: any | null; }
     requestBody: Object,
   } satisfies UpdateDocumentPartialRequest;
 
@@ -1111,7 +1111,7 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **collectionName** | `string` | The name of your MongoDb Collection | [Defaults to `undefined`] |
 | **documentId** | `string` | DocumentId to update | [Defaults to `undefined`] |
-| **requestBody** | `{ [key: string]: any; }` |  | |
+| **requestBody** | `{ [key: string]: any | null; }` |  | |
 
 ### Return type
 

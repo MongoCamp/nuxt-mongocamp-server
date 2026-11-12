@@ -6,9 +6,9 @@
 
 Name | Type
 ------------ | -------------
-`filter` | { [key: string]: any; }
-`sort` | { [key: string]: any; }
-`projection` | { [key: string]: any; }
+`filter` | { [key: string]: any | null; }
+`sort` | { [key: string]: any | null; }
+`projection` | { [key: string]: any | null; }
 
 ## Example
 

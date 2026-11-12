@@ -11,7 +11,7 @@ Name | Type
 `length` | number
 `chunkSize` | number
 `uploadDate` | Date
-`metadata` | { [key: string]: any; }
+`metadata` | { [key: string]: any | null; }
 
 ## Example
 

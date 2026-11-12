@@ -7,7 +7,7 @@
 Name | Type
 ------------ | -------------
 `filename` | string
-`metadata` | { [key: string]: any; }
+`metadata` | { [key: string]: any | null; }
 
 ## Example
 

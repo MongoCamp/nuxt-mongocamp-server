@@ -10,7 +10,7 @@ Name | Type
 `title` | string
 `additionalProperties` | boolean
 `required` | Array&lt;string&gt;
-`properties` | { [key: string]: { [key: string]: any; }; }
+`properties` | { [key: string]: { [key: string]: any | null; }; }
 
 ## Example
 

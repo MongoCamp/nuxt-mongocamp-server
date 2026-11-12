@@ -10,7 +10,7 @@ Name | Type
 `sizeOnDisk` | number
 `empty` | boolean
 `fetched` | Date
-`map` | { [key: string]: any; }
+`map` | { [key: string]: any | null; }
 
 ## Example
 

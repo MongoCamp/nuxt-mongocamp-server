@@ -7,7 +7,7 @@
 Name | Type
 ------------ | -------------
 `name` | string
-`key` | { [key: string]: any; }
+`key` | { [key: string]: any | null; }
 `ops` | number
 `since` | Date
 

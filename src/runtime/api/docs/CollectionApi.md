@@ -23,7 +23,7 @@ All URIs are relative to *http://localhost*
 
 ## aggregate
 
-> Array&lt;{ [key: string]: any; }&gt; aggregate(collectionName, mongoAggregateRequest, rowsPerPage, page, filter, extendedJson)
+> Array&lt;{ [key: string]: any | null; }&gt; aggregate(collectionName, mongoAggregateRequest, rowsPerPage, page, filter, extendedJson)
 
 Aggregate in Collection
 
@@ -92,7 +92,7 @@ example().catch(console.error);
 
 ### Return type
 
-**Array<{ [key: string]: any; }>**
+**Array<{ [key: string]: any | null; }>**
 
 ### Authorization
 

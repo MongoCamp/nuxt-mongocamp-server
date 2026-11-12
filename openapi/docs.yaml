@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: mongocamp-library
-  version: 1.8.1
+  version: 1.8.2
 paths:
   /auth/login:
     post:
@@ -1353,8 +1353,8 @@ paths:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/FileUploadForm'
-            example: 'Part(file,FileRange(/tmp/prefix929971639888939818suffix,None),Map(filename
-              -> prefix929971639888939818suffix),List(Content-Type: application/octet-stream))'
+            example: 'Part(file,FileRange(/tmp/prefix14631577210645980737suffix,None),Map(filename
+              -> prefix14631577210645980737suffix),List(Content-Type: application/octet-stream))'
         required: true
       responses:
         '200':
@@ -3600,7 +3600,7 @@ paths:
               key1: value
               key2: true
               key3:
-                creationDate: '2026-11-08T16:48:08.839Z'
+                creationDate: '2026-11-12T19:00:42.728Z'
         required: true
       responses:
         '200':

@@ -16,9 +16,9 @@ Name | Type
 `min` | number
 `sparse` | boolean
 `hidden` | boolean
-`partialFilterExpression` | { [key: string]: any; }
+`partialFilterExpression` | { [key: string]: any | null; }
 `weights` | { [key: string]: number; }
-`collation` | { [key: string]: any; }
+`collation` | { [key: string]: any | null; }
 
 ## Example
 
