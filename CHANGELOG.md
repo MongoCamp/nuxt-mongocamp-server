@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.9.0
+
+[compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.8.0...v1.9.0)
+
+### 🚀 Enhancements
+
+- Enhance app.vue with user collection management and improved login handling ([65afe8a](https://github.com/MongoCamp/mongocamp-nuxt/commit/65afe8a))
+
+### 🏡 Chore
+
+- Regenerate API client with openapi-generator 7.27.0 ([72b851b](https://github.com/MongoCamp/mongocamp-nuxt/commit/72b851b))
+
+### ❤️ Contributors
+
+- Sfxcode ([@sfxcode](https://github.com/sfxcode))
+
 ## v1.8.0
 
 [compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.7.0...v1.8.0)
