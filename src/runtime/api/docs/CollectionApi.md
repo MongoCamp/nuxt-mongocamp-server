@@ -7,16 +7,19 @@ All URIs are relative to *http://localhost*
 | [**aggregate**](CollectionApi.md#aggregate) | **POST** /mongodb/collections/{collectionName}/aggregate | Aggregate in Collection |
 | [**clearCollection**](CollectionApi.md#clearcollection) | **DELETE** /mongodb/collections/{collectionName}/clear | Clear Collection |
 | [**copyCollection**](CollectionApi.md#copycollection) | **POST** /mongodb/collections/{collectionName}/copy | Copy Collection |
+| [**createCollection**](CollectionApi.md#createcollection) | **PUT** /mongodb/collections/{collectionName} | Create Collection |
 | [**deleteCollection**](CollectionApi.md#deletecollection) | **DELETE** /mongodb/collections/{collectionName} | Delete Collection |
 | [**distinct**](CollectionApi.md#distinct) | **POST** /mongodb/collections/{collectionName}/distinct/{field} | Distinct in Collection |
 | [**getCollectionFields**](CollectionApi.md#getcollectionfields) | **GET** /mongodb/collections/{collectionName}/fields | Collection Fields |
 | [**getCollectionInformation**](CollectionApi.md#getcollectioninformation) | **GET** /mongodb/collections/{collectionName} | Collection Information |
+| [**getCollectionOptions**](CollectionApi.md#getcollectionoptions) | **GET** /mongodb/collections/{collectionName}/options | Collection Options |
 | [**getFieldDetails**](CollectionApi.md#getfielddetails) | **GET** /mongodb/collections/{collectionName}/fields/detail | Fields of a Collection with types |
 | [**getJsonSchema**](CollectionApi.md#getjsonschema) | **GET** /mongodb/collections/{collectionName}/schema | Collection Fields |
 | [**getSchemaAnalysis**](CollectionApi.md#getschemaanalysis) | **GET** /mongodb/collections/{collectionName}/schema/analysis | Collection Fields |
 | [**listCollectionInformation**](CollectionApi.md#listcollectioninformation) | **GET** /mongodb/collections/info | Information of all Collections |
 | [**listCollections**](CollectionApi.md#listcollections) | **GET** /mongodb/collections | List of Collections |
 | [**listCollectionsByDatabase**](CollectionApi.md#listcollectionsbydatabase) | **GET** /mongodb/databases/{databaseName}/collections | List of Collections |
+| [**modifyCollectionOptions**](CollectionApi.md#modifycollectionoptions) | **PATCH** /mongodb/collections/{collectionName}/options | Change the Validation of a Collection |
 | [**renameCollection**](CollectionApi.md#renamecollection) | **POST** /mongodb/collections/{collectionName}/rename | Rename Collection |
 
 
@@ -251,6 +254,87 @@ example().catch(console.error);
 ### Return type
 
 [**CopyResponse**](CopyResponse.md)
+
+### Authorization
+
+[httpAuth1](../README.md#httpAuth1), [httpAuth](../README.md#httpAuth), [apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `text/plain`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** |  |  -  |
+| **400** | Invalid value for: body |  -  |
+| **0** |  |  * x-error-code - Error Code <br>  * x-error-message - Message of the MongoCampException <br>  * x-error-additional-info - Additional information for the MongoCampException <br>  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## createCollection
+
+> CreateCollectionResponse createCollection(collectionName, collectionOptions)
+
+Create Collection
+
+Create a Collection with options: capped (&#x60;capped&#x60;, &#x60;sizeInBytes&#x60;, &#x60;maxDocuments&#x60;), a validator (&#x60;validator&#x60;, &#x60;validationLevel&#x60; off, moderate or strict, &#x60;validationAction&#x60; error or warn) and a collation. Without a body an empty Collection is created. The administrate grant for the name is needed; a name of another database is &#x60;database:name&#x60;. An existing Collection is a conflict (409), reserved names (system collections, the prefix of the server, the collections of a bucket) and options that do not fit are 400.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  CollectionApi,
+} from '';
+import type { CreateCollectionRequest } from '';
+
+async function example() {
+  console.log("🚀 Testing  SDK...");
+  const config = new Configuration({ 
+    // To configure HTTP basic authorization: httpAuth1
+    username: "YOUR USERNAME",
+    password: "YOUR PASSWORD",
+    // Configure HTTP bearer authorization: httpAuth
+    accessToken: "YOUR BEARER TOKEN",
+    // To configure API key authorization: apiKeyAuth
+    apiKey: "YOUR API KEY",
+  });
+  const api = new CollectionApi(config);
+
+  const body = {
+    // string | The name of your MongoDb Collection
+    collectionName: collectionName_example,
+    // CollectionOptions | The options of the new Collection, all of them are optional (optional)
+    collectionOptions: ...,
+  } satisfies CreateCollectionRequest;
+
+  try {
+    const data = await api.createCollection(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **collectionName** | `string` | The name of your MongoDb Collection | [Defaults to `undefined`] |
+| **collectionOptions** | [CollectionOptions](CollectionOptions.md) | The options of the new Collection, all of them are optional | [Optional] |
+
+### Return type
+
+[**CreateCollectionResponse**](CreateCollectionResponse.md)
 
 ### Authorization
 
@@ -598,6 +682,83 @@ example().catch(console.error);
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
+## getCollectionOptions
+
+> CollectionOptions getCollectionOptions(collectionName)
+
+Collection Options
+
+The options of a Collection: capped, the validator with its level and action, the collation. 404 for a Collection that does not exist.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  CollectionApi,
+} from '';
+import type { GetCollectionOptionsRequest } from '';
+
+async function example() {
+  console.log("🚀 Testing  SDK...");
+  const config = new Configuration({ 
+    // To configure HTTP basic authorization: httpAuth1
+    username: "YOUR USERNAME",
+    password: "YOUR PASSWORD",
+    // Configure HTTP bearer authorization: httpAuth
+    accessToken: "YOUR BEARER TOKEN",
+    // To configure API key authorization: apiKeyAuth
+    apiKey: "YOUR API KEY",
+  });
+  const api = new CollectionApi(config);
+
+  const body = {
+    // string | The name of your MongoDb Collection
+    collectionName: collectionName_example,
+  } satisfies GetCollectionOptionsRequest;
+
+  try {
+    const data = await api.getCollectionOptions(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **collectionName** | `string` | The name of your MongoDb Collection | [Defaults to `undefined`] |
+
+### Return type
+
+[**CollectionOptions**](CollectionOptions.md)
+
+### Authorization
+
+[httpAuth1](../README.md#httpAuth1), [httpAuth](../README.md#httpAuth), [apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** |  |  -  |
+| **0** |  |  * x-error-code - Error Code <br>  * x-error-message - Message of the MongoCampException <br>  * x-error-additional-info - Additional information for the MongoCampException <br>  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
 ## getFieldDetails
 
 > Array&lt;FieldInfo&gt; getFieldDetails(collectionName, sampleSize, depth)
@@ -852,11 +1013,11 @@ example().catch(console.error);
 
 ## listCollectionInformation
 
-> Array&lt;CollectionSummary&gt; listCollectionInformation(name)
+> Array&lt;CollectionSummary&gt; listCollectionInformation(name, database)
 
 Information of all Collections
 
-The numbers of all Collections of the default database that the user may read in one request (count, size, storage size, average size of a document, number and size of the indices). A Collection without statistics, for example a view, is listed with available false.
+The numbers of all Collections of the default database (or of the database in &#x60;database&#x60;) that the user may read in one request (count, size, storage size, average size of a document, number and size of the indices). A Collection without statistics, for example a view, is listed with available false. A database that does not exist is a 404 for an administrator and an empty list for every other user: they cannot find out which databases exist.
 
 ### Example
 
@@ -881,8 +1042,10 @@ async function example() {
   const api = new CollectionApi(config);
 
   const body = {
-    // Array<string> | Only the Collections with these names, by default all Collections that the user may read (optional)
+    // Array<string> | Only the Collections with these names, by default all Collections that the user may read. With `database` the names are the names inside that database (`locations`), the full name (`geodata:locations`) of that database is accepted too. (optional)
     name: ...,
+    // string | The Collections of this database, by default the default database. The names in the answer are the full names (`geodata:locations`), as they are used in the paths of the other routes. (optional)
+    database: database_example,
   } satisfies ListCollectionInformationRequest;
 
   try {
@@ -902,7 +1065,8 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **name** | `Array<string>` | Only the Collections with these names, by default all Collections that the user may read | [Optional] |
+| **name** | `Array<string>` | Only the Collections with these names, by default all Collections that the user may read. With &#x60;database&#x60; the names are the names inside that database (&#x60;locations&#x60;), the full name (&#x60;geodata:locations&#x60;) of that database is accepted too. | [Optional] |
+| **database** | `string` | The Collections of this database, by default the default database. The names in the answer are the full names (&#x60;geodata:locations&#x60;), as they are used in the paths of the other routes. | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -1068,6 +1232,87 @@ example().catch(console.error);
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** |  |  -  |
+| **0** |  |  * x-error-code - Error Code <br>  * x-error-message - Message of the MongoCampException <br>  * x-error-additional-info - Additional information for the MongoCampException <br>  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## modifyCollectionOptions
+
+> CollectionOptions modifyCollectionOptions(collectionName, collectionOptions)
+
+Change the Validation of a Collection
+
+Change the validator, the validationLevel and the validationAction of a Collection (collMod), the answer is the options after the change. A capped Collection and the collation cannot be changed after the creation (400). The administrate grant is needed.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  CollectionApi,
+} from '';
+import type { ModifyCollectionOptionsRequest } from '';
+
+async function example() {
+  console.log("🚀 Testing  SDK...");
+  const config = new Configuration({ 
+    // To configure HTTP basic authorization: httpAuth1
+    username: "YOUR USERNAME",
+    password: "YOUR PASSWORD",
+    // Configure HTTP bearer authorization: httpAuth
+    accessToken: "YOUR BEARER TOKEN",
+    // To configure API key authorization: apiKeyAuth
+    apiKey: "YOUR API KEY",
+  });
+  const api = new CollectionApi(config);
+
+  const body = {
+    // string | The name of your MongoDb Collection
+    collectionName: collectionName_example,
+    // CollectionOptions
+    collectionOptions: ...,
+  } satisfies ModifyCollectionOptionsRequest;
+
+  try {
+    const data = await api.modifyCollectionOptions(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **collectionName** | `string` | The name of your MongoDb Collection | [Defaults to `undefined`] |
+| **collectionOptions** | [CollectionOptions](CollectionOptions.md) |  | |
+
+### Return type
+
+[**CollectionOptions**](CollectionOptions.md)
+
+### Authorization
+
+[httpAuth1](../README.md#httpAuth1), [httpAuth](../README.md#httpAuth), [apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `text/plain`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** |  |  -  |
+| **400** | Invalid value for: body |  -  |
 | **0** |  |  * x-error-code - Error Code <br>  * x-error-message - Message of the MongoCampException <br>  * x-error-additional-info - Additional information for the MongoCampException <br>  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)

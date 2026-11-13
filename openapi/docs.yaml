@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: mongocamp-library
-  version: 1.8.2
+  version: 1.9.0
 paths:
   /auth/login:
     post:
@@ -1353,8 +1353,8 @@ paths:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/FileUploadForm'
-            example: 'Part(file,FileRange(/tmp/prefix14631577210645980737suffix,None),Map(filename
-              -> prefix14631577210645980737suffix),List(Content-Type: application/octet-stream))'
+            example: 'Part(file,FileRange(/tmp/prefix13685439271771461161suffix,None),Map(filename
+              -> prefix13685439271771461161suffix),List(Content-Type: application/octet-stream))'
         required: true
       responses:
         '200':
@@ -2024,22 +2024,34 @@ paths:
       tags:
       - Collection
       summary: Information of all Collections
-      description: The numbers of all Collections of the default database that the
-        user may read in one request (count, size, storage size, average size of a
-        document, number and size of the indices). A Collection without statistics,
-        for example a view, is listed with available false.
+      description: 'The numbers of all Collections of the default database (or of
+        the database in `database`) that the user may read in one request (count,
+        size, storage size, average size of a document, number and size of the indices).
+        A Collection without statistics, for example a view, is listed with available
+        false. A database that does not exist is a 404 for an administrator and an
+        empty list for every other user: they cannot find out which databases exist.'
       operationId: listCollectionInformation
       parameters:
       - name: name
         in: query
         description: Only the Collections with these names, by default all Collections
-          that the user may read
+          that the user may read. With `database` the names are the names inside that
+          database (`locations`), the full name (`geodata:locations`) of that database
+          is accepted too.
         required: false
         schema:
           default: []
           type: array
           items:
             type: string
+      - name: database
+        in: query
+        description: The Collections of this database, by default the default database.
+          The names in the answer are the full names (`geodata:locations`), as they
+          are used in the paths of the other routes.
+        required: false
+        schema:
+          type: string
       responses:
         '200':
           description: ''
@@ -2109,6 +2121,75 @@ paths:
                 $ref: '#/components/schemas/CollectionStatus'
         '400':
           description: 'Invalid value for: query parameter includeDetails'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+    put:
+      tags:
+      - Collection
+      summary: Create Collection
+      description: 'Create a Collection with options: capped (`capped`, `sizeInBytes`,
+        `maxDocuments`), a validator (`validator`, `validationLevel` off, moderate
+        or strict, `validationAction` error or warn) and a collation. Without a body
+        an empty Collection is created. The administrate grant for the name is needed;
+        a name of another database is `database:name`. An existing Collection is a
+        conflict (409), reserved names (system collections, the prefix of the server,
+        the collections of a bucket) and options that do not fit are 400.'
+      operationId: createCollection
+      parameters:
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: The options of the new Collection, all of them are optional
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionOptions'
+        required: false
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateCollectionResponse'
+        '400':
+          description: 'Invalid value for: body'
           content:
             text/plain:
               schema:
@@ -2525,6 +2606,123 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RenameResponse'
+        '400':
+          description: 'Invalid value for: body'
+          content:
+            text/plain:
+              schema:
+                type: string
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /mongodb/collections/{collectionName}/options:
+    get:
+      tags:
+      - Collection
+      summary: Collection Options
+      description: 'The options of a Collection: capped, the validator with its level
+        and action, the collation. 404 for a Collection that does not exist.'
+      operationId: getCollectionOptions
+      parameters:
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionOptions'
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+    patch:
+      tags:
+      - Collection
+      summary: Change the Validation of a Collection
+      description: Change the validator, the validationLevel and the validationAction
+        of a Collection (collMod), the answer is the options after the change. A capped
+        Collection and the collation cannot be changed after the creation (400). The
+        administrate grant is needed.
+      operationId: modifyCollectionOptions
+      parameters:
+      - name: collectionName
+        in: path
+        description: The name of your MongoDb Collection
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionOptions'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionOptions'
         '400':
           description: 'Invalid value for: body'
           content:
@@ -3600,7 +3798,7 @@ paths:
               key1: value
               key2: true
               key3:
-                creationDate: '2026-11-12T19:00:42.728Z'
+                creationDate: '2026-11-13T05:11:19.838Z'
         required: true
       responses:
         '200':
@@ -5702,6 +5900,146 @@ paths:
       - httpAuth: []
       - httpAuth1: []
       - apiKeyAuth: []
+  /system/info:
+    get:
+      tags:
+      - System
+      summary: System Information
+      description: 'Information about the system the server is connected to: the version
+        of the MongoDB server'
+      operationId: systemInfo
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemInfo'
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /system/stats:
+    get:
+      tags:
+      - System
+      summary: System Statistics
+      description: 'The numbers of the database server for a server overview: uptime,
+        connections, operation counters (totals since the start of the database server)
+        and the state of the replica set. A database user without the role clusterMonitor
+        gives partial true and no uptime, connections and counters; a server that
+        is not part of a replica set has no replicaSet. No host names or addresses.'
+      operationId: systemStats
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemStats'
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
+  /system/capabilities:
+    get:
+      tags:
+      - System
+      summary: System Capabilities
+      description: 'What this server can do, for every logged in user: the names of
+        the features, the major version of MongoDB, the limits (size of an import,
+        status of a request without the grant) and the operators that an aggregation
+        refuses. A server that has no such route is an older version.'
+      operationId: systemCapabilities
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Capabilities'
+        default:
+          description: ''
+          headers:
+            x-error-code:
+              description: Error Code
+              required: true
+              schema:
+                type: integer
+                format: int32
+              example: 100
+            x-error-message:
+              description: Message of the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Error Message
+            x-error-additional-info:
+              description: Additional information for the MongoCampException
+              required: true
+              schema:
+                type: string
+              example: Additional Error Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+      security:
+      - httpAuth: []
+      - httpAuth1: []
+      - apiKeyAuth: []
 components:
   schemas:
     BucketInformation:
@@ -5724,6 +6062,41 @@ components:
         avgObjectSize:
           type: number
           format: double
+    Capabilities:
+      title: Capabilities
+      type: object
+      required:
+      - serverVersion
+      - limits
+      properties:
+        serverVersion:
+          type: string
+        mongoDbMajor:
+          type: integer
+          format: int32
+        features:
+          type: array
+          items:
+            type: string
+        limits:
+          $ref: '#/components/schemas/CapabilityLimits'
+        aggregationStagesDenied:
+          type: array
+          items:
+            type: string
+    CapabilityLimits:
+      title: CapabilityLimits
+      type: object
+      required:
+      - importMaxBytes
+      - grantDeniedStatus
+      properties:
+        importMaxBytes:
+          type: integer
+          format: int64
+        grantDeniedStatus:
+          type: integer
+          format: int32
     ClusterInformation:
       title: ClusterInformation
       type: object
@@ -5756,6 +6129,41 @@ components:
           type: boolean
         coordinator:
           type: boolean
+    CollectionCollation:
+      title: CollectionCollation
+      type: object
+      required:
+      - locale
+      properties:
+        locale:
+          type: string
+        strength:
+          type: integer
+          format: int32
+        caseLevel:
+          type: boolean
+        numericOrdering:
+          type: boolean
+    CollectionOptions:
+      title: CollectionOptions
+      type: object
+      properties:
+        capped:
+          type: boolean
+        sizeInBytes:
+          type: integer
+          format: int64
+        maxDocuments:
+          type: integer
+          format: int64
+        validator:
+          $ref: '#/components/schemas/Map_Any'
+        validationLevel:
+          type: string
+        validationAction:
+          type: string
+        collation:
+          $ref: '#/components/schemas/CollectionCollation'
     CollectionPermission:
       title: CollectionPermission
       type: object
@@ -5864,6 +6272,23 @@ components:
           format: int64
         available:
           type: boolean
+    ConnectionStats:
+      title: ConnectionStats
+      type: object
+      required:
+      - current
+      - available
+      - totalCreated
+      properties:
+        current:
+          type: integer
+          format: int64
+        available:
+          type: integer
+          format: int64
+        totalCreated:
+          type: integer
+          format: int64
     CopyRequest:
       title: CopyRequest
       type: object
@@ -5903,6 +6328,14 @@ components:
         count:
           type: integer
           format: int64
+    CreateCollectionResponse:
+      title: CreateCollectionResponse
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
     DatabaseInfo:
       title: DatabaseInfo
       type: object
@@ -6469,6 +6902,35 @@ components:
           format: date-time
         map:
           $ref: '#/components/schemas/Map_Any'
+    OpCounters:
+      title: OpCounters
+      type: object
+      required:
+      - insert
+      - query
+      - update
+      - delete
+      - getmore
+      - command
+      properties:
+        insert:
+          type: integer
+          format: int64
+        query:
+          type: integer
+          format: int64
+        update:
+          type: integer
+          format: int64
+        delete:
+          type: integer
+          format: int64
+        getmore:
+          type: integer
+          format: int64
+        command:
+          type: integer
+          format: int64
     PasswordUpdateRequest:
       title: PasswordUpdateRequest
       type: object
@@ -6505,6 +6967,25 @@ components:
       properties:
         name:
           type: string
+    ReplicaSetState:
+      title: ReplicaSetState
+      type: object
+      required:
+      - name
+      - state
+      - memberCount
+      - healthyMembers
+      properties:
+        name:
+          type: string
+        state:
+          type: string
+        memberCount:
+          type: integer
+          format: int32
+        healthyMembers:
+          type: integer
+          format: int32
     Role:
       title: Role
       type: object
@@ -6618,6 +7099,36 @@ components:
             type: string
         configurations:
           $ref: '#/components/schemas/Map_Any'
+    SystemInfo:
+      title: SystemInfo
+      type: object
+      required:
+      - mongoDbVersion
+      properties:
+        mongoDbVersion:
+          type: string
+        mongoDbVersionArray:
+          type: array
+          items:
+            type: integer
+            format: int32
+    SystemStats:
+      title: SystemStats
+      type: object
+      required:
+      - partial
+      properties:
+        uptimeSeconds:
+          type: integer
+          format: int64
+        connections:
+          $ref: '#/components/schemas/ConnectionStats'
+        opcounters:
+          $ref: '#/components/schemas/OpCounters'
+        replicaSet:
+          $ref: '#/components/schemas/ReplicaSetState'
+        partial:
+          type: boolean
     UpdateFileInformationRequest:
       title: UpdateFileInformationRequest
       type: object

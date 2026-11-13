@@ -652,7 +652,7 @@ async function example() {
     // string | The name of your MongoDb Collection
     collectionName: collectionName_example,
     // { [key: string]: any | null; } | JSON Representation for your Document.
-    requestBody: {"key1":"value","key2":true,"key3":{"creationDate":"2026-11-12T19:00:42.728Z"}},
+    requestBody: {"key1":"value","key2":true,"key3":{"creationDate":"2026-11-13T05:11:19.838Z"}},
   } satisfies InsertRequest;
 
   try {
