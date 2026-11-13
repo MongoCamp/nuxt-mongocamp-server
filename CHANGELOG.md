@@ -1,6 +1,19 @@
 # Changelog
 
 
+## v1.9.1
+
+[compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.9.0...v1.9.1)
+
+### 🚀 Enhancements
+
+- Add user and MongoCamp collections management to app.vue and improve session handling ([458d5a6](https://github.com/MongoCamp/mongocamp-nuxt/commit/458d5a6))
+- Update OpenAPI document version to 1.9.0 and add new models for system information and capabilities ([d159bd3](https://github.com/MongoCamp/mongocamp-nuxt/commit/d159bd3))
+
+### ❤️ Contributors
+
+- Sfxcode ([@sfxcode](https://github.com/sfxcode))
+
 ## v1.9.0
 
 [compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.8.0...v1.9.0)
