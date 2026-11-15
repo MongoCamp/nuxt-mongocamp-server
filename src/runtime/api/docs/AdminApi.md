@@ -258,7 +258,7 @@ example().catch(console.error);
 
 Delete User
 
-Delete User
+Delete User. All tokens of the user are revoked.
 
 ### Example
 
@@ -734,7 +734,7 @@ example().catch(console.error);
 
 Update Password
 
-Change Password of User
+Change Password of User. All tokens of the user are revoked.
 
 ### Example
 

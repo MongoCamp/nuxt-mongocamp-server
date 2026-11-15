@@ -436,7 +436,7 @@ This endpoint does not need any parameter.
 
 Update Password
 
-Change Password of logged in User
+Change Password of logged in User. The other tokens of the user are revoked, the bearer token that was used for the call stays valid.
 
 ### Example
 
