@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.9.2
+
+[compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.9.1...v1.9.2)
+
+### 🚀 Enhancements
+
+- Update OpenAPI document version to 1.9.1 and enhance descriptions for user password management and token revocation ([7eabb3f](https://github.com/MongoCamp/mongocamp-nuxt/commit/7eabb3f))
+
+### 🏡 Chore
+
+- Update devDependencies to latest versions ([ead309d](https://github.com/MongoCamp/mongocamp-nuxt/commit/ead309d))
+
+### ❤️ Contributors
+
+- Sfxcode ([@sfxcode](https://github.com/sfxcode))
+
 ## v1.9.1
 
 [compare changes](https://github.com/MongoCamp/mongocamp-nuxt/compare/v1.9.0...v1.9.1)
